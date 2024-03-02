@@ -21,7 +21,7 @@ role: Phd student of Artificial Intelligence
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: Singapore University technology and design
+  - name: Singapore University for Technology and Design
     url: https://sutd.edu.sg/
 
 # Short bio (displayed in user profile at end of posts)
