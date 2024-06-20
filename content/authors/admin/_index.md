@@ -25,7 +25,7 @@ organizations:
     url: https://sutd.edu.sg/
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include Nature language processing. Specifically, my interest is in how LLM can keep up with the times and continue to learn about time-varying knowledge. Specific solutions focus on, stream learning and retrieval augment generation.
+bio: My research interests include Nature language processing. Specifically, my interest is in how LLM can keep up with the times and continue to learn about time-varying knowledge. Specific solutions focus on, stream learning, long context LLM and retrieval augment generation.
 
 # Interests to show in About widget
 interests:
@@ -120,5 +120,5 @@ highlight_name: true
 
 
 
-I am currently a first-year Phd student at the Singapore University of Technology and Design, under the joint supervision of Professor Professor [Shuhao Zhang](https://intellistream.github.io/) and Professor [Wei Lu](https://istd.sutd.edu.sg/people/faculty/lu-wei/). My research interests lie in Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG), and Stream Learning.
+I am currently a first-year Phd student at the Singapore University of Technology and Design, under the joint supervision of Professor  [Roy Ka-Wei LEE](https://info.roylee.sg/). My research interests lie in Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG), and Stream Learning.
 {style="text-align: justify;"}
