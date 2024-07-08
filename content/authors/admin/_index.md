@@ -38,7 +38,7 @@ education:
   courses:
     - course: PhD in Nature language processing
       institution: Singapore University for Technology and Design
-      year: 2023 -- Now
+      year: 2023 -- Present
     - course: BSc in Math
       institution: Huazhong Agricultural University
       year: 2018 -- 2022
@@ -120,5 +120,5 @@ highlight_name: true
 
 
 
-I am currently a first-year Phd student at the Singapore University of Technology and Design, under the joint supervision of Professor  [Roy Ka-Wei LEE](https://info.roylee.sg/). My research interests lie in Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG), and Stream Learning.
+I am currently a Second-year Phd student at the Singapore University of Technology and Design, under the joint supervision of Professor  [Roy Ka-Wei LEE](https://info.roylee.sg/). My research interests lie in Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG), and Stream Learning.
 {style="text-align: justify;"}
