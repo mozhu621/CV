@@ -2,7 +2,7 @@
 title: 'SentiStream: A Co-Training Framework for Adaptive Online Sentiment Analysis
   in Evolving Data Streams'
 authors:
-- Yuhao Wu
+- Yuhao Wu*
 - Karthick Sharma
 - Chun Seah
 - Shuhao Zhang

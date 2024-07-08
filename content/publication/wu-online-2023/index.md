@@ -1,7 +1,7 @@
 ---
 title: Online Continual Knowledge Learning for Language Models
 authors:
-- Yuhao Wu
+- Yuhao Wu* 
 - Tongjun Shi
 - Karthick Sharma
 - Chun Wei Seah
