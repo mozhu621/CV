@@ -120,5 +120,7 @@ highlight_name: true
 
 
 
-I am currently a Second-year Phd student at the Singapore University of Technology and Design, under the supervision of Professor  [Roy Ka-Wei LEE](https://info.roylee.sg/). My research interests lie in Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG), and Stream Learning.
+I am currently a Second-year Phd student at the Singapore University of Technology and Design, under the supervision of Professor  [Roy Ka-Wei LEE](https://info.roylee.sg/). My research interests in Natural Language Processing (NLP), Long-context LLMs, Retrieval-Augmented Generation (RAG), and Stream Learning. 
+
+Recently my research interests have focused on long context and I am looking for related internships, please contact me if you are interested!
 {style="text-align: justify;"}
