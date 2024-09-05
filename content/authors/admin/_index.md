@@ -121,6 +121,7 @@ highlight_name: true
 
 
 I am currently a Second-year Phd student at the Singapore University of Technology and Design, under the supervision of Professor  [Roy Ka-Wei LEE](https://info.roylee.sg/). My research interests in Natural Language Processing (NLP), Long-context LLMs, Retrieval-Augmented Generation (RAG), and Stream Learning. 
-<span style="color:red;">Recently my research interests have focused on long context and I am looking for related internships, please contact me if you are interested!</span>
+
+<span style="color:red;">Recently my research interests have focused on long context LMs and I am looking for related internships, please contact me by email(mozhu621@gmail.com)if you are interested!</span>
 
 {style="text-align: justify;"}
