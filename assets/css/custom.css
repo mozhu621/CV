@@ -1,0 +1,29 @@
+/* Highlight Yuhao Wu's name in publication author lists */
+.pub-authors a[href*="admin"],
+.pub-authors .author-notes + span:first-of-type,
+.article-metadata .author-notes + a {
+  font-weight: 700 !important;
+}
+
+/* Alternative: highlight by text content */
+.pub-authors {
+  font-size: inherit;
+}
+
+.pub-authors > span {
+  display: inline;
+}
+
+/* Bold Yuhao Wu specifically */
+.pub-authors > span:has(a[href*="admin"]) {
+  font-weight: 700;
+}
+
+/* For citation view */
+.citation-author:has(a[href*="admin"]) {
+  font-weight: 700 !important;
+}
+
+.citation-author a[href*="admin"] {
+  font-weight: 700 !important;
+}

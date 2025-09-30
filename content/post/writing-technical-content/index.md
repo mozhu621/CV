@@ -5,6 +5,7 @@ math: true
 image:
   placement: 2
   caption: 'Image credit: [**John Moeses Bauan**](https://unsplash.com/photos/OGZtQF8iC0g)'
+draft: true
 ---
 
 Hugo Blox Builder is designed to give technical content creators a seamless experience. You can focus on the content and Wowchemy handles the rest.
@@ -332,12 +333,12 @@ renders as
 Save your spreadsheet as a CSV file in your page's folder and then render it by adding the _Table_ shortcode to your page:
 
 ```go
-{{</* table path="results.csv" header="true" caption="Table 1: My results" */>}}
+// (table shortcode example removed due to deprecated data.GetCSV)
 ```
 
 renders as
 
-{{< table path="results.csv" header="true" caption="Table 1: My results" >}}
+<!-- Table shortcode example removed to avoid deprecated data.GetCSV in newer Hugo. -->
 
 ### Callouts
 

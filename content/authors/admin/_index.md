@@ -87,7 +87,7 @@ social:
   #   link: https://www.linkedin.com/
   - icon: cv
     icon_pack: ai
-    link: uploads/resume.pdf
+    link: uploads/Yuhao_Wu_CV.pdf
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
