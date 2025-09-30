@@ -18,7 +18,7 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: '吴宇皓（SUTD 博士生），研究方向：NLP、长文本生成与长上下文 LLM、强化学习对齐与评测。'
+    description: 'Yuhao Wu — PhD candidate at SUTD. Researching NLP with a focus on long-form generation, long-context LLMs, RL-based alignment, and rigorous evaluation.'
     twitter: 'GetResearchDev'
   analytics:
     google_analytics: ''
