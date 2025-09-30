@@ -14,6 +14,8 @@ publication: '*Proceedings of the 2023 Conference on Empirical Methods in Natura
   Language Processing*'
 doi: 10.18653/v1/2023.emnlp-main.380
 links:
-- name: URL
-  url: https://aclanthology.org/2023.emnlp-main.380
+  - name: ACL Anthology
+    url: https://aclanthology.org/2023.emnlp-main.380
+  - name: DOI
+    url: https://doi.org/10.18653/v1/2023.emnlp-main.380
 ---

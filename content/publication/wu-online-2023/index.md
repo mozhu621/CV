@@ -28,6 +28,8 @@ tags:
 - Computer Science - Computation and Language
 - Computer Science - Artificial Intelligence
 links:
-- name: URL
-  url: http://arxiv.org/abs/2311.09632
+  - name: arXiv
+    url: https://arxiv.org/abs/2311.09632
+  - name: PDF
+    url: https://arxiv.org/pdf/2311.09632.pdf
 ---
