@@ -29,11 +29,37 @@ sections:
         .pub-authors span:first-of-type {
           font-weight: 700 !important;
         }
+        
+        /* Adjusted spacing */
+        #about, section {
+          padding-top: 25px !important;
+          padding-bottom: 25px !important;
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+        
+        .page-body {
+          padding-top: 10px !important;
+        }
+        
+        .home-section {
+          padding-top: 25px !important;
+          padding-bottom: 25px !important;
+        }
+        
+        /* Minimal spacing between content blocks */
+        .wg-blank {
+          padding: 10px !important;
+        }
+        
+        section:first-of-type {
+          padding-top: 10px !important;
+        }
         </style>
   - block: markdown
     id: about
     content:
-      title: '<span style="font-size:1.5em; font-weight:700;">About</span>'
+      title: '<span style="font-size:1.3em; font-weight:700;">About</span>'
       text: |-
         <script src="/js/avatar-switcher.js"></script>
         <div style="display:flex; align-items:flex-start; gap:40px; flex-wrap:wrap;">
@@ -82,7 +108,7 @@ sections:
   - block: markdown
     id: news
     content:
-      title: '<span style="font-size:1.5em; font-weight:700;">News</span>'
+      title: '<span style="font-size:1.3em; font-weight:700;">News</span>'
       subtitle:
       text: |-
         <div style="font-size:19px; line-height:2.1;">
@@ -110,7 +136,7 @@ sections:
   - block: experience
     id: experience
     content:
-      title: '<span style="font-size:1.5em; font-weight:700;">Experience</span>'
+      title: '<span style="font-size:1.3em; font-weight:700;">Experience</span>'
       date_format: Jan 2006
       items:
         - title: Algorithm Research Intern (Kimi | Moonshot AI)
@@ -138,7 +164,7 @@ sections:
   - block: markdown
     id: education
     content:
-      title: '<span style="font-size:1.5em; font-weight:700;">Education</span>'
+      title: '<span style="font-size:1.3em; font-weight:700;">Education</span>'
       text: |-
         <div style="font-size:22px; line-height:1.9;">
           <div style="margin-bottom:24px;">
@@ -172,7 +198,7 @@ sections:
   - block: collection
     id: publications
     content:
-      title: '<span style="font-size:1.5em; font-weight:700;">Recent Publications</span>'
+      title: '<span style="font-size:1.1em; font-weight:700;">Recent Publications</span>'
       text: |-
         <p style="font-size:18px; color:#666; line-height:1.7;">For more publications, please visit the <a href="./publication/" style="color:#0066cc; text-decoration:none; font-weight:500;">publications page</a>.</p>
       filters:
@@ -186,7 +212,7 @@ sections:
   - block: contact
     id: contact
     content:
-      title: '<span style="font-size:1.5em; font-weight:700;">Contact</span>'
+      title: '<span style="font-size:1.3em; font-weight:700;">Contact</span>'
       subtitle:
       text: |-
        <p style="font-size:19px; line-height:1.9;">If you are interested in my work or would like to collaborate, feel free to email me.</p>
