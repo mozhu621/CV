@@ -62,19 +62,25 @@ sections:
       title: '<span style="font-size:1.3em; font-weight:700;">About</span>'
       text: |-
         <script src="/js/avatar-switcher.js"></script>
+        <script>
+        // Test if avatarState is available
+        window.addEventListener('load', function() {
+          console.log('Page loaded, avatarState available:', typeof window.avatarState);
+        });
+        </script>
         <div style="display:flex; align-items:flex-start; gap:40px; flex-wrap:wrap;">
           <div style="flex:0 0 auto; position:relative;">
             <div style="position:relative; width:280px; height:330px;">
               <img id="avatar-display" src="authors/admin/avatar.jpg" alt="Profile photo" style="width:100%; height:100%; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.15); object-fit:cover; transition:opacity 0.3s ease;">
-              <button type="button" onclick="avatarState.prevAvatar()" onmouseover="this.style.background='#0066cc';this.style.color='white';this.style.transform='translateY(-50%) scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.95)';this.style.color='#333';this.style.transform='translateY(-50%) scale(1)';" style="position:absolute; left:-20px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:2px solid #e0e0e0; border-radius:8px; width:42px; height:52px; cursor:pointer; font-size:26px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:all 0.3s ease; font-weight:bold; color:#333; z-index:10;">‹</button>
-              <button type="button" onclick="avatarState.nextAvatar()" onmouseover="this.style.background='#0066cc';this.style.color='white';this.style.transform='translateY(-50%) scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.95)';this.style.color='#333';this.style.transform='translateY(-50%) scale(1)';" style="position:absolute; right:-20px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:2px solid #e0e0e0; border-radius:8px; width:42px; height:52px; cursor:pointer; font-size:26px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:all 0.3s ease; font-weight:bold; color:#333; z-index:10;">›</button>
+              <button type="button" onclick="window.avatarState.prevAvatar()" onmouseover="this.style.background='#0066cc';this.style.color='white';this.style.transform='translateY(-50%) scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.95)';this.style.color='#333';this.style.transform='translateY(-50%) scale(1)';" style="position:absolute; left:-20px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:2px solid #e0e0e0; border-radius:8px; width:42px; height:52px; cursor:pointer; font-size:26px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:all 0.3s ease; font-weight:bold; color:#333; z-index:10;">‹</button>
+              <button type="button" onclick="window.avatarState.nextAvatar()" onmouseover="this.style.background='#0066cc';this.style.color='white';this.style.transform='translateY(-50%) scale(1.1)';" onmouseout="this.style.background='rgba(255,255,255,0.95)';this.style.color='#333';this.style.transform='translateY(-50%) scale(1)';" style="position:absolute; right:-20px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:2px solid #e0e0e0; border-radius:8px; width:42px; height:52px; cursor:pointer; font-size:26px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:all 0.3s ease; font-weight:bold; color:#333; z-index:10;">›</button>
             </div>
             <div style="text-align:center; margin-top:18px;">
               <span id="avatar-label" style="font-size:15px; color:#888;">Professional</span>
               <div style="margin-top:12px; display:flex; justify-content:center; gap:10px;">
-                <span onclick="avatarState.updateAvatar(0)" style="display:inline-block; width:36px; height:7px; border-radius:3px; background:#0066cc; cursor:pointer; transition:all 0.3s ease;" id="dot-0"></span>
-                <span onclick="avatarState.updateAvatar(1)" style="display:inline-block; width:36px; height:7px; border-radius:3px; background:#ccc; cursor:pointer; transition:all 0.3s ease;" id="dot-1"></span>
-                <span onclick="avatarState.updateAvatar(2)" style="display:inline-block; width:36px; height:7px; border-radius:3px; background:#ccc; cursor:pointer; transition:all 0.3s ease;" id="dot-2"></span>
+                <span onclick="window.avatarState.updateAvatar(0)" style="display:inline-block; width:36px; height:7px; border-radius:3px; background:#0066cc; cursor:pointer; transition:all 0.3s ease;" id="dot-0"></span>
+                <span onclick="window.avatarState.updateAvatar(1)" style="display:inline-block; width:36px; height:7px; border-radius:3px; background:#ccc; cursor:pointer; transition:all 0.3s ease;" id="dot-1"></span>
+                <span onclick="window.avatarState.updateAvatar(2)" style="display:inline-block; width:36px; height:7px; border-radius:3px; background:#ccc; cursor:pointer; transition:all 0.3s ease;" id="dot-2"></span>
               </div>
               <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px; align-items:center;">
                 <a href="https://scholar.google.com/citations?user=XIyHTG0AAAAJ" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:8px; color:#0066cc; text-decoration:none; font-size:16px; transition:color 0.3s ease;" onmouseover="this.style.color='#004499'" onmouseout="this.style.color='#0066cc'">
