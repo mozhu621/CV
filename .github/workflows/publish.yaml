@@ -45,6 +45,10 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Clean Hugo module cache
+        run: hugo mod clean --all
+      - name: Update Hugo modules
+        run: hugo mod get -u ./...
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
