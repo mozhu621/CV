@@ -1,0 +1,7 @@
+{{- /* Fallback for blox-core/functions/get_hook: no-op if hooks system unavailable */ -}}
+{{- $params := . -}}
+{{- $hook := cond (isset $params "hook") (index $params "hook") "" -}}
+{{- $ctx := cond (isset $params "context") (index $params "context") . -}}
+{{- /* Intentionally render nothing. This avoids build failure when the upstream
+      blox-core hook system is not present in the module graph. */ -}}
+
