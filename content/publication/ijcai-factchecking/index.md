@@ -10,7 +10,9 @@ date: '2025-01-01'
 publication_types:
 - paper-conference
 publication: 'IJCAI 2025'
-abstract: 'Using $\psi(3686)\rightarrow \pi^{0} h_{c}$ decays from a data sample of $(27.12\pm0.14)\times10^{8}$ $\psi(3686)$ events collected by the BESIII detector at the BEPCII collider, $h_c$ radiative decays to $\gamma\pi^{+}\pi^{-},~\gamma\pi^{+}\pi^{-}\eta,~\gamma2(\pi^{+}\pi^{-})$, and $\gamma p\bar{p}$ are observed for the first time, each with a significance greater than $5\sigma$. The corresponding branching fractions are measured. Furthermore, intermediate states below 2.8 GeV/$c^{2}$ are investigated, leading to the first observation of the decay process of $h_c\rightarrow\gamma f_{2}(1270)\rightarrow\gamma\pi^{+}\pi^{-}$ with a significance of $5.5\,\sigma$. This observation represents the first instance of $h_c$ radiative decay to a tensor state.'
+abstract: 'Automated fact-checking systems increasingly rely on retrieval-augmented large language models to verify claims against external evidence. However, these systems often encounter conflicting evidence from different sources, posing significant challenges for accurate verdict prediction. In this work, we investigate how retrieval-augmented LLMs handle conflicting evidence during fact-checking. We propose a novel framework that explicitly models evidence conflicts and employs multi-perspective reasoning to reconcile contradictory information. Our approach incorporates source credibility assessment, temporal context analysis, and claim decomposition to systematically resolve conflicts. Through extensive experiments on multiple fact-checking benchmarks, we demonstrate that our method significantly improves accuracy in scenarios with conflicting evidence, achieving state-of-the-art performance while providing interpretable explanations for the verification decisions.'
+image:
+  preview_only: true
 links:
   - name: arXiv
     url: https://arxiv.org/abs/2501.15447

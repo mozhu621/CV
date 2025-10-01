@@ -15,6 +15,8 @@ abstract: 'Large Language Models (LLMs) serve as repositories of extensive world
 tags:
 - Computer Science - Computation and Language
 - Computer Science - Artificial Intelligence
+image:
+  preview_only: true
 links:
   - name: arXiv
     url: https://arxiv.org/abs/2311.09632
