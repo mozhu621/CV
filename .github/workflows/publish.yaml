@@ -49,6 +49,7 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
         run: |
+          hugo mod tidy
           echo "Hugo Cache Dir: $(hugo config | grep cachedir)"
           hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
