@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avatar Test</title>
+    <script src="/js/avatar-switcher.js"></script>
+</head>
+<body>
+    <h1>Avatar Switcher Test</h1>
+    
+    <div style="position:relative; width:280px; height:330px; margin: 20px auto;">
+        <img id="avatar-display" src="authors/admin/avatar.jpg" alt="Profile photo" 
+             style="width:100%; height:100%; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.15); 
+                    object-fit:cover; transition:opacity 0.3s ease;">
+        
+        <button onclick="avatarState.prevAvatar()" 
+                style="position:absolute; left:-50px; top:50%; transform:translateY(-50%); 
+                       padding: 10px 20px; cursor:pointer;">◄ Prev</button>
+        
+        <button onclick="avatarState.nextAvatar()" 
+                style="position:absolute; right:-50px; top:50%; transform:translateY(-50%); 
+                       padding: 10px 20px; cursor:pointer;">Next ►</button>
+    </div>
+    
+    <div style="text-align:center; margin-top:18px;">
+        <span id="avatar-label" style="font-size:18px; color:#888;">Professional</span>
+        <div style="margin-top:12px; display:flex; justify-content:center; gap:10px;">
+            <span onclick="avatarState.updateAvatar(0)" 
+                  style="display:inline-block; width:36px; height:7px; border-radius:3px; 
+                         background:#0066cc; cursor:pointer;" id="dot-0"></span>
+            <span onclick="avatarState.updateAvatar(1)" 
+                  style="display:inline-block; width:36px; height:7px; border-radius:3px; 
+                         background:#ccc; cursor:pointer;" id="dot-1"></span>
+            <span onclick="avatarState.updateAvatar(2)" 
+                  style="display:inline-block; width:36px; height:7px; border-radius:3px; 
+                         background:#ccc; cursor:pointer;" id="dot-2"></span>
+        </div>
+    </div>
+    
+    <div style="margin: 40px auto; max-width: 600px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+        <h2>Debug Info:</h2>
+        <div id="debug-info"></div>
+        <button onclick="runDebug()" style="padding: 10px 20px; margin-top: 10px;">Run Debug Check</button>
+    </div>
+    
+    <script>
+        function runDebug() {
+            var debugDiv = document.getElementById('debug-info');
+            var info = [];
+            
+            info.push('<p><strong>Avatar State:</strong></p>');
+            info.push('<p>Current Index: ' + avatarState.currentIndex + '</p>');
+            info.push('<p>Avatars:</p><ul>');
+            avatarState.avatars.forEach(function(avatar, i) {
+                info.push('<li>' + avatar.label + ': ' + avatar.src + '</li>');
+            });
+            info.push('</ul>');
+            
+            var img = document.getElementById('avatar-display');
+            if (img) {
+                info.push('<p><strong>Current Image Element:</strong></p>');
+                info.push('<p>src: ' + img.src + '</p>');
+                info.push('<p>complete: ' + img.complete + '</p>');
+                info.push('<p>naturalWidth: ' + img.naturalWidth + '</p>');
+                info.push('<p>naturalHeight: ' + img.naturalHeight + '</p>');
+            }
+            
+            debugDiv.innerHTML = info.join('');
+        }
+        
+        // Auto-run debug on load
+        window.addEventListener('load', function() {
+            setTimeout(runDebug, 1000);
+        });
+    </script>
+</body>
+</html>
+

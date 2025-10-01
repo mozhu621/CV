@@ -1,9 +1,20 @@
 // Avatar Switcher Functionality
+// Get base path dynamically
+var getBasePath = function() {
+  var base = document.querySelector('base');
+  if (base && base.href) {
+    return base.href;
+  }
+  // Fallback to current origin
+  return window.location.origin + '/';
+};
+
 var avatarState = {
+  basePath: getBasePath(),
   avatars: [
-    { src: '/authors/admin/avatar.jpg', label: 'Professional' },
-    { src: '/authors/admin/katong.png', label: 'Katong' },
-    { src: '/authors/admin/HAHAHA.jpg', label: 'Fun' }
+    { src: 'authors/admin/avatar.jpg', label: 'Professional' },
+    { src: 'authors/admin/katong.png', label: 'Katong' },
+    { src: 'authors/admin/HAHAHA.jpg', label: 'Fun' }
   ],
   currentIndex: 0,
   
@@ -17,9 +28,11 @@ var avatarState = {
       img.style.opacity = '0';
       var self = this;
       setTimeout(function() {
-        img.src = self.avatars[index].src;
+        // Use base path + relative path
+        var fullPath = self.basePath + self.avatars[index].src;
+        img.src = fullPath;
         img.style.opacity = '1';
-        console.log('Avatar updated to:', self.avatars[index].src);
+        console.log('Avatar updated to:', fullPath);
       }, 200);
     } else {
       console.error('Avatar image element not found');
@@ -51,10 +64,30 @@ var avatarState = {
 };
 
 // Initialize when DOM is loaded
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
+(function() {
+  function init() {
     console.log('Avatar switcher initialized');
-  });
-} else {
-  console.log('Avatar switcher ready');
-}
+    console.log('Base path:', avatarState.basePath);
+    
+    // Ensure initial avatar is loaded
+    var img = document.getElementById('avatar-display');
+    if (img) {
+      console.log('Initial avatar src:', img.src);
+      // Pre-load all avatars
+      avatarState.avatars.forEach(function(avatar, index) {
+        var preloadImg = new Image();
+        var fullPath = avatarState.basePath + avatar.src;
+        preloadImg.src = fullPath;
+        console.log('Pre-loading avatar', index, ':', fullPath);
+      });
+    } else {
+      console.error('Avatar display element not found on init');
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
