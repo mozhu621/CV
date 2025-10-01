@@ -1,0 +1,14 @@
+{{- /* Fallback for blox-core/functions/get_page_title */ -}}
+{{- $page := . -}}
+{{- $title := "" -}}
+
+{{- if $page.IsHome -}}
+  {{- $title = site.Title -}}
+{{- else if $page.Title -}}
+  {{- $title = printf "%s | %s" $page.Title site.Title -}}
+{{- else -}}
+  {{- $title = site.Title -}}
+{{- end -}}
+
+{{- return $title -}}
+

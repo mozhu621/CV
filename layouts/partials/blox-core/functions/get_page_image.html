@@ -1,0 +1,14 @@
+{{- /* Fallback for blox-core/functions/get_page_image */ -}}
+{{- $page := . -}}
+{{- $image := "" -}}
+
+{{- with $page.Params.image -}}
+  {{- $image = . -}}
+{{- else -}}
+  {{- with $page.Params.header.image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $image -}}
+

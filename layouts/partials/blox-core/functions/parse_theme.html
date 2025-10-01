@@ -1,0 +1,7 @@
+{{- /* Fallback for blox-core/functions/parse_theme */ -}}
+{{- $theme := "light" -}}
+{{- with site.Params.appearance.theme_day -}}
+  {{- $theme = . -}}
+{{- end -}}
+{{- return $theme -}}
+

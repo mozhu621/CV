@@ -1,0 +1,16 @@
+{{- /* Fallback for blox-core/functions/get_page_description */ -}}
+{{- $page := . -}}
+{{- $description := "" -}}
+
+{{- if $page.Description -}}
+  {{- $description = $page.Description -}}
+{{- else if $page.Summary -}}
+  {{- $description = $page.Summary -}}
+{{- else if $page.Params.abstract -}}
+  {{- $description = $page.Params.abstract -}}
+{{- else if site.Params.description -}}
+  {{- $description = site.Params.description -}}
+{{- end -}}
+
+{{- return $description -}}
+
