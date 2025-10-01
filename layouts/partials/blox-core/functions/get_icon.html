@@ -3,9 +3,12 @@
 {{- $icon_path := "" -}}
 {{- $default_path := "media/icon.png" -}}
 
-{{- with resources.Get $default_path -}}
-  {{- with (.Resize (printf "%dx%d" $size $size)) -}}
-    {{- $icon_path = .RelPermalink -}}
+{{- $icon_resource := resources.Get $default_path -}}
+
+{{- if $icon_resource -}}
+  {{- $resized := $icon_resource.Resize (printf "%dx%d" $size $size) -}}
+  {{- if $resized -}}
+    {{- $icon_path = $resized.RelPermalink -}}
   {{- end -}}
 {{- end -}}
 
