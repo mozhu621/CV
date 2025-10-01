@@ -1,0 +1,17 @@
+{{- /* Fallback for blox-core/functions/get_sort_by_parameter */ -}}
+{{- $sort_by := . | default "Date" -}}
+{{- $sort_by_param := "" -}}
+{{- if eq $sort_by "Title" -}}
+  {{- $sort_by_param = "Title" -}}
+{{- else if eq $sort_by "Date" -}}
+  {{- $sort_by_param = "Date" -}}
+{{- else if eq $sort_by "Lastmod" -}}
+  {{- $sort_by_param = "Lastmod" -}}
+{{- else if eq $sort_by "Weight" -}}
+  {{- $sort_by_param = "Weight" -}}
+{{- else if eq $sort_by "Params.order" -}}
+  {{- $sort_by_param = "Params.order" -}}
+{{- else -}}
+  {{- $sort_by_param = "Date" -}}
+{{- end -}}
+{{- return $sort_by_param -}}

@@ -1,0 +1,16 @@
+{{- /* Fallback for blox-core/functions/get_featured_image */ -}}
+{{- $page := . -}}
+{{- $featured_image := "" -}}
+{{- with $page.Params.image -}}
+  {{- with .preview_only -}}
+    {{- $featured_image = "" -}}
+  {{- else -}}
+    {{- $featured_image = $page.Resources.GetMatch .filename -}}
+  {{- end -}}
+{{- else -}}
+  {{- $images := $page.Resources.ByType "image" -}}
+  {{- with $images.GetMatch "{*feature*,*cover*,*thumbnail*}" -}}
+    {{- $featured_image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $featured_image -}}
