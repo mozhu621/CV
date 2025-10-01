@@ -1,14 +1,12 @@
 {{- /* Fallback for blox-core/functions/get_icon */ -}}
 {{- $size := . -}}
-{{- $icon_resource := "" -}}
+{{- $icon_path := "" -}}
 {{- $default_path := "media/icon.png" -}}
 
-{{- $icon_resource = resources.Get $default_path -}}
-
-{{- if $icon_resource -}}
-  {{- with ($icon_resource.Resize (printf "%dx%d" $size $size)) -}}
-    {{- return .RelPermalink -}}
+{{- with resources.Get $default_path -}}
+  {{- with (.Resize (printf "%dx%d" $size $size)) -}}
+    {{- $icon_path = .RelPermalink -}}
   {{- end -}}
 {{- end -}}
 
-{{- return "" -}}
+{{- $icon_path -}}
