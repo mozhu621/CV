@@ -99,7 +99,7 @@ sections:
             </div>
           </div>
           <div style="flex:1; min-width:300px;">
-            <p style="margin:0 0 24px 0; font-size:21px; line-height:1.8; color:#333;">I am a third-year PhD candidate at the Singapore University of Technology and Design (SUTD), advised by Prof. <a href="https://info.roylee.sg/" target="_blank" rel="noopener">Roy Ka-Wei Lee</a>. My research focuses on long-form generation and long-context capabilities of LLMs, spanning data generation, chain-of-thought and planning, RL-based training and alignment, and rigorous end-to-end evaluation for long text, code, and reasoning.</p>
+            <p style="margin:0 0 24px 0; font-size:21px; line-height:1.8; color:#333;">I am a third-year PhD candidate at the Singapore University of Technology and Design (SUTD), advised by Prof. <a href="https://www.roylee.sg/" target="_blank" rel="noopener">Roy Ka-Wei Lee</a>. My research focuses on long-form generation and long-context capabilities of LLMs, spanning data generation, chain-of-thought and planning, RL-based training and alignment, and rigorous end-to-end evaluation for long text, code, and reasoning.</p>
             <div style="margin:0; padding:16px 20px; background:#fff5f5; border-left:4px solid #dc3545; border-radius:6px;">
               <p style="margin:0 0 10px 0; font-size:18px; color:#dc3545; line-height:1.7;">
                 <strong>🔍 I am actively seeking internship and international exchange opportunities.</strong>
@@ -158,7 +158,7 @@ sections:
           date_start: '2024-09-01'
           date_end: '2025-06-01'
           description: |2-
-            Contributed to GLM-4.1/4.5 projects; proposed O1/R1-think framework for long-form generation (hierarchical SFT + DPO & Pure RL).
+            Contributed to GLM-4.1/4.5 projects; proposed O1/R1-think framework for long-form generation (hierarchical SFT + DPO: SuperWriter & Pure RL: LongWriter-Zero).
         - title: NLP Algorithm Intern (Trip.com)
           company: Shanghai, China
           company_url: ''
@@ -179,7 +179,7 @@ sections:
               <span style="color:#666; font-size:21px;">2023 — Present</span>
             </div>
             <p style="margin:4px 0; color:#555; font-size:21px;"><em>Ph.D. Student</em> in Natural Language Processing</p>
-            <p style="margin:8px 0 0 0; color:#666; font-size:20px;">Advisor: Prof. <a href="https://info.roylee.sg/" target="_blank" style="color:#0066cc; text-decoration:none;">Roy Ka-Wei Lee</a></p>
+            <p style="margin:8px 0 0 0; color:#666; font-size:20px;">Advisor: Prof. <a href="https://www.roylee.sg/" target="_blank" style="color:#0066cc; text-decoration:none;">Roy Ka-Wei Lee</a></p>
           </div>
           
           <div style="margin-bottom:24px;">
@@ -187,7 +187,7 @@ sections:
               <h3 style="margin:0; font-size:23px; font-weight:600;">Tsinghua University (THU)</h3>
               <span style="color:#666; font-size:21px;">Sep. 2024 — Jul. 2025</span>
             </div>
-            <p style="margin:4px 0; color:#555; font-size:21px;"><em>Visiting Ph.D. Student</em> at Knowledge Engineering Group (KEG)</p>
+            <p style="margin:4px 0; color:#555; font-size:21px;"><em>Visiting Ph.D. Student</em></p>
             <p style="margin:8px 0 0 0; color:#666; font-size:20px;">Beijing, China</p>
           </div>
           

@@ -38,13 +38,13 @@ interests:
 education:
   courses:
     - course: PhD in Natural Language Processing
-      institution: Singapore University of Technology and Design (SUTD)
+      institution: Singapore University of Technology and Design (SUTD) 
       year: 2023 -- Present
-    - course: Visiting PhD Student (Knowledge Engineering Group, KEG)
+    - course: Visiting PhD Student 
       institution: Tsinghua University
       year: 2024.09 -- 2025.07
     - course: BSc in Mathematics
-      institution: Huazhong Agricultural University
+      institution: Huazhong Agricultural University (211)
       year: 2018 -- 2022
 
 # Skills
