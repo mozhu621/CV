@@ -80,12 +80,12 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#7f8c8d;font-weight:600;">[arXiv]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Shangqing Tu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [Shifting Long-Context LLMs Research from Input to Output](https://arxiv.org/abs/2501.14524).
 
-- **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. *From Perception to Action: An Interactive Benchmark for Vision Reasoning*. arXiv 2026.
+- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2026]</span> **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. *From Perception to Action: An Interactive Benchmark for Vision Reasoning*.
 
-- Shangqing Tu, Yucheng Wang, Daniel Zhang-Li, Yushi Bai, Jifan Yu, **Yuhao Wu**, Lei Hou, Huiqin Liu, Zhiyuan Liu, Bin Xu, Juanzi Li. *LongWriter-V: Enabling Ultra-Long and High-Fidelity Generation in Vision-Language Models*. **ACM MM 2025**.
+- <span style="color:#8e44ad;font-weight:600;">[ACM MM 2025]</span> Shangqing Tu, Yucheng Wang, Daniel Zhang-Li, Yushi Bai, Jifan Yu, **Yuhao Wu**, Lei Hou, Huiqin Liu, Zhiyuan Liu, Bin Xu, Juanzi Li. *LongWriter-V: Enabling Ultra-Long and High-Fidelity Generation in Vision-Language Models*.
 
-- Ziyu Ge\*, **Yuhao Wu\*** , Daniel Chin, Roy Ka-Wei Lee, Rui Cao. *Resolving Conflicting Evidence in Automated Fact-Checking: A Study on Retrieval-Augmented LLMs*. **IJCAI 2025**.
+- <span style="color:#d35400;font-weight:600;">[IJCAI 2025]</span> Ziyu Ge\*, **Yuhao Wu\*** , Daniel Chin, Roy Ka-Wei Lee, Rui Cao. *Resolving Conflicting Evidence in Automated Fact-Checking: A Study on Retrieval-Augmented LLMs*.
 
-- **Yuhao Wu**, K. Sharma, C. Seah, S. Zhang. [SentiStream: A Co-Training Framework for Adaptive Online Sentiment Analysis in Evolving Data Streams](https://aclanthology.org/2023.emnlp-main.1010/). **EMNLP 2023**.
+- <span style="color:#16a085;font-weight:600;">[EMNLP 2023]</span> **Yuhao Wu**, K. Sharma, C. Seah, S. Zhang. [SentiStream: A Co-Training Framework for Adaptive Online Sentiment Analysis in Evolving Data Streams](https://aclanthology.org/2023.emnlp-main.1010/).
 
-- **Yuhao Wu\***, T. Shi\*, K. Sharma, C. W. Seah, S. Zhang. *Online Continual Knowledge Learning for Language Models*. arXiv 2023.
+- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2023]</span> **Yuhao Wu\***, T. Shi\*, K. Sharma, C. W. Seah, S. Zhang. *Online Continual Knowledge Learning for Language Models*.
