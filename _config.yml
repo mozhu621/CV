@@ -1,7 +1,9 @@
 # Site Settings
 title                    : "Yuhao Wu"
 description              : "PhD Candidate in NLP at SUTD. Research on long-form generation, long-context LLMs, RL-based alignment and evaluation."
-repository               : "mozhu621/mozhu621.github.io"
+repository               : "mozhu621/CV"
+url                      : "https://mozhu621.github.io"
+baseurl                  : "/CV"
 google_scholar_stats_use_cdn : false
 
 # SEO Related

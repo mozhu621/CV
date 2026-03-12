@@ -14,9 +14,9 @@ redirect_from:
 <script>
 (function() {
   var avatars = [
-    { src: '../images/avatar.jpg', label: 'Professional' },
-    { src: '../images/HAHAHA.jpg', label: 'Casual' },
-    { src: '../images/katong.jpg', label: 'Cartoon' }
+    { src: '/CV/images/avatar.jpg', label: 'Professional' },
+    { src: '/CV/images/HAHAHA.jpg', label: 'Casual' },
+    { src: '/CV/images/katong.jpg', label: 'Cartoon' }
   ];
   var currentIndex = 0;
 
@@ -50,7 +50,7 @@ redirect_from:
 <div style="display:flex; align-items:flex-start; gap:36px; flex-wrap:wrap; margin-bottom:32px;">
   <div style="flex:0 0 auto; text-align:center;">
     <div style="position:relative; width:220px; display:inline-block;">
-      <img id="avatar-switcher-img" src="../images/avatar.jpg" alt="Yuhao Wu"
+      <img id="avatar-switcher-img" src="/CV/images/avatar.jpg" alt="Yuhao Wu"
            style="width:220px; height:260px; border-radius:14px; object-fit:cover; box-shadow:0 6px 20px rgba(0,0,0,0.14); transition:opacity 0.2s ease;">
       <button onclick="avatarPrev()" aria-label="Previous photo"
         style="position:absolute; left:-18px; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.95); border:2px solid #e0e0e0; border-radius:8px; width:38px; height:46px; cursor:pointer; font-size:22px; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.15); transition:all 0.2s ease; color:#555; z-index:10;"
@@ -242,7 +242,7 @@ redirect_from:
 
 <div class="paper-box">
   <div class="paper-box-image">
-    <div><div class="badge">ICLR 2026 Oral</div><img src='../images/longwriter-zero.png' alt="LongWriter-Zero" width="100%" onerror="this.style.display='none'"></div>
+    <div><div class="badge">ICLR 2026 Oral</div><img src='/CV/images/longwriter-zero.png' alt="LongWriter-Zero" width="100%" onerror="this.style.display='none'"></div>
   </div>
   <div class="paper-box-text" markdown="1">
 
@@ -259,7 +259,7 @@ Pure RL training strategy that enables LLMs to master ultra-long (10,000+ word) 
 
 <div class="paper-box">
   <div class="paper-box-image">
-    <div><div class="badge">ICLR 2025</div><img src='../images/longgenbench.png' alt="LongGenBench" width="100%" onerror="this.style.display='none'"></div>
+    <div><div class="badge">ICLR 2025</div><img src='/CV/images/longgenbench.png' alt="LongGenBench" width="100%" onerror="this.style.display='none'"></div>
   </div>
   <div class="paper-box-text" markdown="1">
 
@@ -276,7 +276,7 @@ A comprehensive benchmark for evaluating long-form generation capabilities in lo
 
 <div class="paper-box">
   <div class="paper-box-image">
-    <div><div class="badge">ACL 2026 (Submit)</div><img src='../images/superwriter.png' alt="SuperWriter" width="100%" onerror="this.style.display='none'"></div>
+    <div><div class="badge">ACL 2026 (Submit)</div><img src='/CV/images/superwriter.png' alt="SuperWriter" width="100%" onerror="this.style.display='none'"></div>
   </div>
   <div class="paper-box-text" markdown="1">
 
@@ -293,7 +293,7 @@ A hierarchical SFT + DPO framework where agents self-guide the generation of str
 
 <div class="paper-box">
   <div class="paper-box-image">
-    <div><div class="badge">ACL 2026 (Submit)</div><img src='../images/shifting.png' alt="Shifting" width="100%" onerror="this.style.display='none'"></div>
+    <div><div class="badge">ACL 2026 (Submit)</div><img src='/CV/images/shifting.png' alt="Shifting" width="100%" onerror="this.style.display='none'"></div>
   </div>
   <div class="paper-box-text" markdown="1">
 
