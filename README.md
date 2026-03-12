@@ -1,12 +1,45 @@
-# [Hugo Academic CV Theme](https://github.com/HugoBlox/theme-academic-cv)
+# Yuhao Wu — Academic Homepage
 
-[![Screenshot](./preview.png)](https://hugoblox.com/templates/)
+Personal academic homepage for **Yuhao Wu**, PhD candidate at SUTD (Singapore University of Technology and Design).
 
-The Hugo **Academic Resumé Template** empowers you to easily create your job-winning online resumé, showcase your academic publications, and create online courses or knowledge bases to grow your audience.
+Built with **Jekyll** + [AcadHomepage](https://github.com/RayeRen/acad-homepage.github.io) template (Minimal Mistakes theme).
 
-[![Get Started](https://img.shields.io/badge/-Get%20started-ff4655?style=for-the-badge)](https://hugoblox.com/templates/)
-[![Discord](https://img.shields.io/discord/722225264733716590?style=for-the-badge)](https://discord.com/channels/722225264733716590/742892432458252370/742895548159492138)  
-[![Twitter Follow](https://img.shields.io/twitter/follow/GetResearchDev?label=Follow%20on%20Twitter)](https://twitter.com/GetResearchDev)
+## Quick Start
+
+```bash
+# Install dependencies
+bundle install
+
+# Run local server
+bundle exec jekyll serve --livereload
+# OR
+bash run_server.sh
+```
+
+Open `http://localhost:4000` in your browser.
+
+## Site Structure
+
+```
+_config.yml          # Site configuration (author info, links)
+_pages/about.md      # Homepage content (edit this!)
+_data/navigation.yml # Navigation menu
+files/               # CV PDF and other downloads
+images/              # Avatar and other images
+_sass/               # SCSS styles
+assets/css/          # Compiled CSS
+```
+
+## Customization
+
+- **Personal info**: Edit `_config.yml`
+- **Homepage content**: Edit `_pages/about.md`
+- **Navigation**: Edit `_data/navigation.yml`
+- **CV PDF**: Replace `files/Yuhao_Wu_CV.pdf`
+- **Avatar photos**: Replace images in `images/` (avatar.jpg, HAHAHA.jpg, katong.png)
+
+---
+*Previously built with Hugo (legacy Hugo files preserved in content/, config/, layouts/ etc.)*
 
 ️**Trusted by 250,000+ researchers, educators, and students.** Highly customizable via the integrated **no-code, Hugo Blox Builder**, making every site truly personalized ⭐⭐⭐⭐⭐
 
