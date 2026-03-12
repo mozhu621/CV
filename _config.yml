@@ -1,10 +1,18 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your entire site, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# `jekyll serve`. If you change this file, please restart the server process.
+
 # Site Settings
-title                    : "Yuhao Wu"
+title                    : "Yuhao Wu's Homepage"
 description              : "PhD Candidate in NLP at SUTD. Research on long-form generation, long-context LLMs, RL-based alignment and evaluation."
 repository               : "mozhu621/CV"
-url                      : "https://mozhu621.github.io"
-baseurl                  : "/CV"
 google_scholar_stats_use_cdn : false
+
+# google analytics
+google_analytics_id      : # your google analytics id
 
 # SEO Related
 google_site_verification :
@@ -15,7 +23,7 @@ baidu_site_verification  :
 author:
   name             : "Yuhao Wu"
   avatar           : "images/avatar.jpg"
-  bio              : "PhD Candidate @ SUTD & ByteDance Seed Intern"
+  bio              : "PhD Candidate @ SUTD<br>ByteDance Seed Research Intern"
   location         : "Beijing, China"
   employer         :
   pubmed           :
@@ -83,17 +91,6 @@ exclude:
   - package.json
   - tmp
   - vendor
-  # Hugo-related files to ignore
-  - content
-  - layouts
-  - static
-  - theme.toml
-  - go.mod
-  - netlify.toml
-  - academic.Rproj
-  - publications.bib
-  - scripts
-  - CV_latex
 keep_files:
   - .git
   - .svn
@@ -134,12 +131,12 @@ defaults:
 # Sass/SCSS
 sass:
   sass_dir: _sass
-  style: compressed
+  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 
 
 # Outputting
 permalink: /:categories/:title/
-timezone: Asia/Singapore
+timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins
