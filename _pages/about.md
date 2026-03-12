@@ -32,7 +32,9 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
 - *2025.12*: &nbsp;🚀 Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
-- *2025.06*: &nbsp;🚀 Started as Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2 long-context capabilities.
+- *2026*: &nbsp;📄 **Seed2.0 Model Card** released — ByteDance Seed.
+- *2026*: &nbsp;📄 **Kimi K2.5: Visual Agentic Intelligence** released — Moonshot AI.
+- *2025.06*: &nbsp;🚀 Started as Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
 - *2025.01*: &nbsp;🎉 **LongGenBench** accepted to **ICLR 2025** main track.
 - *2024.09*: &nbsp;🚀 Joined **Zhipu AI** as Algorithm Research Intern, contributing to the GLM-4.1/4.5 series.
 
@@ -44,7 +46,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 - Researched **Skill-Augmented Pretraining**: built structured Skill Libraries and explored skill-data integration to boost model knowledge and capability expression.
 
 **Kimi (Moonshot AI) &mdash; Algorithm Research Intern** <span style="float:right;color:#888;font-weight:normal;">Jun. – Dec. 2025 &nbsp;·&nbsp; Beijing</span>
-- Deeply involved in iterating **Kimi-K2-0905** for long-context capabilities, covering long-text/code synthetic data construction and Long Code Generation data pipelines.
+- Deeply involved in iterating **Kimi-K2.5** for long-context capabilities, covering long-text/code synthetic data construction and Long Code Generation data pipelines.
 - Follow-up works include **Kimi-Linear** and **Kimi-K2-Thinking**.
 
 **Zhipu AI &mdash; Algorithm Research Intern** <span style="float:right;color:#888;font-weight:normal;">Sep. 2024 – Jun. 2025 &nbsp;·&nbsp; Beijing</span>
@@ -67,8 +69,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - **Co-author** — *Kimi Linear: An Expressive, Efficient Attention Architecture*. Moonshot AI, 2025.
 - **Co-author** — *GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models*. Zhipu AI, 2025.
-- **Co-author** — *Kimi K2.5: Visual Agentic Intelligence*. Moonshot AI, 2025.
-- **Co-author** — *Seed2.0 Model Card: Towards Intelligence Frontier for Real-World Complexity*. ByteDance Seed, 2025.
+- **Co-author** — *Kimi K2.5: Visual Agentic Intelligence*. Moonshot AI, 2026.
+- **Co-author** — *Seed2.0 Model Card: Towards Intelligence Frontier for Real-World Complexity*. ByteDance Seed, 2026.
 
 ## Papers
 
