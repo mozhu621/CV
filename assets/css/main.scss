@@ -107,3 +107,106 @@ h1:before, .anchor:before {
     background-color: #00369f;
     font-size: .8em;
 }
+
+/* ===== Custom styles for Yuhao Wu ===== */
+
+/* --- Section headings --- */
+.page__content h1 {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+    padding-bottom: 0.35em;
+    border-bottom: 2px solid #eaecef;
+}
+
+.page__content h2 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #34495e;
+    margin-top: 1.4em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.2em;
+}
+
+/* --- Publication list spacing --- */
+.page__content ul {
+    margin-top: 0.4em;
+}
+
+.page__content ul li {
+    margin-bottom: 0.75em;
+    line-height: 1.65;
+}
+
+/* --- Experience entries: bold company, subdued date --- */
+.page__content p strong:first-child {
+    color: #2c3e50;
+}
+
+/* --- Links --- */
+.page__content a {
+    color: #2471a3;
+    text-decoration: none;
+}
+.page__content a:hover {
+    color: #1a5276;
+    text-decoration: underline;
+}
+
+/* --- Intro text slightly larger --- */
+.page__content > p:first-of-type {
+    font-size: 1.02em;
+    line-height: 1.8;
+}
+
+/* --- Alert / callout box --- */
+.page__content > div[style*="border-left"] {
+    font-size: 0.95em;
+}
+
+/* --- Google Scholar badge alignment --- */
+.page__content img[src*="shields.io"] {
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+/* --- Sidebar author name --- */
+.author__name {
+    font-size: 1.15em !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.2em !important;
+}
+
+.author__bio {
+    font-size: 0.82em !important;
+    line-height: 1.5 !important;
+    color: #555 !important;
+}
+
+/* --- Sidebar avatar: square with rounded corners --- */
+.author__avatar img {
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* --- Sidebar social links --- */
+.author__urls a {
+    font-size: 0.85em;
+}
+
+/* --- Masthead nav font --- */
+.masthead__menu-home-item a {
+    font-weight: 700 !important;
+    letter-spacing: 0.01em;
+}
+
+/* --- News list: tighter --- */
+.page__content h1 + ul li,
+.page__content h1 + p + ul li {
+    margin-bottom: 0.5em;
+}

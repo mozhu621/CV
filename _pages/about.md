@@ -39,28 +39,24 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 # 💼 Experience
 
-**ByteDance Seed — Algorithm Research Intern** &emsp; *Dec. 2025 – Present · Beijing, China*
+**ByteDance Seed &mdash; Algorithm Research Intern** <span style="float:right;color:#888;font-weight:normal;">Dec. 2025 – Present &nbsp;·&nbsp; Beijing</span>
 - Participated in LLM Pretrain-Level data synthesis research; designed high-quality pretraining data pipelines and explored the impact of large-scale synthetic data on model capabilities.
 - Researched **Skill-Augmented Pretraining**: built structured Skill Libraries and explored skill-data integration to boost model knowledge and capability expression.
 
-**Kimi (Moonshot AI) — Algorithm Research Intern** &emsp; *Jun. 2025 – Dec. 2025 · Beijing, China*
-- Deeply involved in iterating **Kimi-K2-0905** for long-context capabilities, including long-text/code synthetic data construction and Long Code Generation data pipelines.
+**Kimi (Moonshot AI) &mdash; Algorithm Research Intern** <span style="float:right;color:#888;font-weight:normal;">Jun. – Dec. 2025 &nbsp;·&nbsp; Beijing</span>
+- Deeply involved in iterating **Kimi-K2-0905** for long-context capabilities, covering long-text/code synthetic data construction and Long Code Generation data pipelines.
 - Follow-up works include **Kimi-Linear** and **Kimi-K2-Thinking**.
 
-**Zhipu AI — Algorithm Research Intern** &emsp; *Sep. 2024 – Jun. 2025 · Beijing, China*
+**Zhipu AI &mdash; Algorithm Research Intern** <span style="float:right;color:#888;font-weight:normal;">Sep. 2024 – Jun. 2025 &nbsp;·&nbsp; Beijing</span>
 - Deeply contributed to the **GLM-Zero series** serving GLM-4.1/4.5; work covered long-chain CoT data construction, Reward Model design, RLHF alignment, and end-to-end benchmark evaluation.
-- Proposed **SuperWriter**: agent-guided hierarchical SFT data generation + hierarchical DPO for long-form writing.
+- Proposed **SuperWriter**: agent-guided hierarchical SFT + hierarchical DPO for long-form writing.
 - Proposed **LongWriter-Zero**: pure RL strategy for ultra-long text generation (**ICLR 2026 Oral**).
-
-**Trip.com (Ctrip) — NLP Algorithm Intern** &emsp; *Jul. 2021 – Oct. 2021 · Shanghai, China*
-- Applied NLP/ML algorithms to improve short-text matching accuracy by 9%. Designed intelligent dialogue systems for customer service. First-author granted patent: CN 202111234433X.
-
 
 # 🎓 Education
 
-- *2023 – Present* &emsp; **Ph.D.** in Natural Language Processing · Singapore University of Technology and Design (SUTD) · Advisor: Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/)
-- *Sep. 2024 – Jul. 2025* &emsp; **Visiting Ph.D. Student** · Tsinghua University (THU) · Beijing, China
-- *2018 – 2022* &emsp; **B.Sc.** in Mathematics · Huazhong Agricultural University (211) · Wuhan, China
+- *2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisor: Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
+- *Sep. 2024 – Jul. 2025* &emsp; **Visiting Ph.D. Student**, Tsinghua University (THU), Beijing.
+- *2018 – 2022* &emsp; **B.Sc.** in Mathematics, Huazhong Agricultural University (211), Wuhan.
 
 
 # 📝 Selected Publications
@@ -80,9 +76,9 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#2980b9;font-weight:600;">[ICLR 2025]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [LongGenBench: Benchmarking Long-Form Generation in Long Context LLMs](https://arxiv.org/abs/2410.04199). \[[Code](https://github.com/mozhu621/LongGenBench)\]
 
-- <span style="color:#27ae60;font-weight:600;">[ACL 2026 Under Review]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2502.09606).
+- <span style="color:#7f8c8d;font-weight:600;">[arXiv]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2502.09606).
 
-- <span style="color:#27ae60;font-weight:600;">[ACL 2026 Under Review]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Shangqing Tu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [Shifting Long-Context LLMs Research from Input to Output](https://arxiv.org/abs/2501.14524).
+- <span style="color:#7f8c8d;font-weight:600;">[arXiv]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Shangqing Tu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [Shifting Long-Context LLMs Research from Input to Output](https://arxiv.org/abs/2501.14524).
 
 - **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. *From Perception to Action: An Interactive Benchmark for Vision Reasoning*. arXiv 2026.
 
