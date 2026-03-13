@@ -76,15 +76,15 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#2471a3;font-weight:600;">[ICLR 2026 Oral]</span> **Yuhao Wu\***, Yushi Bai\*, Jiajie Zhang, Xin Lv, Roy Ka-Wei Lee, Juanzi Li. [LongWriter-Zero: Mastering Ultra-Long Text Generation via Reinforcement Learning](https://arxiv.org/abs/2502.07593). \[[Code](https://github.com/THUDM/LongWriter-Zero)\]
 
-- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2026]</span> **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. *From Perception to Action: An Interactive Benchmark for Vision Reasoning*.
+- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2026]</span> **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. [From Perception to Action: An Interactive Benchmark for Vision Reasoning](https://arxiv.org/abs/2602.21015).
 
 - <span style="color:#7f8c8d;font-weight:600;">[arXiv 2026]</span> Shuangshuang Ying, Zheyu Wang, Yunjian Peng, Jin Chen, **Yuhao Wu**, Hongbin Lin, Dingyu He, Siyi Liu, Gengchen Yu, YinZhu Piao, Yuchen Wu, Xin Gui, Zhongyuan Peng, Xin Li, Xeron Du, Libo Qin, YiXin Cao, Ge Zhang, Stephen Huang. [Retrieval-Infused Reasoning Sandbox: A Benchmark for Decoupling Retrieval and Reasoning Capabilities](https://arxiv.org/abs/2601.21937).
 
-- <span style="color:#8e44ad;font-weight:600;">[ACM MM 2025]</span> Shangqing Tu, Yucheng Wang, Daniel Zhang-Li, Yushi Bai, Jifan Yu, **Yuhao Wu**, Lei Hou, Huiqin Liu, Zhiyuan Liu, Bin Xu, Juanzi Li. *LongWriter-V: Enabling Ultra-Long and High-Fidelity Generation in Vision-Language Models*.
+- <span style="color:#8e44ad;font-weight:600;">[ACM MM 2025]</span> Shangqing Tu, Yucheng Wang, Daniel Zhang-Li, Yushi Bai, Jifan Yu, **Yuhao Wu**, Lei Hou, Huiqin Liu, Zhiyuan Liu, Bin Xu, Juanzi Li. [LongWriter-V: Enabling Ultra-Long and High-Fidelity Generation in Vision-Language Models](https://arxiv.org/abs/2502.14834). \[[Code](https://github.com/THU-KEG/LongWriter-V)\]
 
-- <span style="color:#d35400;font-weight:600;">[IJCAI 2025]</span> Ziyu Ge\*, **Yuhao Wu\*** , Daniel Chin, Roy Ka-Wei Lee, Rui Cao. *Resolving Conflicting Evidence in Automated Fact-Checking: A Study on Retrieval-Augmented LLMs*.
+- <span style="color:#d35400;font-weight:600;">[IJCAI 2025]</span> Ziyu Ge\*, **Yuhao Wu\*** , Daniel Wai Kit Chin, Roy Ka-Wei Lee, Rui Cao. [Resolving Conflicting Evidence in Automated Fact-Checking: A Study on Retrieval-Augmented LLMs](https://arxiv.org/abs/2505.17762).
 
-- <span style="color:#2471a3;font-weight:600;">[ICLR 2025]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [LongGenBench: Benchmarking Long-Form Generation in Long Context LLMs](https://arxiv.org/abs/2410.04199). \[[Code](https://github.com/mozhu621/LongGenBench)\]
+- <span style="color:#2471a3;font-weight:600;">[ICLR 2025]</span> **Yuhao Wu**, Ming Shan Hee, Zhiqing Hu, Roy Ka-Wei Lee. [LongGenBench: Benchmarking Long-Form Generation in Long Context LLMs](https://arxiv.org/abs/2409.02076). \[[Code](https://github.com/mozhu621/LongGenBench)\]
 
 - <span style="color:#27ae60;font-weight:600;">[AAAI 2025]</span> Weihua Zheng, Xin Huang, Zhengyuan Liu, Tarun Kumar Vangani, Bowei Zou, Xiyan Tao, **Yuhao Wu**, Ai Ti Aw, Nancy F. Chen, Roy Ka-Wei Lee. [AdaMCoT: Rethinking Cross-Lingual Factual Reasoning through Adaptive Multilingual Chain-of-Thought](https://arxiv.org/abs/2501.16154).
 
@@ -94,4 +94,4 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#16a085;font-weight:600;">[EMNLP 2023]</span> **Yuhao Wu**, K. Sharma, C. Seah, S. Zhang. [SentiStream: A Co-Training Framework for Adaptive Online Sentiment Analysis in Evolving Data Streams](https://aclanthology.org/2023.emnlp-main.1010/).
 
-- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2023]</span> **Yuhao Wu\***, T. Shi\*, K. Sharma, C. W. Seah, S. Zhang. *Online Continual Knowledge Learning for Language Models*.
+- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2023]</span> **Yuhao Wu\***, Tongjun Shi\*, Karthick Sharma, Chun Wei Seah, Shuhao Zhang. [Online Continual Knowledge Learning for Language Models](https://arxiv.org/abs/2311.09632).
