@@ -33,8 +33,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 - *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
 - *2025.12*: &nbsp;🚀 Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
 - *2026*: &nbsp;📄 **Seed2.0 Model Card** released — ByteDance Seed.
+- *2025.06 – 2025.12*: &nbsp;🚀 Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
 - *2026*: &nbsp;📄 **Kimi K2.5: Visual Agentic Intelligence** released — Moonshot AI.
-- *2025.06*: &nbsp;🚀 Started as Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
 - *2025.01*: &nbsp;🎉 **LongGenBench** accepted to **ICLR 2025** main track.
 - *2024.09*: &nbsp;🚀 Joined **Zhipu AI** as Algorithm Research Intern, contributing to the GLM-4.1/4.5 series.
 
@@ -56,9 +56,9 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 # 🎓 Education
 
-- *2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisor: Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
+- *Sep. 2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisor: Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
 - *Sep. 2024 – Jul. 2025* &emsp; **Visiting Ph.D. Student**, Tsinghua University (THU), Beijing.
-- *2018 – 2022* &emsp; **B.Sc.** in Mathematics, Huazhong Agricultural University (211), Wuhan.
+- *Sep. 2018 – Jun. 2022* &emsp; **B.Sc.** in Mathematics, Huazhong Agricultural University (HZAU), Wuhan.
 
 
 # 📝 Selected Publications
