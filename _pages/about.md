@@ -82,7 +82,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 ## Papers
 
-- <span style="color:#2471a3;font-weight:600;">[ICLR 2026 Oral]</span> **Yuhao Wu\***, Yushi Bai\*, Jiajie Zhang, Xin Lv, Roy Ka-Wei Lee, Juanzi Li. [LongWriter-Zero: Mastering Ultra-Long Text Generation via Reinforcement Learning](https://arxiv.org/abs/2502.07593). \[[Code](https://github.com/THUDM/LongWriter-Zero)\]
+- <span style="color:#2471a3;font-weight:600;">[ICLR 2026 Oral]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqiang Hu, Roy Ka-Wei Lee, Juanzi Li. [LongWriter-Zero: Mastering Ultra-Long Text Generation via Reinforcement Learning](https://arxiv.org/abs/2506.18841). \[[Code](https://github.com/THUDM/LongWriter-Zero)\]
 
 - <span style="color:#7f8c8d;font-weight:600;">[arXiv 2026]</span> **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. [From Perception to Action: An Interactive Benchmark for Vision Reasoning](https://arxiv.org/abs/2602.21015).
 
