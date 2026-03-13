@@ -24,7 +24,7 @@ I am currently a research intern at **ByteDance Seed**, working on large-scale p
 My papers have received <a href='https://scholar.google.com/citations?user=XIyHTG0AAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a> citations.
 
 <div style="padding: 12px 16px; background: #fff8f0; border-left: 4px solid #e67e22; border-radius: 4px; margin: 16px 0;">
-🔍 <strong>I am actively seeking internship and international exchange opportunities.</strong> Feel free to reach out at <a href="mailto:mozhu621@gmail.com">mozhu621@gmail.com</a>
+💼 <strong>I am actively seeking full-time positions.</strong> Feel free to reach out at <a href="mailto:mozhu621@gmail.com">mozhu621@gmail.com</a>
 </div>
 
 
@@ -33,8 +33,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 - *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
 - *2025.12*: &nbsp;🚀 Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
 - *2026*: &nbsp;📄 **Seed2.0 Model Card** released — ByteDance Seed.
-- *2025.06 – 2025.12*: &nbsp;🚀 Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
 - *2026*: &nbsp;📄 **Kimi K2.5: Visual Agentic Intelligence** released — Moonshot AI.
+- *2025.06 – 2025.12*: &nbsp;🚀 Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
 - *2025.01*: &nbsp;🎉 **LongGenBench** accepted to **ICLR 2025** main track.
 - *2024.09*: &nbsp;🚀 Joined **Zhipu AI** as Algorithm Research Intern, contributing to the GLM-4.1/4.5 series.
 
