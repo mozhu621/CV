@@ -5,7 +5,39 @@
 <div itemscope itemtype="http://schema.org/Person" class="profile_box">
 
   <div class="author__avatar">
-    <img src="{{ author.avatar }}" class="author__avatar" alt="{{ author.name }}">
+    <div id="avatar-slideshow" style="position:relative;cursor:pointer;" title="Click to switch photo">
+      <img id="avatar-img" src="{{ site.baseurl }}/images/photo_casual.jpg" alt="{{ author.name }}" style="width:100%;border-radius:8px;display:block;">
+      <div id="avatar-dots" style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:5px;">
+        <span class="avatar-dot" data-idx="0" style="width:7px;height:7px;border-radius:50%;background:#fff;opacity:1;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></span>
+        <span class="avatar-dot" data-idx="1" style="width:7px;height:7px;border-radius:50%;background:#fff;opacity:0.45;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></span>
+        <span class="avatar-dot" data-idx="2" style="width:7px;height:7px;border-radius:50%;background:#fff;opacity:0.45;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></span>
+        <span class="avatar-dot" data-idx="3" style="width:7px;height:7px;border-radius:50%;background:#fff;opacity:0.45;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></span>
+      </div>
+    </div>
+    <script>
+    (function(){
+      var photos = [
+        '{{ site.baseurl }}/images/photo_casual.jpg',
+        '{{ site.baseurl }}/images/avatar.jpg',
+        '{{ site.baseurl }}/images/HAHAHA.jpg',
+        '{{ site.baseurl }}/images/katong.jpg'
+      ];
+      var current = 0;
+      var img = document.getElementById('avatar-img');
+      var dots = document.querySelectorAll('.avatar-dot');
+      function switchTo(idx) {
+        current = idx;
+        img.style.opacity = '0';
+        setTimeout(function(){ img.src = photos[current]; img.style.opacity = '1'; }, 150);
+        dots.forEach(function(d, i){ d.style.opacity = i === current ? '1' : '0.45'; });
+      }
+      document.getElementById('avatar-slideshow').addEventListener('click', function(e){
+        if (!e.target.classList.contains('avatar-dot')) switchTo((current + 1) % photos.length);
+      });
+      dots.forEach(function(d){ d.addEventListener('click', function(e){ e.stopPropagation(); switchTo(parseInt(d.dataset.idx)); }); });
+      img.style.transition = 'opacity 0.15s ease';
+    })();
+    </script>
   </div>
 
   <div class="author__content">

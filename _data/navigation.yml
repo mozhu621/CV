@@ -4,16 +4,16 @@ main:
     url: "/#about-me"
 
   - title: "News"
-    url: "/#-news"
+    url: "/#news"
 
   - title: "Experience"
-    url: "/#-experience"
+    url: "/#experience"
 
   - title: "Education"
-    url: "/#-education"
+    url: "/#education"
 
   - title: "Publications"
-    url: "/#-selected-publications"
+    url: "/#publications"
 
   - title: "CV"
     url: "/files/Yuhao_Wu_CV.pdf"

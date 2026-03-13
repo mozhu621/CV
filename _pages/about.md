@@ -28,6 +28,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 </div>
 
 
+<span class='anchor' id='news'></span>
+
 # 🔥 News
 
 - *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
@@ -38,6 +40,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 - *2025.01*: &nbsp;🎉 **LongGenBench** accepted to **ICLR 2025** main track.
 - *2024.09*: &nbsp;🚀 Joined **Zhipu AI** as Algorithm Research Intern, contributing to the GLM-4.1/4.5 series.
 
+
+<span class='anchor' id='experience'></span>
 
 # 💼 Experience
 
@@ -54,12 +58,16 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 - Proposed **SuperWriter**: agent-guided hierarchical SFT + hierarchical DPO for long-form writing.
 - Proposed **LongWriter-Zero**: pure RL strategy for ultra-long text generation (**ICLR 2026 Oral**).
 
+<span class='anchor' id='education'></span>
+
 # 🎓 Education
 
 - *Sep. 2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisor: Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
 - *Sep. 2024 – Jul. 2025* &emsp; **Visiting Ph.D. Student**, Tsinghua University (THU), Beijing.
 - *Sep. 2018 – Jun. 2022* &emsp; **B.Sc.** in Mathematics, Huazhong Agricultural University (HZAU), Wuhan.
 
+
+<span class='anchor' id='publications'></span>
 
 # 📝 Selected Publications
 
