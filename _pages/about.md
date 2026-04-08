@@ -88,7 +88,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#c0392b;font-weight:600;">[ACL 2026 Findings]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2506.04180).
 
-- <span style="color:#c0392b;font-weight:600;">[ACL 2026 Findings]</span> Junjie Li^, Xinrui Guo, **Yuhao Wu**, Roy Ka-Wei Lee, Hongzhi Li, Yutao Xie. Lost in Stories: Consistency Bugs in Long Story Generation by LLMs.
+- <span style="color:#c0392b;font-weight:600;">[ACL 2026 Findings]</span> Junjie Li^, Xinrui Guo, **Yuhao Wu**, Roy Ka-Wei Lee, Hongzhi Li, Yutao Xie. [Lost in Stories: Consistency Bugs in Long Story Generation by LLMs](https://arxiv.org/abs/2603.05890).
 
 - <span style="color:#7f8c8d;font-weight:600;">[arXiv 2026]</span> **Yuhao Wu**, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee. [From Perception to Action: An Interactive Benchmark for Vision Reasoning](https://arxiv.org/abs/2602.21015).
 
