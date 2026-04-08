@@ -32,8 +32,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 # 🔥 News
 
-- *2026.04*: &nbsp;🎉 **SuperWriter** accepted to **ACL 2026** — reflection-driven long-form writing with LLMs!
-- *2026.04*: &nbsp;🏅 Received **Tencent Student Travel Grant** for ACL 2026 (10 recipients worldwide).
+- *2026.04*: &nbsp;🎉 **SuperWriter** accepted to **ACL 2026 Findings** — reflection-driven long-form writing with LLMs!
+- *2026.04*: &nbsp;🏅 Received **Tencent Student Travel Grant** for ICLR 2026 (10 recipients worldwide).
 - *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
 - *2025.12*: &nbsp;🚀 Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
 - *2026*: &nbsp;📄 **Seed2.0 Model Card** released — ByteDance Seed.
@@ -98,7 +98,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#27ae60;font-weight:600;">[AAAI 2025]</span> Weihua Zheng, Xin Huang, Zhengyuan Liu, Tarun Kumar Vangani, Bowei Zou, Xiyan Tao, **Yuhao Wu**, Ai Ti Aw, Nancy F. Chen, Roy Ka-Wei Lee. [AdaMCoT: Rethinking Cross-Lingual Factual Reasoning through Adaptive Multilingual Chain-of-Thought](https://arxiv.org/abs/2501.16154).
 
-- <span style="color:#c0392b;font-weight:600;">[ACL 2026]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2506.04180).
+- <span style="color:#c0392b;font-weight:600;">[ACL 2026 Findings]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2506.04180).
 
 - <span style="color:#7f8c8d;font-weight:600;">[arXiv 2025]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Shangqing Tu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [Shifting Long-Context LLMs Research from Input to Output](https://arxiv.org/abs/2503.04723).
 
