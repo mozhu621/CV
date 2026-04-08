@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am a third-year PhD candidate at the **Singapore University of Technology and Design (SUTD)** (in collaboration with MIT & Zhejiang University), advised by Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/). My research focuses on **long-form generation** and **long-context capabilities of LLMs**, spanning data generation, chain-of-thought and planning, RL-based training and alignment, and end-to-end evaluation for long text, code, and reasoning.
+I am a third-year PhD candidate at the **Singapore University of Technology and Design (SUTD)** (in collaboration with MIT & Zhejiang University), advised by Prof. [Wenxuan Zhang](https://isakzhang.github.io/) and Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/). My research focuses on **long-form generation** and **long-context capabilities of LLMs**, spanning data generation, chain-of-thought and planning, RL-based training and alignment, and end-to-end evaluation for long text, code, and reasoning.
 
 I am currently a research intern at **ByteDance Seed**, working on large-scale pretraining data synthesis and Skill-Augmented Pretraining. Previously, I interned at **Kimi (Moonshot AI)** on Kimi-K2 long-context capabilities, and at **Zhipu AI** on the GLM-4.x series via long-form generation with RL.
 
@@ -32,6 +32,8 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 # 🔥 News
 
+- *2026.04*: &nbsp;🎉 **SuperWriter** accepted to **ACL 2026** — reflection-driven long-form writing with LLMs!
+- *2026.04*: &nbsp;🏅 Received **Tencent Student Travel Grant** for ACL 2026 (10 recipients worldwide).
 - *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
 - *2025.12*: &nbsp;🚀 Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
 - *2026*: &nbsp;📄 **Seed2.0 Model Card** released — ByteDance Seed.
@@ -62,7 +64,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 # 🎓 Education
 
-- *Sep. 2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisor: Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
+- *Sep. 2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisors: Prof. [Wenxuan Zhang](https://isakzhang.github.io/) and Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
 - *Sep. 2024 – Jul. 2025* &emsp; **Visiting Ph.D. Student**, Tsinghua University (THU), Beijing.
 - *Sep. 2018 – Jun. 2022* &emsp; **B.Sc.** in Mathematics, Huazhong Agricultural University (HZAU), Wuhan.
 
@@ -96,7 +98,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 - <span style="color:#27ae60;font-weight:600;">[AAAI 2025]</span> Weihua Zheng, Xin Huang, Zhengyuan Liu, Tarun Kumar Vangani, Bowei Zou, Xiyan Tao, **Yuhao Wu**, Ai Ti Aw, Nancy F. Chen, Roy Ka-Wei Lee. [AdaMCoT: Rethinking Cross-Lingual Factual Reasoning through Adaptive Multilingual Chain-of-Thought](https://arxiv.org/abs/2501.16154).
 
-- <span style="color:#7f8c8d;font-weight:600;">[arXiv 2025]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2506.04180).
+- <span style="color:#c0392b;font-weight:600;">[ACL 2026]</span> **Yuhao Wu\***, Yushi Bai\*, Zhiqing Hu, Juanzi Li, Roy Ka-Wei Lee. [SuperWriter: Reflection-Driven Long-Form Writing with LLMs](https://arxiv.org/abs/2506.04180).
 
 - <span style="color:#7f8c8d;font-weight:600;">[arXiv 2025]</span> **Yuhao Wu**, Yushi Bai, Zhiqing Hu, Shangqing Tu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee. [Shifting Long-Context LLMs Research from Input to Output](https://arxiv.org/abs/2503.04723).
 
