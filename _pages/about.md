@@ -8,44 +8,97 @@ redirect_from:
   - /about.html
 ---
 
-{% if site.google_scholar_stats_use_cdn %}
-{% assign gsDataBaseUrl = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: "@" %}
-{% else %}
-{% assign gsDataBaseUrl = "https://raw.githubusercontent.com/" | append: site.repository | append: "/" %}
-{% endif %}
-{% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
-
 <span class='anchor' id='about-me'></span>
 
-I am a third-year PhD candidate at the **Singapore University of Technology and Design (SUTD)** (in collaboration with MIT & Zhejiang University), advised by Prof. [Wenxuan Zhang](https://isakzhang.github.io/) and Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/). My research focuses on **long-form generation** and **long-context capabilities of LLMs**, spanning data generation, chain-of-thought and planning, RL-based training and alignment, and end-to-end evaluation for long text, code, and reasoning.
+<section class="home-hero">
+  <p class="home-eyebrow">Yuhao Wu · NLP Researcher</p>
+  <h1>Language models that can write longer, reason better, and learn from better data.</h1>
+  <p class="home-lede">I work on long-form generation, long-context intelligence, and the data systems behind model improvement.</p>
+  <div class="home-actions">
+    <a class="home-button home-button--primary" href="{{ site.baseurl }}/files/Yuhao_Wu_CV.pdf">Read my CV</a>
+    <a class="home-button" href="https://scholar.google.com/citations?user=XIyHTG0AAAAJ">Google Scholar</a>
+    <a class="home-button" href="mailto:mozhu621@gmail.com">Email me</a>
+  </div>
+</section>
 
-I am currently a research intern at **ByteDance Seed**, working on large-scale pretraining data synthesis and Skill-Augmented Pretraining. Previously, I interned at **Kimi (Moonshot AI)** on Kimi-K2 long-context capabilities, and at **Zhipu AI** on the GLM-4.x series via long-form generation with RL.
+<div class="home-intro-grid">
+  <div>
+    <p>I am a third-year PhD candidate at the <strong>Singapore University of Technology and Design (SUTD)</strong>, advised by Prof. <a href="https://isakzhang.github.io/">Wenxuan Zhang</a> and Prof. <a href="https://www.roylee.sg/">Roy Ka-Wei Lee</a>. My work spans data generation, chain-of-thought and planning, RL-based training and alignment, and end-to-end evaluation for long text, code, and reasoning.</p>
+    <p>Before starting my PhD, I studied mathematics. That background still shapes how I think about model behavior: I care less about a single score, and more about whether a capability is stable, explainable, and transferable.</p>
+    <p class="citation-line">My publications and citation record are available on <a href="https://scholar.google.com/citations?user=XIyHTG0AAAAJ">Google Scholar</a>.</p>
+  </div>
+  <aside class="current-note">
+    <span>Currently</span>
+    <strong>Research Intern, ByteDance Seed</strong>
+    <p>Large-scale pretraining data synthesis and Skill-Augmented Pretraining.</p>
+    <small>Previously: Kimi (Moonshot AI) and Zhipu AI.</small>
+  </aside>
+</div>
 
-My papers have received <a href='https://scholar.google.com/citations?user=XIyHTG0AAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a> citations.
+<div class="research-grid" aria-label="Research areas">
+  <div>
+    <span>01</span>
+    <strong>Data &amp; self-improvement</strong>
+    <p>Synthetic data, training trajectories, and the feedback loops that decide what a model should learn next.</p>
+  </div>
+  <div>
+    <span>02</span>
+    <strong>Long-form generation</strong>
+    <p>Planning, reflection, and reinforcement learning for coherent outputs over genuinely long horizons.</p>
+  </div>
+  <div>
+    <span>03</span>
+    <strong>Long-context evaluation</strong>
+    <p>Benchmarks and analysis that look beyond retrieval to reasoning, consistency, and useful action.</p>
+  </div>
+</div>
 
-<div style="padding: 12px 16px; background: #fff8f0; border-left: 4px solid #e67e22; border-radius: 4px; margin: 16px 0;">
-💼 <strong>I am actively seeking full-time positions.</strong> Feel free to reach out at <a href="mailto:mozhu621@gmail.com">mozhu621@gmail.com</a>
+<div class="availability-note">
+  <span>Open to conversations</span>
+  <p>I am actively seeking full-time research positions. Feel free to reach out at <a href="mailto:mozhu621@gmail.com">mozhu621@gmail.com</a>.</p>
 </div>
 
 
 <span class='anchor' id='news'></span>
 
-# 🔥 News
+# News
 
-- *2026.04*: &nbsp;🎉 **SuperWriter** accepted to **ACL 2026 Findings** — reflection-driven long-form writing with LLMs!
-- *2026.04*: &nbsp;🏅 Received **Tencent Student Travel Grant** for ICLR 2026 (10 recipients worldwide).
-- *2026.01*: &nbsp;🏆 **LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT!
-- *2025.12*: &nbsp;🚀 Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
-- *2026*: &nbsp;📄 **Seed2.0 Model Card** released — ByteDance Seed.
-- *2026*: &nbsp;📄 **Kimi K2.5: Visual Agentic Intelligence** released — Moonshot AI.
-- *2025.06 – 2025.12*: &nbsp;🚀 Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
-- *2025.01*: &nbsp;🎉 **LongGenBench** accepted to **ICLR 2025** main track.
-- *2024.09*: &nbsp;🚀 Joined **Zhipu AI** as Algorithm Research Intern, contributing to the GLM-4.1/4.5 series.
+- *2026.04*: &nbsp;**SuperWriter** accepted to **ACL 2026 Findings** — reflection-driven long-form writing with LLMs.
+- *2026.04*: &nbsp;Received the **Tencent Student Travel Grant** for ICLR 2026 (10 recipients worldwide).
+- *2026.01*: &nbsp;**LongWriter-Zero** accepted to **ICLR 2026 as Oral** (top ~1.8%) — pure RL for ultra-long text generation without SFT.
+- *2025.12*: &nbsp;Started as Algorithm Research Intern at **ByteDance Seed**, working on LLM pretraining data synthesis and Skill-Augmented Pretraining.
+- *2026*: &nbsp;**Seed2.0 Model Card** released — ByteDance Seed.
+- *2026*: &nbsp;**Kimi K2.5: Visual Agentic Intelligence** released — Moonshot AI.
+- *2025.06 – 2025.12*: &nbsp;Algorithm Research Intern at **Kimi (Moonshot AI)**, contributing to Kimi-K2.5 long-context capabilities.
+- *2025.01*: &nbsp;**LongGenBench** accepted to **ICLR 2025** main track.
+- *2024.09*: &nbsp;Joined **Zhipu AI** as Algorithm Research Intern, contributing to the GLM-4.1/4.5 series.
+
+
+<span class='anchor' id='blog'></span>
+
+# Writing
+
+<p class="section-intro">Notes on data, model self-improvement, long-context systems, and research questions I am still trying to make precise.</p>
+
+<article class="blog-feature-card">
+  <div class="blog-card-meta">
+    <span>Research note</span>
+    <time datetime="2026-07-31">31 Jul 2026</time>
+  </div>
+  <h2><a href="{{ site.baseurl }}/blog/data-driven-rsi/">Data 可能是 RSI 最先能想清楚的一块</a></h2>
+  <p>如果模型还要继续 scaling，下一批真正有用的数据从哪里来？这篇文章从模糊评估、Synthetic Data Ladder 和 Harness–Evolve 三个问题出发，试着把 Data-driven RSI 讲得更具体一点。</p>
+  <div class="blog-card-footer">
+    <span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span>
+    <a href="{{ site.baseurl }}/blog/data-driven-rsi/">Read note <span aria-hidden="true">→</span></a>
+  </div>
+</article>
+
+<p class="all-writing-link"><a href="{{ site.baseurl }}/blog/">All writing →</a></p>
 
 
 <span class='anchor' id='experience'></span>
 
-# 💼 Experience
+# Experience
 
 **ByteDance Seed &mdash; Algorithm Research Intern** <span style="float:right;color:#888;font-weight:normal;">Dec. 2025 – Present &nbsp;·&nbsp; Beijing</span>
 - Participated in LLM Pretrain-Level data synthesis research; designed high-quality pretraining data pipelines and explored the impact of large-scale synthetic data on model capabilities.
@@ -62,7 +115,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 <span class='anchor' id='education'></span>
 
-# 🎓 Education
+# Education
 
 - *Sep. 2023 – Present* &emsp; **Ph.D.** in Natural Language Processing, Singapore University of Technology and Design (SUTD). Advisors: Prof. [Wenxuan Zhang](https://isakzhang.github.io/) and Prof. [Roy Ka-Wei Lee](https://www.roylee.sg/).
 - *Sep. 2024 – Jul. 2025* &emsp; **Visiting Ph.D. Student**, Tsinghua University (THU), Beijing.
@@ -71,7 +124,7 @@ My papers have received <a href='https://scholar.google.com/citations?user=XIyHT
 
 <span class='anchor' id='publications'></span>
 
-# 📝 Selected Publications
+# Selected Publications
 
 <small>\* denotes equal contribution &nbsp;|&nbsp; ^ denotes supervised student &nbsp;|&nbsp; For complete list see <a href="https://scholar.google.com/citations?user=XIyHTG0AAAAJ" target="_blank">Google Scholar</a></small>
 

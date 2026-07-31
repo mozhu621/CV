@@ -1,4 +1,6 @@
 _site/
+.bundle/
+vendor/
 push.sh
 .DS_Store
 test.ipynb

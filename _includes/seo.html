@@ -1,14 +1,14 @@
 <!-- begin SEO -->
 {% if site.url %}
-  {% assign seo_url = site.url %}
+  {% assign seo_url = site.url | append: site.baseurl %}
 {% endif %}
 {% assign seo_url = seo_url | default: site.github.url %}
 
 {% if site.url %}
-  {% assign canonical_url = page.url | replace: "index.html", "" | prepend: site.url %}
+  {% assign canonical_url = page.url | replace: "index.html", "" | prepend: seo_url %}
 {% endif %}
 
-<title>{{ site.title }} - Homepage</title>
+<title>{% if page.title and page.title != "" %}{{ page.title | strip_html | escape }} · Yuhao Wu{% else %}{{ site.title }}{% endif %}</title>
 
 {% assign seo_description = page.description | default: page.excerpt | default: site.description %}
 {% if seo_description %}
@@ -31,7 +31,7 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="{{ site.title }}">
-<meta property="og:title" content="{{ site.title }}">
+<meta property="og:title" content="{% if page.title and page.title != "" %}{{ page.title | strip_html | escape }}{% else %}{{ site.title }}{% endif %}">
 
 {% if seo_url %}
   <link rel="canonical" href="{{ page.url | prepend: seo_url | replace: "/index.html", "/" }}">
