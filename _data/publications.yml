@@ -1,0 +1,272 @@
+reports:
+  - key: kimi-linear
+    ordinal: "01"
+    venue: Moonshot AI
+    year: "2025"
+    label: Technical report
+    title: "Kimi Linear: An Expressive, Efficient Attention Architecture"
+    authors: "Kimi Team · <strong>Contributing author</strong>"
+    paper_url: "https://arxiv.org/abs/2510.26692"
+    bibtex: |-
+      @article{kimi2025linear,
+        title   = {Kimi Linear: An Expressive, Efficient Attention Architecture},
+        author  = {{Kimi Team}},
+        journal = {arXiv preprint arXiv:2510.26692},
+        year    = {2025},
+        url     = {https://arxiv.org/abs/2510.26692}
+      }
+
+  - key: glm-45
+    ordinal: "02"
+    venue: Zhipu AI
+    year: "2025"
+    label: Technical report
+    title: "GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models"
+    authors: "GLM-4.5 Team · <strong>Contributing author</strong>"
+    paper_url: "https://arxiv.org/abs/2508.06471"
+    code_url: "https://github.com/zai-org/GLM-4.5"
+    bibtex: |-
+      @article{glm2025glm45,
+        title   = {GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models},
+        author  = {{GLM-4.5 Team}},
+        journal = {arXiv preprint arXiv:2508.06471},
+        year    = {2025},
+        url     = {https://arxiv.org/abs/2508.06471}
+      }
+
+  - key: kimi-k25
+    ordinal: "03"
+    venue: Moonshot AI
+    year: "2026"
+    label: Model report
+    title: "Kimi K2.5: Visual Agentic Intelligence"
+    authors: "Kimi Team · <strong>Contributing author</strong>"
+    paper_url: "https://arxiv.org/abs/2602.02276"
+    bibtex: |-
+      @article{kimi2026k25,
+        title   = {Kimi K2.5: Visual Agentic Intelligence},
+        author  = {{Kimi Team}},
+        journal = {arXiv preprint arXiv:2602.02276},
+        year    = {2026},
+        url     = {https://arxiv.org/abs/2602.02276}
+      }
+
+  - key: seed-20
+    ordinal: "04"
+    venue: ByteDance Seed
+    year: "2026"
+    label: Model report
+    title: "Seed2.0 Model Card: Towards Intelligence Frontier for Real-World Complexity"
+    authors: "ByteDance Seed · <strong>Contributing author</strong>"
+    paper_url: "https://arxiv.org/abs/2607.00248"
+    bibtex: |-
+      @article{bytedanceseed2026seed20,
+        title   = {Seed2.0 Model Card: Towards Intelligence Frontier for Real-World Complexity},
+        author  = {{ByteDance Seed}},
+        journal = {arXiv preprint arXiv:2607.00248},
+        year    = {2026},
+        url     = {https://arxiv.org/abs/2607.00248}
+      }
+
+papers:
+  - key: longwriter-zero
+    ordinal: "01"
+    venue: ICLR
+    year: "2026"
+    distinction: Oral
+    featured: true
+    title: "LongWriter-Zero: Mastering Ultra-Long Text Generation via Reinforcement Learning"
+    authors: "<strong>Yuhao Wu</strong><sup>*</sup>, Yushi Bai<sup>*</sup>, Zhiqiang Hu, Roy Ka-Wei Lee, Juanzi Li"
+    paper_url: "https://arxiv.org/abs/2506.18841"
+    code_url: "https://github.com/THUDM/LongWriter-Zero"
+    bibtex: |-
+      @inproceedings{wu2026longwriterzero,
+        title     = {LongWriter-Zero: Mastering Ultra-Long Text Generation via Reinforcement Learning},
+        author    = {Wu, Yuhao and Bai, Yushi and Hu, Zhiqiang and Lee, Roy Ka-Wei and Li, Juanzi},
+        booktitle = {International Conference on Learning Representations},
+        year      = {2026},
+        note      = {Oral presentation},
+        url       = {https://arxiv.org/abs/2506.18841}
+      }
+
+  - key: superwriter
+    ordinal: "02"
+    venue: ACL Findings
+    year: "2026"
+    featured: true
+    title: "SuperWriter: Reflection-Driven Long-Form Generation with Large Language Models"
+    authors: "<strong>Yuhao Wu</strong><sup>*</sup>, Yushi Bai<sup>*</sup>, Zhiqiang Hu, Juanzi Li, Roy Ka-Wei Lee"
+    paper_url: "https://arxiv.org/abs/2506.04180"
+    bibtex: |-
+      @inproceedings{wu2026superwriter,
+        title     = {SuperWriter: Reflection-Driven Long-Form Generation with Large Language Models},
+        author    = {Wu, Yuhao and Bai, Yushi and Hu, Zhiqiang and Li, Juanzi and Lee, Roy Ka-Wei},
+        booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},
+        year      = {2026},
+        url       = {https://arxiv.org/abs/2506.04180}
+      }
+
+  - key: lost-in-stories
+    ordinal: "03"
+    venue: ACL Findings
+    year: "2026"
+    title: "Lost in Stories: Consistency Bugs in Long Story Generation by LLMs"
+    authors: "Junjie Li<sup>†</sup>, Xinrui Guo, <strong>Yuhao Wu</strong>, Roy Ka-Wei Lee, Hongzhi Li, Yutao Xie"
+    paper_url: "https://arxiv.org/abs/2603.05890"
+    project_url: "https://picrew.github.io/ConStory-Bench/"
+    bibtex: |-
+      @inproceedings{li2026lostinstories,
+        title     = {Lost in Stories: Consistency Bugs in Long Story Generation by LLMs},
+        author    = {Li, Junjie and Guo, Xinrui and Wu, Yuhao and Lee, Roy Ka-Wei and Li, Hongzhi and Xie, Yutao},
+        booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},
+        year      = {2026},
+        url       = {https://arxiv.org/abs/2603.05890}
+      }
+
+  - key: perception-to-action
+    ordinal: "04"
+    venue: arXiv
+    year: "2026"
+    title: "From Perception to Action: An Interactive Benchmark for Vision Reasoning"
+    authors: "<strong>Yuhao Wu</strong>, Maojia Song, Yihuai Lan, Lei Wang, Zhiqiang Hu, Yao Xiao, Heng Zhou, Weihua Zheng, Dylan Raharja, Soujanya Poria, Roy Ka-Wei Lee"
+    paper_url: "https://arxiv.org/abs/2602.21015"
+    bibtex: |-
+      @article{wu2026perceptiontoaction,
+        title   = {From Perception to Action: An Interactive Benchmark for Vision Reasoning},
+        author  = {Wu, Yuhao and Song, Maojia and Lan, Yihuai and Wang, Lei and Hu, Zhiqiang and Xiao, Yao and Zhou, Heng and Zheng, Weihua and Raharja, Dylan and Poria, Soujanya and Lee, Roy Ka-Wei},
+        journal = {arXiv preprint arXiv:2602.21015},
+        year    = {2026},
+        url     = {https://arxiv.org/abs/2602.21015}
+      }
+
+  - key: retrieval-infused-reasoning
+    ordinal: "05"
+    venue: arXiv
+    year: "2026"
+    title: "Retrieval-Infused Reasoning Sandbox: A Benchmark for Decoupling Retrieval and Reasoning Capabilities"
+    authors: "Shuangshuang Ying, Zheyu Wang, Yunjian Peng, Jin Chen, <strong>Yuhao Wu</strong>, et al."
+    paper_url: "https://arxiv.org/abs/2601.21937"
+    bibtex: |-
+      @article{ying2026retrievalinfused,
+        title   = {Retrieval-Infused Reasoning Sandbox: A Benchmark for Decoupling Retrieval and Reasoning Capabilities},
+        author  = {Ying, Shuangshuang and Wang, Zheyu and Peng, Yunjian and Chen, Jin and Wu, Yuhao and others},
+        journal = {arXiv preprint arXiv:2601.21937},
+        year    = {2026},
+        url     = {https://arxiv.org/abs/2601.21937}
+      }
+
+  - key: longwriter-v
+    ordinal: "06"
+    venue: ACM MM
+    year: "2025"
+    title: "LongWriter-V: Enabling Ultra-Long and High-Fidelity Generation in Vision-Language Models"
+    authors: "Shangqing Tu, Yucheng Wang, Daniel Zhang-Li, Yushi Bai, Jifan Yu, <strong>Yuhao Wu</strong>, Lei Hou, Huiqin Liu, Zhiyuan Liu, Bin Xu, Juanzi Li"
+    paper_url: "https://arxiv.org/abs/2502.14834"
+    code_url: "https://github.com/THU-KEG/LongWriter-V"
+    bibtex: |-
+      @inproceedings{tu2025longwriterv,
+        title     = {LongWriter-V: Enabling Ultra-Long and High-Fidelity Generation in Vision-Language Models},
+        author    = {Tu, Shangqing and Wang, Yucheng and Zhang-Li, Daniel and Bai, Yushi and Yu, Jifan and Wu, Yuhao and Hou, Lei and Liu, Huiqin and Liu, Zhiyuan and Xu, Bin and Li, Juanzi},
+        booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia},
+        year      = {2025},
+        url       = {https://arxiv.org/abs/2502.14834}
+      }
+
+  - key: conflicting-evidence
+    ordinal: "07"
+    venue: IJCAI
+    year: "2025"
+    title: "Resolving Conflicting Evidence in Automated Fact-Checking: A Study on Retrieval-Augmented LLMs"
+    authors: "Ziyu Ge<sup>*</sup>, <strong>Yuhao Wu</strong><sup>*</sup>, Daniel Wai Kit Chin, Roy Ka-Wei Lee, Rui Cao"
+    paper_url: "https://arxiv.org/abs/2505.17762"
+    bibtex: |-
+      @inproceedings{ge2025conflictingevidence,
+        title     = {Resolving Conflicting Evidence in Automated Fact-Checking: A Study on Retrieval-Augmented LLMs},
+        author    = {Ge, Ziyu and Wu, Yuhao and Chin, Daniel Wai Kit and Lee, Roy Ka-Wei and Cao, Rui},
+        booktitle = {Proceedings of the Thirty-Fourth International Joint Conference on Artificial Intelligence},
+        year      = {2025},
+        url       = {https://arxiv.org/abs/2505.17762}
+      }
+
+  - key: longgenbench
+    ordinal: "08"
+    venue: ICLR
+    year: "2025"
+    title: "LongGenBench: Benchmarking Long-Form Generation in Long Context LLMs"
+    authors: "<strong>Yuhao Wu</strong>, Ming Shan Hee, Zhiqiang Hu, Roy Ka-Wei Lee"
+    paper_url: "https://arxiv.org/abs/2409.02076"
+    code_url: "https://github.com/mozhu621/LongGenBench"
+    bibtex: |-
+      @inproceedings{wu2025longgenbench,
+        title     = {LongGenBench: Benchmarking Long-Form Generation in Long Context LLMs},
+        author    = {Wu, Yuhao and Hee, Ming Shan and Hu, Zhiqiang and Lee, Roy Ka-Wei},
+        booktitle = {International Conference on Learning Representations},
+        year      = {2025},
+        url       = {https://arxiv.org/abs/2409.02076}
+      }
+
+  - key: adamcot
+    ordinal: "09"
+    venue: AAAI
+    year: "2025"
+    title: "AdaMCoT: Rethinking Cross-Lingual Factual Reasoning through Adaptive Multilingual Chain-of-Thought"
+    authors: "Weihua Zheng, Xin Huang, Zhengyuan Liu, Tarun Kumar Vangani, Bowei Zou, Xiyan Tao, <strong>Yuhao Wu</strong>, Ai Ti Aw, Nancy F. Chen, Roy Ka-Wei Lee"
+    paper_url: "https://arxiv.org/abs/2501.16154"
+    bibtex: |-
+      @inproceedings{zheng2025adamcot,
+        title     = {AdaMCoT: Rethinking Cross-Lingual Factual Reasoning through Adaptive Multilingual Chain-of-Thought},
+        author    = {Zheng, Weihua and Huang, Xin and Liu, Zhengyuan and Vangani, Tarun Kumar and Zou, Bowei and Tao, Xiyan and Wu, Yuhao and Aw, Ai Ti and Chen, Nancy F. and Lee, Roy Ka-Wei},
+        booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+        year      = {2025},
+        url       = {https://arxiv.org/abs/2501.16154}
+      }
+
+  - key: shifting-long-context
+    ordinal: "10"
+    venue: arXiv
+    year: "2025"
+    title: "Shifting Long-Context LLMs Research from Input to Output"
+    authors: "<strong>Yuhao Wu</strong>, Yushi Bai, Zhiqiang Hu, Shangqing Tu, Ming Shan Hee, Juanzi Li, Roy Ka-Wei Lee"
+    paper_url: "https://arxiv.org/abs/2503.04723"
+    bibtex: |-
+      @article{wu2025shiftinglongcontext,
+        title   = {Shifting Long-Context LLMs Research from Input to Output},
+        author  = {Wu, Yuhao and Bai, Yushi and Hu, Zhiqiang and Tu, Shangqing and Hee, Ming Shan and Li, Juanzi and Lee, Roy Ka-Wei},
+        journal = {arXiv preprint arXiv:2503.04723},
+        year    = {2025},
+        url     = {https://arxiv.org/abs/2503.04723}
+      }
+
+  - key: sentistream
+    ordinal: "11"
+    venue: EMNLP
+    year: "2023"
+    title: "SentiStream: A Co-Training Framework for Adaptive Online Sentiment Analysis in Evolving Data Streams"
+    authors: "<strong>Yuhao Wu</strong>, Karthick Sharma, Chun Seah, Shuhao Zhang"
+    paper_url: "https://aclanthology.org/2023.emnlp-main.380/"
+    bibtex: |-
+      @inproceedings{wu2023sentistream,
+        title     = {SentiStream: A Co-Training Framework for Adaptive Online Sentiment Analysis in Evolving Data Streams},
+        author    = {Wu, Yuhao and Sharma, Karthick and Seah, Chun and Zhang, Shuhao},
+        booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+        pages     = {6198--6212},
+        year      = {2023},
+        doi       = {10.18653/v1/2023.emnlp-main.380},
+        url       = {https://aclanthology.org/2023.emnlp-main.380/}
+      }
+
+  - key: online-continual-knowledge
+    ordinal: "12"
+    venue: arXiv
+    year: "2023"
+    title: "Online Continual Knowledge Learning for Language Models"
+    authors: "<strong>Yuhao Wu</strong><sup>*</sup>, Tongjun Shi<sup>*</sup>, Karthick Sharma, Chun Wei Seah, Shuhao Zhang"
+    paper_url: "https://arxiv.org/abs/2311.09632"
+    bibtex: |-
+      @article{wu2023onlinecontinual,
+        title   = {Online Continual Knowledge Learning for Language Models},
+        author  = {Wu, Yuhao and Shi, Tongjun and Sharma, Karthick and Seah, Chun Wei and Zhang, Shuhao},
+        journal = {arXiv preprint arXiv:2311.09632},
+        year    = {2023},
+        url     = {https://arxiv.org/abs/2311.09632}
+      }

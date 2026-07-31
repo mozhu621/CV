@@ -1,0 +1,31 @@
+{% assign publication = include.publication %}
+<article class="publication-card{% if publication.featured %} publication-card--featured{% endif %}" id="publication-{{ publication.key }}">
+  <div class="publication-ordinal" aria-hidden="true">{{ publication.ordinal }}</div>
+  <div class="publication-body">
+    <div class="publication-meta">
+      <span class="publication-venue">{{ publication.venue }}</span>
+      <span>{{ publication.year }}</span>
+      {% if publication.label %}<span>{{ publication.label }}</span>{% endif %}
+      {% if publication.distinction %}<span class="publication-distinction">{{ publication.distinction }}</span>{% endif %}
+    </div>
+
+    <h3><a href="{{ publication.paper_url }}" target="_blank" rel="noopener">{{ publication.title }}</a></h3>
+    <p class="publication-authors">{{ publication.authors }}</p>
+
+    <div class="publication-actions">
+      <a href="{{ publication.paper_url }}" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+      {% if publication.code_url %}<a href="{{ publication.code_url }}" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>{% endif %}
+      {% if publication.project_url %}<a href="{{ publication.project_url }}" target="_blank" rel="noopener">Project <span aria-hidden="true">↗</span></a>{% endif %}
+      <details class="publication-citation">
+        <summary>Cite</summary>
+        <div class="publication-citation-panel">
+          <div class="publication-citation-head">
+            <span>BibTeX</span>
+            <button type="button" data-copy-citation>Copy</button>
+          </div>
+          <pre><code>{{ publication.bibtex | escape }}</code></pre>
+        </div>
+      </details>
+    </div>
+  </div>
+</article>
