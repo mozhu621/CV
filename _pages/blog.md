@@ -15,14 +15,19 @@ page_class: writing-page
 
 <div class="writing-list">
 {% for post in site.posts %}
+{% unless post.listed == false %}
   <article class="writing-list-item">
     <div class="writing-list-date">{{ post.date | date: "%d %b %Y" }}</div>
     <div>
       <p class="writing-list-kicker">{{ post.category | default: "Research note" }}</p>
       <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
       <p>{{ post.description }}</p>
-      <a class="writing-list-link" href="{{ site.baseurl }}{{ post.url }}">Read note →</a>
+      <div class="writing-list-links">
+        <a class="writing-list-link" href="{{ site.baseurl }}{{ post.url }}">中文版 →</a>
+        {% if post.translation_url %}<a class="writing-list-link" href="{{ post.translation_url | relative_url }}">English →</a>{% endif %}
+      </div>
     </div>
   </article>
+{% endunless %}
 {% endfor %}
 </div>

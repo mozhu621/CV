@@ -36,6 +36,16 @@
   <meta property="og:url" content="{{ page.url | prepend: seo_url | replace: "/index.html", "/" }}">
 {% endif %}
 
+{% if page.translation_url and canonical_url %}
+  {% if page.lang == "zh-CN" %}
+    <link rel="alternate" hreflang="zh-CN" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="en" href="{{ page.translation_url | prepend: seo_url }}">
+  {% else %}
+    <link rel="alternate" hreflang="en" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="zh-CN" href="{{ page.translation_url | prepend: seo_url }}">
+  {% endif %}
+{% endif %}
+
 {% if seo_description %}
   <meta name="description" content="{{ seo_description }}">
   <meta property="og:description" content="{{ seo_description }}">

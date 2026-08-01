@@ -7,10 +7,14 @@ category: "Research note"
 author_profile: false
 page_class: blog-post
 lang: zh-CN
+translation_url: /blog/data-driven-rsi/en/
 ---
 
 <header class="post-header">
-  <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
+  <div class="post-utility">
+    <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
+    <nav class="post-language" aria-label="语言切换"><span>中文</span><a href="{{ '/blog/data-driven-rsi/en/' | relative_url }}">English</a></nav>
+  </div>
   <p class="post-kicker">Research note · 31 Jul 2026</p>
   <h1>Data 可能是 RSI<br>最先能想清楚的一块</h1>
   <p class="post-dek">我最近反复在想：如果 RSI 真会发生，它最开始会长什么样？我现在更愿意押在 Data 上。先让模型看见自己不会什么，再围绕这些失败做数据、训练，然后继续往下找。</p>
@@ -23,7 +27,7 @@ lang: zh-CN
     <li><a href="#start-with-data">先从 Data 开始</a></li>
     <li><a href="#synthetic-data">为什么一定会走到 synthetic data</a></li>
     <li><a href="#eval">Eval 得能告诉我们下一步做什么</a></li>
-    <li><a href="#ladder">先用 Ladder 试，再谈规模</a></li>
+    <li><a href="#ladder">从 architecture ladder 到 synthetic-data ladder</a></li>
     <li><a href="#trajectory">轨迹需要一条靠谱的产线</a></li>
   </ol>
 </nav>
@@ -97,11 +101,25 @@ Benchmark 不是没用。它适合做快照，也适合比较一个局部变化�
 
 <span class="anchor" id="ladder"></span>
 
-# 2. 先用 Ladder 试，再谈规模
+# 2. Ladder：先看趋势，再谈规模
 
 假设一个 coding Harness 一周能跑出一百万条轨迹，要不要全做？我不知道，也不应该拍脑袋决定。合成数据最麻烦的地方就在这里：样本可以写得很漂亮，答案也可以是对的，训练到目标模型上却没有任何变化。
 
-所以我把 Ladder 理解成一串越来越贵的小赌注。先花最少的钱确认任务和 verifier 没问题，再做一次小训练看有没有信号；有信号才扩量，然后看迁移和饱和。上一层没回答清楚，就不急着爬下一层。
+我借用 Ladder 这个词，是因为 model architecture 的研究一直在做类似的事。一种新的 architecture 不会一上来就拿最大的算力做到底。通常会先跑几个从小到大的模型，看 loss 和下游能力怎么随参数、token 和 compute 变化；还会看它相对 baseline 的优势是在放大、保持，还是逐渐消失。小模型上的一个好点子，不一定能活到更大的 scale。Architecture ladder 想回答的是：**这个设计值不值得继续 scale。**
+
+Data ladder 问的是另一件事。固定目标模型和训练方法，只改变某类数据的数量、比例或覆盖范围，然后观察每增加一段数据，独立 eval 还能得到多少收益。它关心的不是新 architecture 能不能放大，而是：**这批数据还提供多少新的学习信号，以及应该做到哪里停。**
+
+到了 synthetic data，这条 ladder 又多了一层麻烦。自然数据通常先在那里，我们再决定取多少；synthetic data 则是生产出来的。生产模型、Harness、verifier、采样温度和筛选规则只要换一个，数据分布就会跟着换。量做大以后，通过率可能下降，重复会增加，长尾任务也可能被简单样本淹没。更重要的是，同一批轨迹对不同目标模型的作用并不一样：有的模型能吸收其中的规划习惯，有的模型只学到措辞，还有的模型几乎没有变化。
+
+所以三种 Ladder 看起来相似，真正押注的对象并不一样：
+
+<div class="ladder-comparison">
+  <div><strong>Architecture ladder</strong><p>逐级放大模型与算力，判断一个结构上的优势能不能穿过 scale。</p><small>问题是：这个 model design 值不值得继续做大？</small></div>
+  <div><strong>Data ladder</strong><p>固定训练对象，逐级增加某类数据，观察增益、迁移和边际回报。</p><small>问题是：这批数据还值不值得继续加？</small></div>
+  <div><strong>Synthetic-data ladder</strong><p>同时追踪生产管线、目标模型和数据量，判断生成出来的轨迹是否真的被吸收。</p><small>问题是：这条产线，针对这个模型，还值不值得继续跑？</small></div>
+</div>
+
+我因此把 synthetic-data ladder 理解成一串越来越贵的小赌注。先花最少的钱确认任务和 verifier 没问题，再做一次小训练看有没有信号；有信号才扩量，然后看迁移和饱和。上一层没回答清楚，就不急着爬下一层。
 
 <div class="ladder-stack">
   <div><span>01</span><section><strong>数据本身成立吗</strong><p>任务可解吗？答案和 verifier 靠谱吗？它真的碰到了目标能力吗？</p><small>这一层不过，就先别训练。</small></section></div>

@@ -299,6 +299,12 @@ h1:before,
     font-size: .9em;
 }
 
+.writing-list-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
 /* ===== Long-form blog post ===== */
 
 .blog-post .page__content {
@@ -310,9 +316,11 @@ h1:before,
 
 .blog-post .page__content a,
 .blog-post .post-kicker,
+.blog-post .post-language,
 .blog-post .post-tags,
 .blog-post .post-toc,
 .blog-post .rsi-diagram,
+.blog-post .ladder-comparison,
 .blog-post .ladder-stack,
 .blog-post .production-checks,
 .blog-post .prior-list,
@@ -327,10 +335,33 @@ h1:before,
     border-bottom: 2px solid #eaecef;
 }
 
+.post-utility {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    margin-bottom: 1.7em;
+}
+
 .post-back {
     display: inline-block;
-    margin-bottom: 1.7em;
     font-size: .88em;
+}
+
+.post-language {
+    display: flex;
+    align-items: center;
+    gap: .7em;
+    font-size: .82em;
+}
+
+.post-language span {
+    color: #30343a;
+    font-weight: 700;
+}
+
+.post-language a {
+    color: #777;
 }
 
 .post-kicker {
@@ -410,6 +441,7 @@ h1:before,
 }
 
 .rsi-diagram,
+.ladder-comparison,
 .ladder-stack,
 .production-checks,
 .prior-list,
@@ -417,6 +449,26 @@ h1:before,
     margin: 1.8em 0;
     font-size: .9em;
     line-height: 1.55;
+}
+
+.ladder-comparison {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .7em;
+}
+
+.ladder-comparison > div {
+    padding: .9em;
+    border-top: 3px solid #2471a3;
+    background: #f7f9fa;
+}
+
+.ladder-comparison p {
+    margin: .35em 0 .55em;
+}
+
+.ladder-comparison small {
+    color: #68737a;
 }
 
 .rsi-diagram--flow,
@@ -513,6 +565,7 @@ h1:before,
 
     .rsi-diagram--flow,
     .rsi-diagram--trajectory,
+    .ladder-comparison,
     .production-checks,
     .loop-grid {
         grid-template-columns: 1fr;
