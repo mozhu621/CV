@@ -92,7 +92,7 @@ Benchmark 不是没用。它适合做快照，也适合比较一个局部变化�
   <div><span>03</span><strong>看失败发生在哪</strong></div>
   <div><span>04</span><strong>决定下一批数据</strong></div>
   <div><span>05</span><strong>换新题再试一次</strong></div>
-  <figcaption>Eval 在这里不是终点，而是决定下一批数据的起点。</figcaption>
+  <figcaption>图 1. 编号表示一轮工作的先后，而不是五个独立分数。Eval 在这里不是终点；第 03 步看到的失败，会直接决定第 04 步生产什么数据。</figcaption>
 </figure>
 
 这件事大概只能 in-house 做。因为评估要跟着自己的模型、工具和数据一起变，题也不能永远固定。旧的失败修掉以后，系统应该继续往边界外出题，而不是继续庆祝一个已经会做的分数。
@@ -113,11 +113,38 @@ Data ladder 问的是另一件事。固定目标模型和训练方法，只改�
 
 所以三种 Ladder 看起来相似，真正押注的对象并不一样：
 
-<div class="ladder-comparison">
-  <div><strong>Architecture ladder</strong><p>逐级放大模型与算力，判断一个结构上的优势能不能穿过 scale。</p><small>问题是：这个 model design 值不值得继续做大？</small></div>
-  <div><strong>Data ladder</strong><p>固定训练对象，逐级增加某类数据，观察增益、迁移和边际回报。</p><small>问题是：这批数据还值不值得继续加？</small></div>
-  <div><strong>Synthetic-data ladder</strong><p>同时追踪生产管线、目标模型和数据量，判断生成出来的轨迹是否真的被吸收。</p><small>问题是：这条产线，针对这个模型，还值不值得继续跑？</small></div>
-</div>
+<figure class="ladder-figure">
+  <div class="ladder-comparison">
+    <div>
+      <strong>Architecture ladder</strong>
+      <p class="ladder-axis">放大对象：模型与 compute</p>
+      <div class="ladder-scale" aria-label="从小模型逐级放大到大模型"><span>小模型</span><i></i><span>中模型</span><i></i><span>大模型</span></div>
+      <p>看结构优势会扩大、保持，还是逐渐消失。</p>
+      <small>问题是：这个 model design 值不值得继续做大？</small>
+    </div>
+    <div>
+      <strong>Data ladder</strong>
+      <p class="ladder-axis">放大对象：固定来源的数据量</p>
+      <div class="ladder-scale" aria-label="从小批数据逐级增加到大批数据"><span>小批</span><i></i><span>中批</span><i></i><span>大批</span></div>
+      <p>固定训练对象，观察增益、迁移和边际回报。</p>
+      <small>问题是：这批数据还值不值得继续加？</small>
+    </div>
+    <div>
+      <strong>Synthetic-data ladder</strong>
+      <p class="ladder-axis">放大对象：产线 × 数据 × 目标模型</p>
+      <div class="ladder-scale" aria-label="从验证数据开始，经过小规模训练，再决定是否扩量"><span>验证</span><i></i><span>小训</span><i></i><span class="ladder-scale__stop">扩量？</span></div>
+      <p>每一级都要重新确认轨迹有没有被目标模型吸收。</p>
+      <small>问题是：这条产线，针对这个模型，还值不值得继续跑？</small>
+    </div>
+  </div>
+  <div class="diagram-legend" aria-label="图例">
+    <strong>图例</strong>
+    <span><i class="legend-key legend-key--node"></i>一个经过训练与 eval 的台阶</span>
+    <span><i class="legend-key legend-key--line"></i>前一级有信号，才继续投入</span>
+    <span><i class="legend-key legend-key--stop"></i>优势消失或收益饱和时停</span>
+  </div>
+  <figcaption>图 2. 三种 Ladder 的形式相似，但横轴并不相同。前两种主要放大一个变量；synthetic-data ladder 还把生产管线和目标模型带进了实验。</figcaption>
+</figure>
 
 我因此把 synthetic-data ladder 理解成一串越来越贵的小赌注。先花最少的钱确认任务和 verifier 没问题，再做一次小训练看有没有信号；有信号才扩量，然后看迁移和饱和。上一层没回答清楚，就不急着爬下一层。
 
@@ -176,7 +203,7 @@ coding 里，人知道测试结果很重要；数学里，人会用证明检查�
   <div><strong>Evolve</strong><p>多次尝试、变体、回退、修改、选择</p></div>
   <div><strong>Trajectory data</strong><p>留下完整、可靠而且有差异的过程</p></div>
   <div><strong>SFT</strong><p>把这些过程训练回目标模型</p></div>
-  <figcaption>Harness–Evolve 先改善轨迹，再由 SFT 把这些轨迹变成模型的习惯。</figcaption>
+  <figcaption>图 3. 四个方框是同一条数据产线的四个阶段。Evolve 改善的是候选轨迹，不是直接更新模型；真正把这些过程写回目标模型的是最后的 SFT。</figcaption>
 </figure>
 
 ## 我为什么想要很多种 Harness

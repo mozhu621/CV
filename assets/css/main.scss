@@ -320,6 +320,7 @@ h1:before,
 .blog-post .post-tags,
 .blog-post .post-toc,
 .blog-post .rsi-diagram,
+.blog-post .ladder-figure,
 .blog-post .ladder-comparison,
 .blog-post .ladder-stack,
 .blog-post .production-checks,
@@ -441,6 +442,7 @@ h1:before,
 }
 
 .rsi-diagram,
+.ladder-figure,
 .ladder-comparison,
 .ladder-stack,
 .production-checks,
@@ -449,6 +451,10 @@ h1:before,
     margin: 1.8em 0;
     font-size: .9em;
     line-height: 1.55;
+}
+
+.ladder-figure .ladder-comparison {
+    margin: 0;
 }
 
 .ladder-comparison {
@@ -469,6 +475,96 @@ h1:before,
 
 .ladder-comparison small {
     color: #68737a;
+}
+
+.ladder-axis {
+    min-height: 2.6em;
+    color: #68737a;
+    font-size: .82em;
+}
+
+.ladder-scale {
+    display: flex;
+    align-items: center;
+    margin: .85em 0;
+    font-size: .76em;
+}
+
+.ladder-scale span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.15em;
+    padding: .18em .5em;
+    border: 1px solid #4f829f;
+    border-radius: 999px;
+    background: #fff;
+    color: #345d74;
+    line-height: 1.15;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.ladder-scale i {
+    flex: 1;
+    min-width: 5px;
+    height: 1px;
+    background: #8eacbc;
+}
+
+.ladder-scale .ladder-scale__stop {
+    border-color: #b66a55;
+    background: #fff8f5;
+    color: #884532;
+}
+
+.diagram-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55em 1.15em;
+    margin: .9em 0 .55em;
+    padding: .75em 0;
+    border-top: 1px solid #e5e8ea;
+    border-bottom: 1px solid #e5e8ea;
+    color: #68737a;
+    font-size: .78em;
+}
+
+.diagram-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: .45em;
+}
+
+.diagram-legend > strong {
+    color: #30343a;
+}
+
+.legend-key {
+    display: inline-block;
+    flex: 0 0 auto;
+}
+
+.legend-key--node {
+    width: 11px;
+    height: 11px;
+    border: 1px solid #4f829f;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.legend-key--line {
+    width: 18px;
+    height: 1px;
+    background: #8eacbc;
+}
+
+.legend-key--stop {
+    width: 11px;
+    height: 11px;
+    border: 1px solid #b66a55;
+    border-radius: 50%;
+    background: #fff8f5;
 }
 
 .rsi-diagram--flow,
@@ -503,7 +599,8 @@ h1:before,
     margin: .25em 0 0;
 }
 
-.rsi-diagram figcaption {
+.rsi-diagram figcaption,
+.ladder-figure figcaption {
     grid-column: 1 / -1;
     color: #777;
     font-size: .86em;
@@ -573,6 +670,14 @@ h1:before,
 
     .rsi-diagram figcaption {
         grid-column: auto;
+    }
+
+    .ladder-axis {
+        min-height: 0;
+    }
+
+    .diagram-legend span {
+        flex: 1 1 150px;
     }
 
     .prior-list > div {

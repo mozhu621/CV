@@ -93,7 +93,7 @@ Most importantly, the result should change the next round of work. It should tel
   <div><span>03</span><strong>Locate the failure</strong></div>
   <div><span>04</span><strong>Choose the next data</strong></div>
   <div><span>05</span><strong>Return with new tasks</strong></div>
-  <figcaption>Evaluation is not the end of the loop. It decides what data should come next.</figcaption>
+  <figcaption>Figure 1. The numbers show the order of one iteration, not five separate scores. Failures found in step 03 directly determine the data produced in step 04.</figcaption>
 </figure>
 
 Much of this will probably have to be done in-house. The evaluation needs to move with the model, its tools, and its training data. Once an old failure is fixed, the system should move outward and look for the next boundary instead of continuing to celebrate a solved score.
@@ -114,11 +114,38 @@ Synthetic data adds another complication because the dataset does not simply exi
 
 The three ladders have a similar shape, but they place their bets on different things:
 
-<div class="ladder-comparison">
-  <div><strong>Architecture ladder</strong><p>Increase model and compute scale to see whether a structural advantage survives.</p><small>Is this model design worth making larger?</small></div>
-  <div><strong>Data ladder</strong><p>Add controlled tranches of data and watch gain, transfer, and marginal return.</p><small>Is this dataset still worth adding to?</small></div>
-  <div><strong>Synthetic-data ladder</strong><p>Track the production pipeline, target model, and volume together to see whether generated trajectories are absorbed.</p><small>Is this pipeline still worth running for this model?</small></div>
-</div>
+<figure class="ladder-figure">
+  <div class="ladder-comparison">
+    <div>
+      <strong>Architecture ladder</strong>
+      <p class="ladder-axis">What scales: model and compute</p>
+      <div class="ladder-scale" aria-label="Scale from a small model to a large model"><span>Small</span><i></i><span>Medium</span><i></i><span>Large</span></div>
+      <p>Does the structural advantage grow, hold, or disappear?</p>
+      <small>Is this model design worth making larger?</small>
+    </div>
+    <div>
+      <strong>Data ladder</strong>
+      <p class="ladder-axis">What scales: data from a fixed source</p>
+      <div class="ladder-scale" aria-label="Scale from a small data batch to a large data batch"><span>Small</span><i></i><span>Medium</span><i></i><span>Large</span></div>
+      <p>Hold training fixed and watch gain, transfer, and marginal return.</p>
+      <small>Is this dataset still worth adding to?</small>
+    </div>
+    <div>
+      <strong>Synthetic-data ladder</strong>
+      <p class="ladder-axis">What scales: pipeline × data × target model</p>
+      <div class="ladder-scale" aria-label="Validate data, run a small training experiment, then decide whether to scale"><span>Validate</span><i></i><span>Small run</span><i></i><span class="ladder-scale__stop">Scale?</span></div>
+      <p>At every rung, check whether the target model actually absorbed the trajectories.</p>
+      <small>Is this pipeline still worth running for this model?</small>
+    </div>
+  </div>
+  <div class="diagram-legend" aria-label="Legend">
+    <strong>Legend</strong>
+    <span><i class="legend-key legend-key--node"></i>A rung tested with training and eval</span>
+    <span><i class="legend-key legend-key--line"></i>Continue only after a positive signal</span>
+    <span><i class="legend-key legend-key--stop"></i>Stop when the advantage or return fades</span>
+  </div>
+  <figcaption>Figure 2. The ladders look similar, but their horizontal axes are different. The first two mostly scale one variable; the synthetic-data ladder also changes the production system and depends on the target model.</figcaption>
+</figure>
 
 I therefore think of a synthetic-data ladder as a sequence of increasingly expensive bets. Spend as little as possible to check that the task and verifier are sound. Run a small training experiment to see whether there is a repeatable signal. Scale the data only if the signal exists, then test transfer and saturation. If one rung has not answered its question, there is no reason to climb to the next.
 
@@ -177,7 +204,7 @@ What goes into SFT is no longer a polished final answer. It is a better trajecto
   <div><strong>Evolve</strong><p>Multiple attempts, variation, backtracking, revision, selection</p></div>
   <div><strong>Trajectory data</strong><p>Keep complete, reliable, and meaningfully different processes</p></div>
   <div><strong>SFT</strong><p>Train those processes back into the target model</p></div>
-  <figcaption>Harness–Evolve improves the trajectories first; SFT turns them into habits of the target model.</figcaption>
+  <figcaption>Figure 3. These are four stages of one data pipeline. Evolve improves the candidate trajectories; it does not update the model directly. The final SFT stage writes the selected processes back into the target model.</figcaption>
 </figure>
 
 ## Why I want more than one harness
