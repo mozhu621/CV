@@ -18,7 +18,7 @@ translation_url: /blog/data-driven-rsi/
   </div>
   <p class="post-kicker">Research note · 31 Jul 2026</p>
   <h1>Data May Be the First<br>Tractable Part of RSI</h1>
-  <p class="post-dek">If recursive self-improvement ever begins, what will its earliest form look like? Data offers a practical starting point: a model finds the edges of what it cannot do, turns those failures into training experience, learns from them, and goes looking again.</p>
+  <p class="post-dek">One question keeps coming back: if recursive self-improvement ever begins, what will its earliest form look like? My current bet is data—a model finds the edges of what it cannot do, turns those failures into training experience, learns from them, and goes looking again.</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
@@ -39,7 +39,7 @@ translation_url: /blog/data-driven-rsi/
 
 If RSI does begin to happen, its earliest form may not look very dramatic. A model may not begin by rewriting its own architecture. It may begin with something more ordinary: making the next batch of training data better than the last one.
 
-Algorithms obviously matter, but they are difficult to reason about in advance. A new idea often has to be built before its mechanism becomes clear, and a change that looks promising at one scale may disappear at another. There is no reliable way to predict where the next important algorithmic change will come from.
+Algorithms obviously matter, but they are difficult to reason about in advance. A new idea often has to be built before its mechanism becomes clear, and a change that looks promising at one scale may disappear at another. If I had to predict where the next important algorithmic change will come from, I would not have a confident answer.
 
 Data is more concrete. Give a model a set of unfamiliar tasks and watch where it fails. Organize those failures, build new exercises and trajectories around them, and train them back into the model. Then take the new model to a fresh set of tasks and repeat.
 
@@ -81,7 +81,7 @@ Suppose the goal is to make a model better at coding. The easiest move is to cho
 
 Benchmarks are not useless. They are good snapshots and they are often the right way to compare a local change. The problem begins when a fixed benchmark becomes a permanent training target. Mathematics and coding are not single scores in the first place.
 
-> Useful evaluation looks more like a demanding test lead than a leaderboard.
+> The evaluation I want looks more like a demanding test lead than a leaderboard.
 
 The long-term goal may be fuzzy; the evidence from each round cannot be. An evaluation should tell us what kind of unfamiliar task failed, whether the bottleneck was knowledge, planning, tool use, or checking, whether the failure can be reproduced, and whether the fix transfers to a different set of tasks.
 
@@ -211,7 +211,7 @@ What goes into SFT is no longer a polished final answer. It is a better trajecto
 
 One harness tends to grow one style of trajectory. A test-driven coding harness produces many run–error–revision paths. A critique-and-rewrite harness produces more self-checking. A search-oriented harness produces branches and comparisons. Each can be useful, and each can harden into a template when overused.
 
-A better approach is to run several harnesses and use the ladder to see which ones the target model actually absorbs, and which mixtures work better together. This is more cumbersome than declaring one ideal trajectory format, but it is less likely to train the model into a single repeated pattern.
+I would rather run several harnesses and use the ladder to see which ones the target model actually absorbs, and which mixtures work better together. This is more cumbersome than declaring one ideal trajectory format, but it is less likely to train the model into a single repeated pattern.
 
 ## Synthesis still needs priors
 
@@ -244,7 +244,7 @@ The unusual part is that the failures of one model begin to determine the data f
   <div><span>06</span><strong>Run the ladder</strong><p>Measure absorption, transfer, and saturation before deciding to produce more.</p></div>
 </div>
 
-The strict definition of RSI matters less than whether the loop works. If a model can help identify its failures, help produce the next training experience, and become stronger because of that experience, the loop is already worth studying.
+To me, the strict definition of RSI matters less than whether the loop works. If a model can help identify its failures, help produce the next training experience, and become stronger because of that experience, the loop is already worth studying.
 
 It is not autonomous self-improvement. The goal, harness, verifier, and stopping rule still depend heavily on human judgment. That is partly why the direction feels credible to me: one segment of the larger problem can be made measurable, scalable, and falsifiable without waiting for every other segment to be solved.
 
@@ -256,7 +256,7 @@ It is not autonomous self-improvement. The goal, harness, verifier, and stopping
 - Can the model gradually participate in harness design without causing evaluation and production to collapse into the same loop?
 - Does SFT learn a better process, or merely a subtler version of the generator’s style?
 
-These questions do not yet have confident answers. The most useful next step may not be a more complete diagram. It may be to choose one narrow domain, run the entire loop several times, and see where it actually breaks.
+I do not have confident answers to these questions. The most useful next step may not be a more complete diagram. It may be to choose one narrow domain, run the entire loop several times, and see where it actually breaks.
 
 <footer class="post-footer">
   <p>Thanks for reading. If you are also working on synthetic data, evaluation, or agent harnesses, I would be glad to compare notes.</p>
