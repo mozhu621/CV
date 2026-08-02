@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Data May Be the First Tractable Part of RSI"
-description: "Why data-driven self-improvement runs through open-ended evaluation, synthetic-data ladders, and Harness–Evolve trajectory production."
+title: "Data-Driven RSI: Evaluation, Synthetic-Data Ladders, and Trajectory Production"
+description: "A working framework for data-driven self-improvement: use open-ended evaluation to find failures, synthetic-data ladders to decide what deserves scale, and Harness–Evolve to produce trainable trajectories."
 permalink: /blog/data-driven-rsi/en/
 category: "Research note"
 author_profile: false
@@ -16,9 +16,9 @@ translation_url: /blog/data-driven-rsi/
     <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
     <nav class="post-language" aria-label="Language"><a href="{{ '/blog/data-driven-rsi/' | relative_url }}">中文</a><span>English</span></nav>
   </div>
-  <p class="post-kicker">Research note · 31 Jul 2026</p>
-  <h1>Data May Be the First<br>Tractable Part of RSI</h1>
-  <p class="post-dek">One question keeps coming back: if recursive self-improvement ever begins, what will its earliest form look like? My current bet is data—a model finds the edges of what it cannot do, turns those failures into training experience, learns from them, and goes looking again.</p>
+  <p class="post-kicker">Research note · 31 Jul 2026 · Updated 2 Aug 2026</p>
+  <h1>Data-Driven RSI:<br>Evaluation, Ladders, and Trajectories</h1>
+  <p class="post-dek">If RSI happens, its earliest form may not be a model directly rewriting its own weights. It may be a more concrete loop: find failures, produce training experience around them, and carry the resulting capability into the next round. This note breaks that loop into three experimentally tractable questions.</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
@@ -30,6 +30,7 @@ translation_url: /blog/data-driven-rsi/
     <li><a href="#eval">Evaluation that tells us what to do next</a></li>
     <li><a href="#ladder">From architecture ladders to synthetic-data ladders</a></li>
     <li><a href="#trajectory">A production line for better trajectories</a></li>
+    <li><a href="#related-work">Relationship to adjacent work</a></li>
   </ol>
 </nav>
 
@@ -53,6 +54,14 @@ Following that line of thought leaves me with three questions:
 
 Those are the three questions considered here.
 
+## Working definitions
+
+**RSI** here does not mean that a model rewrites its parameters during a single inference run. I use a weaker, testable definition: the current model helps identify capability gaps and produce experience for the next training round; the resulting successor then improves reproducibly on fresh tasks that were not part of production.
+
+**Open-ended evaluation** does not mean subjective evaluation. The goal may remain broad—for example, mathematical research ability—but each iteration must leave auditable evidence: tasks, trajectories, failure causes, verifier outcomes, and a data prescription for the next round.
+
+**Harness–Evolve** is a working name used in this note, not an established algorithm. The harness defines the environment in which the model operates. Evolve generates, revises, and selects candidate trajectories inside that environment. SFT then trains selected processes into the target model. Evolve itself does not update the weights.
+
 <span class="anchor" id="synthetic-data"></span>
 
 # Why this leads to synthetic data
@@ -65,7 +74,7 @@ Pretraining is beginning to acquire the same character. Natural data remains the
 
 This does not make natural data unimportant. Natural data gives a model its knowledge, language, and contact with the world. But the internet does not grow in response to the failure modes of a particular checkpoint. When a model gets stuck on one step of one kind of problem, the web does not immediately produce ten thousand exercises at exactly the right difficulty with reliable feedback attached.
 
-The data wall does not mean that the internet has run out of new material. It means that data which is new to the model, useful for the next version, and good enough to train on is not growing as quickly as the appetite created by more models and more compute. New tokens no longer guarantee new capability.
+The data wall does not mean that the internet has run out of new material. It means that data which is new to the model, useful for the next version, and good enough to train on is not growing as quickly as the appetite created by more models and more compute. Estimates of public text stocks and training demand suggest that high-quality human-generated text can become a constraint on continued scaling ([Villalobos et al., 2024](https://arxiv.org/abs/2211.04325)). This is not a precise date for impact, but it is enough to separate new tokens from genuinely new capability.
 
 > The scarce resource is not tokens. It is experience that is useful for the model’s next step.
 
@@ -79,13 +88,23 @@ Of course, synthetic data can also copy the past more quickly. A model can gener
 
 Suppose the goal is to make a model better at coding. The easiest move is to choose a benchmark and optimize the score. Over time, however, its task formats, answers, and grading preferences seep into the training process. The score may keep rising while it becomes harder to tell whether the model can write more kinds of code or has simply become better at this test.
 
-Benchmarks are not useless. They are good snapshots and they are often the right way to compare a local change. The problem begins when a fixed benchmark becomes a permanent training target. Mathematics and coding are not single scores in the first place.
+Benchmarks are not useless. They are good snapshots and they are often the right way to compare a local change. The problem begins when a fixed benchmark becomes a permanent training target. Mathematics and coding are not single scores in the first place. Contamination adds a second difficulty: the same overlap detector can have different explanatory value across models and benchmarks ([Singh et al., 2024](https://arxiv.org/abs/2411.03923)). The objection is not to benchmarks, but to treating a score already inside the optimization loop as independent ground truth.
 
 > The evaluation I want looks more like a demanding test lead than a leaderboard.
 
 The long-term goal may be fuzzy; the evidence from each round cannot be. An evaluation should tell us what kind of unfamiliar task failed, whether the bottleneck was knowledge, planning, tool use, or checking, whether the failure can be reproduced, and whether the fix transfers to a different set of tasks.
 
 Most importantly, the result should change the next round of work. It should tell us what tasks to add, what environment the model needs to practice in, which data pipeline is not worth running yet, and what fresh tasks should be held back for the next check. A single aggregate score rarely carries enough information to drive self-improvement.
+
+An evaluation round should therefore produce more than a score. It needs a **failure record**: the task slice, terminal error, earliest causal deviation in the trajectory, candidate mechanism, and proposed data intervention. Two runs can both end in a timeout while failing for entirely different reasons—bad planning, a broken tool call, or context-management failure. Self-Harness uses a related form of weakness mining: it extracts model-specific failure patterns from verifiable traces before proposing bounded harness changes ([Zhang et al., 2026](https://arxiv.org/abs/2606.09498)).
+
+I would ask for five layers of evidence:
+
+1. **Outcome:** Was the task completed, preferably under an executable or explicit verifier?
+2. **Process:** Where did the first causal deviation occur?
+3. **Slice:** Does the mechanism repeat across a fresh task family rather than one bad case?
+4. **Prescription:** Does the failure imply a concrete task, feedback, or harness intervention?
+5. **Transfer:** After training, does the gain appear on held-out tasks that were not used in production?
 
 <figure class="rsi-diagram rsi-diagram--flow">
   <div><span>01</span><strong>Name the direction</strong></div>
@@ -111,6 +130,8 @@ The term “ladder” comes from the way model architectures are often tested. A
 A data ladder changes the object being scaled. Hold the target model and training recipe roughly fixed, vary the amount, mixture, or coverage of a dataset, and measure what each additional tranche contributes on independent evaluations. The question is no longer whether an architecture survives scale. It is: **how much new learning signal does this data still contain, and where do returns begin to flatten?**
 
 Synthetic data adds another complication because the dataset does not simply exist before the experiment. It is produced. Change the generator, harness, verifier, sampling policy, or filter and the distribution changes with it. As production grows, acceptance rates may fall, duplication may rise, and easy examples may crowd out the long tail. The same trajectories can also be absorbed very differently by different target models. One model may learn a planning habit; another may copy the wording; a third may barely move.
+
+Recent work has begun to measure synthetic-data scaling directly. In mathematical pretraining experiments, SynthLLM reports fitted growth curves, a visible saturation region, and different token optima for target models of different sizes ([Qin et al., 2025](https://arxiv.org/abs/2503.19551)). The result makes an important distinction: how much data a system can produce is not how much it should produce. A curve fitted to one pipeline, however, does not automatically transfer to another generator, harness, or target model.
 
 The three ladders have a similar shape, but they place their bets on different things:
 
@@ -157,6 +178,14 @@ A synthetic-data ladder is therefore a sequence of increasingly expensive bets. 
   <div><span>05</span><section><strong>Where should production stop?</strong><p>Has the cost of generation, verification, and training overtaken the capability gained from the next batch?</p><small>The saturation region tells us how much to make.</small></section></div>
 </div>
 
+## A minimum viable experiment
+
+For the ladder to be interpretable, only a small number of variables should move at once. A minimum design fixes the target-model checkpoint, training-token budget, optimizer, and held-out evaluation. It varies only the number of accepted, deduplicated trajectories—for example, four geometrically increasing rungs—while retaining a no-added-data control. Each rung should be repeated at least twice so that training noise is not mistaken for a curve.
+
+Each point needs three groups of measurements: generation cost, acceptance rate, and deduplication rate on the production side; effective training tokens, stability, and behavioral change on the training side; target-slice gain, cross-slice transfer, and regressions on the evaluation side. A more expensive rung is justified only when adjacent rungs show a consistent direction across repeats.
+
+Strictly speaking, this remains a **ladder experiment**, not an extrapolatable scaling law, until it has been tested across enough scale points, target models, and production pipelines. Its first purpose is to pace investment and reveal saturation, not to promise a clean power law.
+
 ## What to measure first
 
 The total number of generated examples is not very informative by itself. More useful measures are the share that passes verification, what remains after deduplication, and whether each additional batch of genuinely different trajectories improves an independent evaluation. The first two numbers determine what the production line really costs. The last one tells whether it should keep running.
@@ -183,7 +212,7 @@ Many synthetic-data pipelines today are essentially prompt + model + filter. Tha
 
 In coding, people know that tests matter. In mathematics, they use proof checks, counterexamples, and controlled increases in difficulty. In agent tasks, environment state and tool output cannot simply be discarded. These pieces of experience currently live in prompts, scripts, and researchers’ heads. A harness turns them into an environment the model encounters every time it works.
 
-Here, a harness is more than an engineering wrapper. It decides what the model can see, which tools it can call, whether it can retry after failure, where feedback comes from, and what counts as completion. In practice, it determines the kind of trajectory the pipeline is able to collect.
+Here, a harness is more than an engineering wrapper. A fuller definition includes prompts, tools, context management, workflow, persistent state, permissions, and verification logic: the system that controls how a model observes, acts, stores artifacts, and checks itself ([Weng, 2026](https://lilianweng.github.io/posts/2026-07-04-harness/)). In practice, it determines the kind of trajectory the pipeline is able to collect.
 
 <div class="production-checks">
   <div><strong>Traceable</strong><p>The task, generator, harness, tools, and verifier all have explicit versions.</p></div>
@@ -198,6 +227,8 @@ Here, a harness is more than an engineering wrapper. It decides what the model c
 Harness–Evolve can be read straightforwardly. Put a model in an environment with tools and feedback, and let it make several attempts. It can follow different paths, fail, backtrack, and revise in response to what happens. From those attempts, keep the complete processes that are correct, representative, and meaningfully different from one another.
 
 What goes into SFT is no longer a polished final answer. It is a better trajectory. The aim is not to memorize one solution, but to make reliable behavior easier to reach the next time: verify when verification is needed, revise after failure, and use a tool when the task calls for one.
+
+There is a clear line from STaR, which generates rationales, keeps paths that recover the correct answer, and trains them back into the model ([Zelikman et al., 2022](https://arxiv.org/abs/2203.14465)). Harness–Evolve expands the candidate object from a textual rationale to a stateful agent trajectory: tool responses, file changes, execution errors, backtracking, and replanning become part of the data. It is also different from DGM and Self-Harness, whose primary optimization target is the agent or harness itself. Here the direct output is training data, and the target model changes only in the final SFT stage ([Zhang et al., 2025](https://arxiv.org/abs/2505.22954); [Zhang et al., 2026](https://arxiv.org/abs/2606.09498)).
 
 <figure class="rsi-diagram rsi-diagram--trajectory">
   <div><strong>Harness</strong><p>Tools, context, feedback, memory, verification</p></div>
@@ -226,6 +257,22 @@ I would rather run several harnesses and use the ladder to see which ones the ta
 These priors are not meant to write the solution for the model. They point to where exploration is useful, which feedback is trustworthy, and which outcomes should not be trusted. Ultimately, the model needs to learn more than a single synthesis recipe. Given a new topic or a new open-ended goal, it should be able to borrow from these experiences, design tasks and environments, and search for the next useful data.
 
 There is also a practical risk: generators copy themselves. If one model acts, judges, and filters, Evolve can make its existing patterns more concentrated rather than more capable. Execution tools, independent verifiers, generators from different model families, anchors in real data, and small human audits are ways of keeping the production line from becoming an echo chamber.
+
+A second risk is **selection-induced shortcutting**. A verifier that only checks the final answer may select lucky short paths rather than transferable processes; a preference for long traces can reward empty elaboration. Selection should therefore consider outcome, process completeness, trajectory novelty, and cost together, while retaining rejected traces and rejection reasons. Those records are useful not only for cleaning but for the next round of task and harness design.
+
+<span class="anchor" id="related-work"></span>
+
+# Relationship to adjacent work
+
+The nearest lines of work become easier to separate by their optimization target:
+
+- **Reasoning self-training** optimizes reasoning paths to be internalized by the model. STaR is the clearest example.
+- **Synthetic-data scaling** measures the gain and saturation of a generation method as data and model scale change. SynthLLM belongs here.
+- **Harness optimization** changes prompts, tools, context, or workflow so that a frozen model performs better at deployment. Self-Harness closes a loop among failure mining, editing, and regression testing.
+- **Open-ended agent evolution** retains a population of candidate agents and continues branching under executable feedback. DGM and AlphaEvolve show how archives and evaluators support this search ([Novikov et al., 2025](https://arxiv.org/abs/2506.13131)).
+- **Harness–Evolve in this note** sits at their intersection: use a harness to expand trajectory search, use verifiers and diversity rules to select trajectories, and distill the result into a target model. It is a research hypothesis, not an empirical result.
+
+The relevant tests are causal, not rhetorical: whether multiple harnesses produce more transferable data than one; whether a ladder predicts the return of large-scale production; and whether SFT learns a reusable process rather than the surface preferences of the generator and verifier.
 
 <span class="anchor" id="loop"></span>
 
@@ -257,6 +304,17 @@ It is not autonomous self-improvement. The goal, harness, verifier, and stopping
 - Does SFT learn a better process, or merely a subtler version of the generator’s style?
 
 I do not have confident answers to these questions. The most useful next step may not be a more complete diagram. It may be to choose one narrow domain, run the entire loop several times, and see where it actually breaks.
+
+# References
+
+1. Villalobos et al. (2024), [*Will we run out of data? Limits of LLM scaling based on human-generated data*](https://arxiv.org/abs/2211.04325).
+2. Singh et al. (2024), [*Evaluation data contamination in LLMs: how do we measure it and (when) does it matter?*](https://arxiv.org/abs/2411.03923).
+3. Zelikman et al. (2022), [*STaR: Bootstrapping Reasoning With Reasoning*](https://arxiv.org/abs/2203.14465).
+4. Qin et al. (2025), [*Scaling Laws of Synthetic Data for Language Models*](https://arxiv.org/abs/2503.19551).
+5. Zhang et al. (2025), [*Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents*](https://arxiv.org/abs/2505.22954).
+6. Novikov et al. (2025), [*AlphaEvolve: A coding agent for scientific and algorithmic discovery*](https://arxiv.org/abs/2506.13131).
+7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
+8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
 
 <footer class="post-footer">
   <p>Thanks for reading. If you are also working on synthetic data, evaluation, or agent harnesses, I would be glad to compare notes.</p>

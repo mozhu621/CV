@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Data 可能是 RSI 最先能想清楚的一块"
-description: "从模糊评估、Synthetic Data Ladder 和 Harness–Evolve 出发，聊聊为什么数据可能是 RSI 最早能落地的一环。"
+title: "Data-driven RSI：Eval、Synthetic Data Ladder 与轨迹产线"
+description: "一个关于数据驱动自我改进的工作框架：如何用开放目标的评估发现失败，用 Synthetic Data Ladder 判断数据是否值得扩量，再用 Harness–Evolve 生产可训练的轨迹。"
 permalink: /blog/data-driven-rsi/
 category: "Research note"
 author_profile: false
@@ -15,9 +15,9 @@ translation_url: /blog/data-driven-rsi/en/
     <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
     <nav class="post-language" aria-label="语言切换"><span>中文</span><a href="{{ '/blog/data-driven-rsi/en/' | relative_url }}">English</a></nav>
   </div>
-  <p class="post-kicker">Research note · 31 Jul 2026</p>
-  <h1>Data 可能是 RSI<br>最先能想清楚的一块</h1>
-  <p class="post-dek">最近反复想的一个问题是：如果 RSI 真会发生，它最开始会长什么样？我目前更愿意把答案押在 Data 上——先让模型看见自己不会什么，再围绕失败做数据、训练，然后继续寻找下一处边界。</p>
+  <p class="post-kicker">Research note · 31 Jul 2026 · Updated 2 Aug 2026</p>
+  <h1>Data-driven RSI：Eval、<br>Synthetic Data Ladder 与轨迹产线</h1>
+  <p class="post-dek">如果 RSI 真会发生，它最早可能不是模型直接改写自己的权重，而是一条更具体的闭环：模型发现失败，围绕失败生产训练经验，再把学到的能力带回下一轮。本文试着把这条闭环拆成三个可以实验的问题。</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
@@ -29,6 +29,7 @@ translation_url: /blog/data-driven-rsi/en/
     <li><a href="#eval">Eval 得能给出下一步</a></li>
     <li><a href="#ladder">从 architecture ladder 到 synthetic-data ladder</a></li>
     <li><a href="#trajectory">轨迹需要一条靠谱的产线</a></li>
+    <li><a href="#related-work">它与现有工作的关系</a></li>
   </ol>
 </nav>
 
@@ -52,6 +53,14 @@ Data 要具体得多。模型先做一批没见过的任务，暴露出自己会
 
 这篇就只谈这三件事。
 
+## 先给几个工作定义
+
+这里的 **RSI** 不是指模型在一次推理中直接重写自己的参数。本文采用一个更弱、也更容易实验的定义：当前模型参与发现能力缺口、生产下一轮训练经验；训练得到的后继模型在未参与生产的新任务上取得可复现的提升。
+
+**开放目标评估**（open-ended evaluation）也不等于“主观评估”。目标可以是宽的，例如数学研究能力，但每轮留下的证据必须具体：任务、轨迹、失败原因、验证结果和下一步的数据处方都要能复查。
+
+**Harness–Evolve** 是本文给数据生产方式取的工作名称，不是一个已有的标准算法。Harness 定义模型工作的环境；Evolve 在这个环境里产生、修改和筛选多条候选轨迹；最后再通过 SFT 把选出的过程训练进目标模型。这个边界很重要：Evolve 本身不更新权重。
+
 <span class="anchor" id="synthetic-data"></span>
 
 # 为什么一定会走到 synthetic data
@@ -64,7 +73,7 @@ PT 也开始有类似的味道。自然数据当然还是地基，但清洗、�
 
 这并不意味着自然数据不重要。恰恰相反，它给了模型知识、语言和世界的底子。但自然数据不会专门照着某一个模型的失败长出来。模型刚好不会哪一步，互联网通常不会立刻送来一万条难度合适、反馈清楚的练习。
 
-这里所说的数据墙，不是“互联网上没有新东西了”，而是对下一版模型真正有用、没有被反复吃过、质量又够高的数据，增长开始跟不上模型和算力的胃口。数据当然还会继续增长，只是新增 token 不再等于新增能力。
+这里所说的数据墙，不是“互联网上没有新东西了”，而是对下一版模型真正有用、没有被反复吃过、质量又够高的数据，增长开始跟不上模型和算力的胃口。对公开文本存量与训练需求的估算也指出，高质量人类文本可能成为继续扩大训练规模的约束之一（[Villalobos et al., 2024](https://arxiv.org/abs/2211.04325)）。这不是一个精确的撞墙日期，但足以说明：新增 token 不再天然等于新增能力。
 
 > 真正稀缺的不是 token，而是下一步刚好有用的经验。
 
@@ -78,13 +87,23 @@ PT 也开始有类似的味道。自然数据当然还是地基，但清洗、�
 
 假设目标是“让模型 coding 更强”。最容易的做法是挑一个 Benchmark，然后开始刷分。但刷一阵以后，题型、答案甚至评分偏好都会慢慢进入训练流程。分数还在涨，却越来越难判断：模型是真的会写更多代码了，还是更会做这套题了。
 
-Benchmark 不是没用。它适合做快照，也适合比较一个局部变化。问题是它一旦成了长期训练目标，就不再是一个很独立的测量工具。“数学能力”和“coding 能力”又本来就不是一个分数能讲完的东西。
+Benchmark 不是没用。它适合做快照，也适合比较一个局部变化。问题是它一旦成了长期训练目标，就不再是一个很独立的测量工具。“数学能力”和“coding 能力”又本来就不是一个分数能讲完的东西。更现实的问题是 contamination：相同的污染检测方法，对不同模型和 benchmark 的解释力也不一样（[Singh et al., 2024](https://arxiv.org/abs/2411.03923)）。所以这里反对的不是 benchmark，而是把一个已经进入优化回路的固定分数继续当成外部真值。
 
 > 我想要的 eval，更像一个会挑错的测试负责人，而不是一张 leaderboard。
 
 长期目标可以模糊，证据不能模糊。每一轮评估至少应该说清楚：模型在哪类新任务上失败；卡在知识、规划、工具使用还是检查；这个失败能不能复现；修完以后能不能迁移到另一批题。
 
 更关键的是，结果得能改变下一轮工作。它需要指出接下来应该补哪类任务，用什么环境让模型练，什么数据先别做，以及下一次拿什么新题回来验证。如果 eval 最后只留下一个总分，它很难真的驱动自我迭代。
+
+一轮 eval 的产物不应该只有 score，至少还要有一份 **failure record**：失败发生在哪个任务切片，最终错误是什么，轨迹里最早出现偏差的位置在哪里，可能对应哪一种机制，以及下一批数据准备干预什么。相同的“timeout”可能来自错误规划、工具调用失败或上下文管理失效；只按终局标签聚类，会把不同问题混在一起。Self-Harness 也采用了类似的 weakness mining：先从可验证轨迹中找出模型特定的失败模式，再提出受约束的 harness 修改（[Zhang et al., 2026](https://arxiv.org/abs/2606.09498)）。
+
+对这类评估，我会看五层证据：
+
+1. **Outcome**：任务最终是否完成，判断能否由执行器或明确 verifier 给出。
+2. **Process**：失败最早从哪里开始，后面的错误是否只是连锁反应。
+3. **Slice**：问题是否在一类新任务上重复出现，而不是单个 bad case。
+4. **Prescription**：它能否导出下一批任务、反馈形式或 Harness 变化。
+5. **Transfer**：干预以后，提升是否出现在没有参与数据生产的 held-out 任务上。
 
 <figure class="rsi-diagram rsi-diagram--flow">
   <div><span>01</span><strong>先说想变强什么</strong></div>
@@ -110,6 +129,8 @@ Ladder 这个词借自 model architecture 的研究。一种新的 architecture 
 Data ladder 问的是另一件事。固定目标模型和训练方法，只改变某类数据的数量、比例或覆盖范围，然后观察每增加一段数据，独立 eval 还能得到多少收益。它关心的不是新 architecture 能不能放大，而是：**这批数据还提供多少新的学习信号，以及应该做到哪里停。**
 
 到了 synthetic data，这条 ladder 又多了一层麻烦。自然数据通常先在那里，再决定取多少；synthetic data 则是生产出来的。生产模型、Harness、verifier、采样温度和筛选规则只要换一个，数据分布就会跟着换。量做大以后，通过率可能下降，重复会增加，长尾任务也可能被简单样本淹没。更重要的是，同一批轨迹对不同目标模型的作用并不一样：有的模型能吸收其中的规划习惯，有的模型只学到措辞，还有的模型几乎没有变化。
+
+已有工作已经开始直接测 synthetic data 的 scaling curve。例如 SynthLLM 在数学预训练实验中观察到可拟合的增长曲线与明显的饱和区，而且不同大小的目标模型达到最优点所需的 token 数并不相同（[Qin et al., 2025](https://arxiv.org/abs/2503.19551)）。这正好说明“能生成多少”和“应该生成多少”是两件事。不过，单条 pipeline 上拟合出的曲线还不能自动外推到另一种生产模型、Harness 或目标模型。
 
 所以三种 Ladder 看起来相似，真正押注的对象并不一样：
 
@@ -156,6 +177,14 @@ Data ladder 问的是另一件事。固定目标模型和训练方法，只改�
   <div><span>05</span><section><strong>什么时候停</strong><p>继续生成、筛选和训练的成本，是否已经超过新带来的能力增益？</p><small>找到饱和区，才知道该做多少。</small></section></div>
 </div>
 
+## 一个最小可用的实验设计
+
+为了让 Ladder 真正可比较，每次只放开少数变量。最小版本可以固定目标模型起点、训练 token budget、优化器和 held-out eval，只改变被接受且去重后的 trajectory 数量，例如做四个逐级扩大的数据点，并保留一个不加这批数据的 control。每一级至少重复两次，以免把训练噪声当成趋势。
+
+每个点同时记录三类量：生产侧的生成成本、通过率和去重率；训练侧的有效 token、训练稳定性与行为变化；评估侧的目标切片提升、跨切片迁移和回归。只有当相邻台阶的增益在重复实验中方向一致，才进入更贵的一层。
+
+严格地说，在足够多的规模点、目标模型和生产管线上验证以前，它只是 **ladder experiment**，还不是一条可外推的 scaling law。Ladder 的价值首先是控制投资节奏与暴露饱和点，而不是提前承诺一条漂亮的幂律。
+
 ## 先看哪几个数
 
 “总共生成了多少条”不是最重要的数。更有用的是：多少条通过验证，去重以后还剩多少，每增加一批不同的轨迹，独立 eval 上有没有新的提升。前两个数决定这条产线到底多贵，最后一个数决定它值不值得继续。
@@ -182,7 +211,7 @@ Data ladder 问的是另一件事。固定目标模型和训练方法，只改�
 
 coding 里，人知道测试结果很重要；数学里，人会用证明检查、反例和难度递进；agent 任务里，人知道环境状态和工具返回不能丢。这些经验过去散在 prompt、脚本和研究者的脑子里。Harness 的作用，是把它们变成模型每次运行都会遇到的环境。
 
-这里说的 Harness，不只是包在模型外面的工程壳。它决定模型看见什么、能调用什么工具、失败后能不能重试、反馈从哪里来、什么算完成。换句话说，它直接决定最终能收集到哪一种轨迹。
+这里说的 Harness，不只是包在模型外面的工程壳。更完整的定义包括 prompt、工具、上下文管理、工作流、持久状态、权限与验证逻辑；它决定模型如何观察、行动、保存结果和检查自己（[Weng, 2026](https://lilianweng.github.io/posts/2026-07-04-harness/)）。换句话说，它直接决定最终能收集到哪一种轨迹。
 
 <div class="production-checks">
   <div><strong>能追踪</strong><p>任务、生产模型、Harness、工具和 verifier 都有清楚的版本。</p></div>
@@ -197,6 +226,8 @@ coding 里，人知道测试结果很重要；数学里，人会用证明检查�
 Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈的环境里多试几次。它可以走不同路径，可以失败，也可以根据结果回来改。然后从这些尝试里，挑出正确、有代表性、彼此又不太一样的完整过程。
 
 最后 SFT 的不是一句漂亮答案，而是这些更好的 trajectory。目的也不是让模型背住某一道题，而是让它下一次遇到类似问题时，更容易走上靠谱的路径：该验证的时候验证，看到失败会修改，需要工具时知道怎么用。
+
+这条思路与 STaR 有一条清楚的继承关系：STaR 生成 rationale、保留能得到正确答案的路径，再把它们训练回模型（[Zelikman et al., 2022](https://arxiv.org/abs/2203.14465)）。Harness–Evolve 想把候选空间从“文本推理过程”扩到带状态的 agent trajectory：工具返回、文件变化、执行错误、回退和重新规划都成为数据的一部分。与此同时，它也不同于 DGM 或 Self-Harness：后两者主要优化 agent/harness 本身；这里的直接产物是训练数据，最终更新发生在目标模型的 SFT 阶段（[Zhang et al., 2025](https://arxiv.org/abs/2505.22954); [Zhang et al., 2026](https://arxiv.org/abs/2606.09498)）。
 
 <figure class="rsi-diagram rsi-diagram--trajectory">
   <div><strong>Harness</strong><p>工具、上下文、反馈、记忆、验证</p></div>
@@ -225,6 +256,22 @@ Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈
 这些先验不是替模型把解法写死，而是告诉它哪里值得探索、什么反馈可信、哪些结果不应被当真。模型最后要学到的，也不应只是某一条数据配方。面对一个新 topic 或新的模糊目标，它应该能参考这些经验，自行设计任务和环境，再找出下一批有用的数据。
 
 这里还有一个很现实的风险：生产模型会复制自己。如果行动、判断、筛选都交给同一个模型，Evolve 很容易只是把它原来的 pattern 变得更浓。执行工具、独立 verifier、不同来源的生产模型、真实数据锚点和少量人工抽查，都是为了让这条产线别变成一个回音室。
+
+另一个风险是 **selection-induced shortcut**。如果 verifier 只认最终答案，最容易通过筛选的可能是碰巧答对的短路径，而不是可迁移的好过程；如果只偏好长轨迹，又会奖励无效的展开。因此筛选最好同时约束 outcome、过程完整性、轨迹新颖度和成本，并保留被拒绝轨迹及原因。它们不仅用于清洗，也会成为下一轮改 Harness 和出题的重要信号。
+
+<span class="anchor" id="related-work"></span>
+
+# 它与现有工作的关系
+
+可以把相邻工作按“被优化的对象”分开：
+
+- **Reasoning self-training** 优化模型内化的推理路径。STaR 是最直接的例子。
+- **Synthetic-data scaling** 研究某条生成方法随数据量和模型规模的收益与饱和，SynthLLM 属于这一类。
+- **Harness optimization** 修改 prompt、工具、上下文或工作流，让冻结模型在部署时做得更好。Self-Harness 把失败挖掘、修改与回归测试连成闭环。
+- **Open-ended agent evolution** 保留多个候选 agent，在可执行反馈下继续分支和选择。DGM 与 AlphaEvolve 展示了 archive 和 evaluator 如何支撑这种搜索（[Novikov et al., 2025](https://arxiv.org/abs/2506.13131)）。
+- **本文的 Harness–Evolve** 位于这些方向的交叉处：借 harness 扩大轨迹搜索空间，借 verifier 和多样性规则选择轨迹，再把结果蒸馏回目标模型。它目前是一个研究假设，而不是已有实验结论。
+
+真正需要验证的不是“这个 loop 看起来是否合理”，而是三个因果问题：多 Harness 是否比单 Harness 产生更可迁移的数据；Ladder 能否提前预测大规模生产的收益；经过 SFT 的模型是否学到了可复用的过程，而非生成器和 verifier 的表面偏好。
 
 <span class="anchor" id="loop"></span>
 
@@ -256,6 +303,17 @@ Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈
 - SFT 学到的到底是更好的解题过程，还是生产模型更隐蔽的表达习惯？
 
 这些问题我现在也没有答案。接下来真正有价值的工作，可能不是再画一个更完整的框架，而是挑一个窄领域，把整条 loop 跑几轮，看看它到底会在哪里坏掉。
+
+# References
+
+1. Villalobos et al. (2024), [*Will we run out of data? Limits of LLM scaling based on human-generated data*](https://arxiv.org/abs/2211.04325).
+2. Singh et al. (2024), [*Evaluation data contamination in LLMs: how do we measure it and (when) does it matter?*](https://arxiv.org/abs/2411.03923).
+3. Zelikman et al. (2022), [*STaR: Bootstrapping Reasoning With Reasoning*](https://arxiv.org/abs/2203.14465).
+4. Qin et al. (2025), [*Scaling Laws of Synthetic Data for Language Models*](https://arxiv.org/abs/2503.19551).
+5. Zhang et al. (2025), [*Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents*](https://arxiv.org/abs/2505.22954).
+6. Novikov et al. (2025), [*AlphaEvolve: A coding agent for scientific and algorithmic discovery*](https://arxiv.org/abs/2506.13131).
+7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
+8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
 
 <footer class="post-footer">
   <p>Thanks for reading. 如果你也在做 synthetic data、eval 或 agent harness，欢迎来聊。</p>
