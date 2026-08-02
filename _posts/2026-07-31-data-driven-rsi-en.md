@@ -16,7 +16,7 @@ translation_url: /blog/data-driven-rsi/
     <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
     <nav class="post-language" aria-label="Language"><a href="{{ '/blog/data-driven-rsi/' | relative_url }}">中文</a><span>English</span></nav>
   </div>
-  <p class="post-kicker">Research note · 31 Jul 2026 · Updated 2 Aug 2026</p>
+  <p class="post-kicker">Research note · 31 Jul 2026 · Updated 3 Aug 2026</p>
   <h1>Data-Driven RSI:<br>Evaluation, Ladders, and Trajectories</h1>
   <p class="post-dek">If RSI happens, its earliest form may not be a model directly rewriting its own weights. It may be a more concrete loop: find failures, produce training experience around them, and carry the resulting capability into the next round. This note breaks that loop into three experimentally tractable questions.</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
@@ -75,6 +75,10 @@ Pretraining is beginning to acquire the same character. Natural data remains the
 This does not make natural data unimportant. Natural data gives a model its knowledge, language, and contact with the world. But the internet does not grow in response to the failure modes of a particular checkpoint. When a model gets stuck on one step of one kind of problem, the web does not immediately produce ten thousand exercises at exactly the right difficulty with reliable feedback attached.
 
 The data wall does not mean that the internet has run out of new material. It means that data which is new to the model, useful for the next version, and good enough to train on is not growing as quickly as the appetite created by more models and more compute. Estimates of public text stocks and training demand suggest that high-quality human-generated text can become a constraint on continued scaling ([Villalobos et al., 2024](https://arxiv.org/abs/2211.04325)). This is not a precise date for impact, but it is enough to separate new tokens from genuinely new capability.
+
+Will DePue calls the internet a “one-time subsidy” to deep learning ([DePue, 2026](https://willdepue.net/writings/a-stargate-for-data/)). The phrase is useful. For decades, people wrote webpages, code, papers, and discussions for reasons unrelated to model training; together they happened to form a huge, inexpensive, cross-domain dataset. The next increment will not arrive through the same accident. What remains outside the public web is often not another collection of documents, but internal workflows, tacit expert judgment, unrecorded failures, and processes visible only inside real environments.
+
+This separates the data problem into at least two axes. **Volume** asks how many more high-quality examples are needed in domains already represented. **Coverage** asks which tasks, tools, edge cases, and long-horizon processes have never been recorded at all. Synthetic data is well suited to expanding volume, but it cannot reconstruct information that does not exist in its inputs. Extending coverage still requires anchors from people and real environments, after which models can elaborate, recombine, and explore around them.
 
 > The scarce resource is not tokens. It is experience that is useful for the model’s next step.
 
@@ -206,6 +210,8 @@ Whenever the target model, generator, or harness changes, the ladder should retu
 
 Data has always been designed by people. People decide where to look, what is worth keeping, how to label it, and which tasks should come before others. Even when the raw material comes from the internet, it enters a model through a human-built pipeline.
 
+As public webpages stop being the main source of marginal data, production will increasingly shift from collecting documents to recording work. A complete expert workflow can include private tools, repeated communication, local judgment, failure recovery, and final acceptance. Saving only the input and final answer discards much of the trainable process. Data infrastructure therefore means more than storage or labeling capacity; it must capture environments, actions, feedback, and outcomes together.
+
 Many synthetic-data pipelines today are essentially prompt + model + filter. That is enough to produce large collections of questions and answers, but it remains too thin. The valuable part is often not the final answer. It is how the model searched, tried something, observed an error, revised a plan, and noticed that it had gone wrong.
 
 ## A prompt is not a production line
@@ -315,6 +321,7 @@ I do not have confident answers to these questions. The most useful next step ma
 6. Novikov et al. (2025), [*AlphaEvolve: A coding agent for scientific and algorithmic discovery*](https://arxiv.org/abs/2506.13131).
 7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
 8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
+9. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
 
 <footer class="post-footer">
   <p>Thanks for reading. If you are also working on synthetic data, evaluation, or agent harnesses, I would be glad to compare notes.</p>

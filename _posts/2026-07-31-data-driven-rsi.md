@@ -15,7 +15,7 @@ translation_url: /blog/data-driven-rsi/en/
     <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
     <nav class="post-language" aria-label="语言切换"><span>中文</span><a href="{{ '/blog/data-driven-rsi/en/' | relative_url }}">English</a></nav>
   </div>
-  <p class="post-kicker">Research note · 31 Jul 2026 · Updated 2 Aug 2026</p>
+  <p class="post-kicker">Research note · 31 Jul 2026 · Updated 3 Aug 2026</p>
   <h1>Data-driven RSI：Eval、<br>Synthetic Data Ladder 与轨迹产线</h1>
   <p class="post-dek">如果 RSI 真会发生，它最早可能不是模型直接改写自己的权重，而是一条更具体的闭环：模型发现失败，围绕失败生产训练经验，再把学到的能力带回下一轮。本文试着把这条闭环拆成三个可以实验的问题。</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
@@ -74,6 +74,10 @@ PT 也开始有类似的味道。自然数据当然还是地基，但清洗、�
 这并不意味着自然数据不重要。恰恰相反，它给了模型知识、语言和世界的底子。但自然数据不会专门照着某一个模型的失败长出来。模型刚好不会哪一步，互联网通常不会立刻送来一万条难度合适、反馈清楚的练习。
 
 这里所说的数据墙，不是“互联网上没有新东西了”，而是对下一版模型真正有用、没有被反复吃过、质量又够高的数据，增长开始跟不上模型和算力的胃口。对公开文本存量与训练需求的估算也指出，高质量人类文本可能成为继续扩大训练规模的约束之一（[Villalobos et al., 2024](https://arxiv.org/abs/2211.04325)）。这不是一个精确的撞墙日期，但足以说明：新增 token 不再天然等于新增能力。
+
+Will DePue 把互联网称为 deep learning 的“一次性补贴”（[DePue, 2026](https://willdepue.net/writings/a-stargate-for-data/)）。这个说法很准确：过去几十年，人类并不是为了训练模型才写下网页、代码、论文和讨论，但这些材料后来恰好组成了一份巨大、便宜而且跨领域的数据集。下一阶段很难再复制同样的偶然性。尚未进入互联网的部分，往往不是另一批网页，而是组织内部的工作流、专家的隐性判断、没有被记录的失败，以及只能在真实环境里观察到的过程。
+
+因此，数据问题至少有两个不同的轴：**volume** 是已有领域里还需要多少高质量样本；**coverage** 是哪些任务、工具、边界情况和长程过程根本没有被记录。Synthetic data 很适合补 volume，却不能凭空恢复不存在的知识。要补 coverage，仍然需要人和真实环境提供锚点，再让模型围绕这些锚点展开、组合和探索。
 
 > 真正稀缺的不是 token，而是下一步刚好有用的经验。
 
@@ -205,6 +209,8 @@ Data ladder 问的是另一件事。固定目标模型和训练方法，只改�
 
 以前的数据其实一直是人设计的。人决定去哪里找，什么值得留下，怎么标注，哪些任务先学、哪些后学。即使原料来自互联网，进入模型以前也已经走过一条人为的数据管线。
 
+当公开网页不再是主要增量以后，数据生产也会从“收集文档”逐渐变成“记录工作”。一个完整的专家流程可能包含私有工具、反复沟通、局部判断、失败恢复和最终验收；只保存输入与最后答案，会丢掉最有训练价值的部分。数据基础设施因此不只是更大的存储或标注平台，还要能够把环境、行动、反馈和结果一起记录下来。
+
 现在不少 synthetic data pipeline，说到底还是 prompt + model + filter。这能很快得到大量问答，但仍然太薄。真正值得模型学习的，往往不是最后那句答案，而是它怎么搜、怎么试、看到报错以后怎么改、在哪一步发现自己走错了。
 
 ## 一个 prompt 不是产线
@@ -314,6 +320,7 @@ Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈
 6. Novikov et al. (2025), [*AlphaEvolve: A coding agent for scientific and algorithmic discovery*](https://arxiv.org/abs/2506.13131).
 7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
 8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
+9. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
 
 <footer class="post-footer">
   <p>Thanks for reading. 如果你也在做 synthetic data、eval 或 agent harness，欢迎来聊。</p>
