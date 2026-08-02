@@ -250,6 +250,22 @@ One harness tends to grow one style of trajectory. A test-driven coding harness 
 
 I would rather run several harnesses and use the ladder to see which ones the target model actually absorbs, and which mixtures work better together. This is more cumbersome than declaring one ideal trajectory format, but it is less likely to train the model into a single repeated pattern.
 
+## A harness has a horizon too
+
+There is a less visible constraint: harness code written for today's agents may not support the long-running tasks that RSI eventually requires. Many systems assume that a task ends within one run or context, tool calls are synchronous, verifier feedback arrives quickly, and success can be represented by one terminal state. Those assumptions may be adequate for a coding task measured in minutes. They are less plausible for experiments that run for days, data programs spanning multiple training rounds, or research whose feedback arrives much later.
+
+METR measures a task-completion horizon using the time a human expert needs for the same task. This is a proxy for task difficulty, not the agent's literal wall-clock runtime. Their results nevertheless isolate an important capability axis: whether a model can reliably compose local skills into a longer sequence of actions ([METR, 2026](https://metr.org/time-horizons/)). If task horizon grows faster than harness horizon, the binding constraint may move away from the base model and into lost state, context growth, compounding errors, and failed recovery.
+
+An RSI-oriented harness needs several capabilities that are not yet universal defaults:
+
+- **Persistent state:** experiments, code, data versions, and unfinished work cannot live only in context; interrupted runs need recoverable checkpoints.
+- **Hierarchical goals:** long tasks need verifiable stages while preserving dependencies across stages, rather than optimizing the nearest local score.
+- **Asynchronous execution:** training, evaluation, and data generation may run for hours or days; the harness must launch, monitor, cancel, and resume background work.
+- **Delayed feedback:** when final reward arrives late, intermediate evidence must be retained and failure attributed to the step that caused it.
+- **Evolvability with boundaries:** the model may revise workflows, context policy, and tool composition, while verifiers, permissions, and audit logs remain outside the editable loop.
+
+Recent work on long-horizon agents similarly centers compact state, checkpointing, verifier-backed state transitions, and targeted recovery rather than repeatedly feeding raw interaction history back into the prompt ([Wu et al., 2026](https://arxiv.org/abs/2607.11388)). This suggests a longer-term extension of the argument: Harness–Evolve cannot only evolve trajectories inside a fixed harness. As tasks lengthen, **the harness carrying those trajectories must evolve as well**. Otherwise the production line will reliably generate data only within its current horizon.
+
 ## Synthesis still needs priors
 
 <dl class="prior-list">
@@ -322,6 +338,8 @@ I do not have confident answers to these questions. The most useful next step ma
 7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
 8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
 9. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
+10. METR (2026), [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/).
+11. Wu et al. (2026), [*StructAgent: Harness Long-horizon Digital Agents with Unified Causal Structure*](https://arxiv.org/abs/2607.11388).
 
 <footer class="post-footer">
   <p>Thanks for reading. If you are also working on synthetic data, evaluation, or agent harnesses, I would be glad to compare notes.</p>

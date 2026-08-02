@@ -249,6 +249,22 @@ Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈
 
 我更倾向于让几种 Harness 同时生产，再用 Ladder 看目标模型到底吸收哪一种，哪几种混在一起更好。这样做比先认定一种“最好轨迹”更麻烦，但也更不容易把模型训练成单一 pattern。
 
+## Harness 也有自己的 horizon
+
+还有一种更隐蔽的限制：为今天的 agent 写的 harness code，未必能支持 RSI 真正需要的长线任务。很多系统默认一个任务能在单次运行或一个 context 里结束，工具调用是同步的，verifier 很快返回，成功也能用一个最终状态判断。这些假设对几十分钟的 coding task 可能够用，对持续几天的实验、跨多轮训练的数据工程，或者反馈要很久以后才出现的研究任务就不一定成立。
+
+METR 用“人类专家完成同一任务所需的时间”来刻画 agent 的 task-completion horizon；这不是 agent 实际运行的墙上时间，而是任务难度的一种代理。他们的结果说明，模型能否把很多局部能力可靠地串成更长的行动序列，本身就是一条重要的能力轴（[METR, 2026](https://metr.org/time-horizons/)）。如果任务 horizon 增长得比 harness horizon 更快，瓶颈最后不一定在 base model，而会出现在状态丢失、上下文膨胀、错误累积和无法恢复上。
+
+RSI-oriented harness 至少还需要几种今天并不总是默认具备的能力：
+
+- **持久状态**：实验、代码、数据版本和未完成事项不能只活在 context 里；中断以后要能从 checkpoint 恢复。
+- **分层目标**：长任务要拆成可验证的阶段，同时保留阶段之间的依赖，避免只优化眼前的小分数。
+- **异步执行**：训练、评测和数据生成可能跑数小时或数天，Harness 要能启动、监控、取消和重新接管后台任务。
+- **延迟反馈**：最终 reward 很晚才出现时，需要保存中间证据，并把失败追溯到真正产生偏差的步骤。
+- **可演化但有边界**：模型可以修改 workflow、context policy 和工具组合，但 verifier、权限与审计日志不应被同一个改进回路随意改写。
+
+最近的长程 agent 工作也开始把 compact state、checkpoint、verifier-backed state transition 和 targeted recovery 放到中心，而不是继续把完整交互历史塞回 prompt（[Wu et al., 2026](https://arxiv.org/abs/2607.11388)）。这提示了一个更长线的判断：Harness–Evolve 不只是在固定 Harness 里 evolve trajectory；随着任务变长，**承载轨迹的 Harness 本身也必须升级**。否则产线只会稳定地产出当前 horizon 以内的数据。
+
 ## 数据合成还是需要先验
 
 <dl class="prior-list">
@@ -321,6 +337,8 @@ Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈
 7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
 8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
 9. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
+10. METR (2026), [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/).
+11. Wu et al. (2026), [*StructAgent: Harness Long-horizon Digital Agents with Unified Causal Structure*](https://arxiv.org/abs/2607.11388).
 
 <footer class="post-footer">
   <p>Thanks for reading. 如果你也在做 synthetic data、eval 或 agent harness，欢迎来聊。</p>
