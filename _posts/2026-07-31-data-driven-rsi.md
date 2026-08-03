@@ -13,37 +13,44 @@ translation_url: /blog/data-driven-rsi/en/
 <header class="post-header">
   <div class="post-utility">
     <a class="post-back" href="{{ site.baseurl }}/blog/">← Writing</a>
-    <nav class="post-language" aria-label="语言切换"><span>中文</span><a href="{{ '/blog/data-driven-rsi/en/' | relative_url }}">English</a></nav>
+    <nav class="post-language" aria-label="语言与下载"><span>中文</span><a href="{{ '/blog/data-driven-rsi/en/' | relative_url }}">English</a><a href="{{ '/output/pdf/data-driven-rsi-zh.pdf' | relative_url }}">PDF</a></nav>
   </div>
   <p class="post-kicker">Research note · 31 Jul 2026 · Updated 3 Aug 2026</p>
   <h1>Data-driven RSI：Eval、<br>Synthetic Data Ladder 与轨迹产线</h1>
-  <p class="post-dek">如果 RSI 真会发生，它最早可能不是模型直接改写自己的权重，而是一条更具体的闭环：模型发现失败，围绕失败生产训练经验，再把学到的能力带回下一轮。本文试着把这条闭环拆成三个可以实验的问题。</p>
+  <p class="post-dek">RSI 想接过的，首先是今天由基础模型团队推动的改进循环：发现问题、设计评估、生产数据、训练，再决定下一步。本文从其中最容易开始实验的一段——Data——往下推。</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
 <nav class="post-toc" aria-label="文章目录">
   <strong>这篇会聊</strong>
   <ol>
-    <li><a href="#start-with-data">先从 Data 开始</a></li>
+    <li><a href="#start-with-data">RSI 想接过什么</a></li>
     <li><a href="#synthetic-data">为什么一定会走到 synthetic data</a></li>
-    <li><a href="#eval">Eval 得能给出下一步</a></li>
-    <li><a href="#ladder">从 architecture ladder 到 synthetic-data ladder</a></li>
+    <li><a href="#eval">Eval 不该有终点</a></li>
+    <li><a href="#ladder">三种 Ladder 有什么不同</a></li>
     <li><a href="#trajectory">轨迹需要一条靠谱的产线</a></li>
     <li><a href="#related-work">它与现有工作的关系</a></li>
+    <li><a href="#loop">这条 loop 怎么转起来</a></li>
+    <li><a href="#open-questions">仍未解决的问题</a></li>
+    <li><a href="#references">References</a></li>
   </ol>
 </nav>
 
 <span class="anchor" id="start-with-data"></span>
 
-# 先从 Data 开始
+# RSI 想接过什么
 
-如果 RSI 真的开始发生，最初的形态未必特别 dramatic。模型未必先学会改自己的 architecture，更可能先学会一件朴素的事：把下一批训练数据做得更好。
+许多关于 RSI 的设想，落到工程上都在问同一件事：今天由基础模型团队手工维持的改进循环，能不能逐渐交给模型？OpenAI、Moonshot AI（Kimi）、智谱 AI（GLM）等团队仍需要研究者不断发现失败、搭 eval、做数据、跑训练，再决定下一版往哪里走。
 
-算法当然重要，但这块很难提前说清。一个新想法为什么有效，放大以后还灵不灵，常常是先做出来，后面才慢慢知道。真要预测下一次关键的算法变化会出现在哪里，我没有太多把握。
+说得直白一点，RSI 想接替的是我们这批基础模型研究者目前维持的工作：即使没有人持续守在循环里，LLM 也能找到能力边界、提出值得解决的问题、为下一轮训练制造经验，并检验后继模型是否真的更强。
 
-Data 要具体得多。模型先做一批没见过的任务，暴露出自己会在哪里失败；这些失败被整理出来，变成新的练习和轨迹，再训练回模型。新模型出来以后，换一批题，再来一次。
+这比“模型能不能直接改写自己的权重”更接近我在意的 RSI。它要接过的不是一次单点优化，而是一条能够继续运转的研究循环。
 
-这里的重点不是多喂一些 token，而是让模型的失败改变下一批数据。如果这个 loop 能稳定转起来，模型就已经在参与决定自己下一轮学什么了。它离完整意义上的 RSI 可能还很远，但已经构成了一个足够实际的起点。
+## 为什么先从 Data 开始
+
+这件事未必从模型改写 architecture 开始。下一次关键的算法变化会出现在哪里，一个想法放大以后还灵不灵，都很难提前判断。Data 要具体得多：让模型先做一批没见过的任务，找到稳定的失败，再把这些失败变成新的任务和轨迹，训练回下一版模型。
+
+这里的重点不是多喂一些 token，而是让模型的失败改变下一批数据。如果这个 loop 能持续运转，模型就已经开始参与决定自己下一轮学什么。它离完整意义上的 RSI 还有距离，但可能是最先能够被认真验证的一部分。
 
 沿着这条思路往下走，会遇到三个问题：
 
@@ -87,107 +94,123 @@ Will DePue 把互联网称为 deep learning 的“一次性补贴”（[DePue, 2
 
 <span class="anchor" id="eval"></span>
 
-# 1. Eval 得能给出下一步
+# 1. Eval 不该有终点
 
-假设目标是“让模型 coding 更强”。最容易的做法是挑一个 Benchmark，然后开始刷分。但刷一阵以后，题型、答案甚至评分偏好都会慢慢进入训练流程。分数还在涨，却越来越难判断：模型是真的会写更多代码了，还是更会做这套题了。
+固定 benchmark 的分辨率通常不会永久保持。当前沿模型接近题目上限、题型被反复适配、样本可能回流进训练时，它对最强系统的区分力会下降；不过，不同 benchmark 的饱和速度和原因并不相同。对 60 个常用文本 benchmark 的研究中，近一半已经表现出较高或很高的饱和度（[Akhtar et al., 2026](https://arxiv.org/abs/2602.16763)）。Contamination 又让分数更难解释，而且影响会随模型与 benchmark 改变（[Singh et al., 2024](https://arxiv.org/abs/2411.03923)）。
 
-Benchmark 不是没用。它适合做快照，也适合比较一个局部变化。问题是它一旦成了长期训练目标，就不再是一个很独立的测量工具。“数学能力”和“coding 能力”又本来就不是一个分数能讲完的东西。更现实的问题是 contamination：相同的污染检测方法，对不同模型和 benchmark 的解释力也不一样（[Singh et al., 2024](https://arxiv.org/abs/2411.03923)）。所以这里反对的不是 benchmark，而是把一个已经进入优化回路的固定分数继续当成外部真值。
+过去的解法是继续由人造更难的 benchmark，但这件事越来越贵。Humanity's Last Exam 从七万多道候选题里筛出 2,500 道，动员了近千名专家并做了多轮审核（[Center for AI Safety & Scale AI, 2025](https://labs.scale.com/leaderboard/humanitys_last_exam)）。这里有一个还没有被证明、但我认为必须认真对待的判断：如果模型开始以更短的周期迭代，人类定义任务、写题、维护答案和更新验证集的速度，迟早会跟不上模型自己变强的速度。
 
-> 我想要的 eval，更像一个会挑错的测试负责人，而不是一张 leaderboard。
+所以 eval 不能只是一套定期更新的固定题库。它也要进入自我迭代：目标可以是模糊的，比如“数学研究能力更强”或“能完成更长的 coding task”；模型则从上一轮 failure map 出发，寻找新的能力边界，提出任务，制造反例，调节难度，持续长出新的 benchmark 和 validation set。AutoBencher 已经把 benchmark creation 写成了一个由模型搜索“重要、新颖、困难”数据集的过程（[Li et al., 2025](https://proceedings.iclr.cc/paper_files/paper/2025/hash/eb216114f3eaad22506fd1bc7bbff0ca-Abstract-Conference.html)）。
 
-长期目标可以模糊，证据不能模糊。每一轮评估至少应该说清楚：模型在哪类新任务上失败；卡在知识、规划、工具使用还是检查；这个失败能不能复现；修完以后能不能迁移到另一批题。
+不过，模型参与搭 benchmark，不等于模型可以自己证明自己变强。它可以提出候选题、测试和 verifier；用于训练和找错的 active benchmark（工作集）可以不断变化，用于确认进步的 private validation（私有验证集）则应与训练产线隔离，并对被评 checkpoint 隐藏。题目是否有效、答案是否正确、是否发生泄漏，还需要由独立生成器、环境证据或人工审核确认。在生成私有验证前冻结被评 checkpoint 很有用，但不能单独保证独立性。
 
-更关键的是，结果得能改变下一轮工作。它需要指出接下来应该补哪类任务，用什么环境让模型练，什么数据先别做，以及下一次拿什么新题回来验证。如果 eval 最后只留下一个总分，它很难真的驱动自我迭代。
+> 模型可以自己出下一套题，但不能只凭自己对这套题的判断，宣布自己已经进步。
 
-一轮 eval 的产物不应该只有 score，至少还要有一份 **failure record**：失败发生在哪个任务切片，最终错误是什么，轨迹里最早出现偏差的位置在哪里，可能对应哪一种机制，以及下一批数据准备干预什么。相同的“timeout”可能来自错误规划、工具调用失败或上下文管理失效；只按终局标签聚类，会把不同问题混在一起。Self-Harness 也采用了类似的 weakness mining：先从可验证轨迹中找出模型特定的失败模式，再提出受约束的 harness 修改（[Zhang et al., 2026](https://arxiv.org/abs/2606.09498)）。
+这里的 self-evaluation 不是自我打分，而是让模型维护一条不断移动的能力边界；self-validation 也不是取消外部证据，而是让模型参与构造检验，再由它无法提前迎合的证据完成确认。
+
+<figure class="eval-loop" aria-labelledby="eval-loop-title">
+  <header><strong id="eval-loop-title">从模糊目标到下一轮训练</strong><p>Benchmark 不再是一份静态文件，而是一条持续寻找边界的生产流程。</p></header>
+  <div class="eval-loop__main">
+    <div><span>01</span><strong>给出模糊目标</strong><p>数学、coding、研究或更长程的任务。</p></div>
+    <div><span>02</span><strong>模型寻找边界</strong><p>提出新题、反例和更难的任务变体。</p></div>
+    <div><span>03</span><strong>形成 failure map</strong><p>定位稳定失败，而不是只留下总分。</p></div>
+    <div><span>04</span><strong>生产数据并训练</strong><p>把失败变成任务、轨迹与下一版模型。</p></div>
+    <div><span>05</span><strong>验证后继模型</strong><p>在隐藏任务和独立证据上比较，再把结果送回下一轮边界搜索。</p></div>
+  </div>
+  <div class="eval-boundary">
+    <span>VALIDATION BOUNDARY</span>
+    <div><strong>Private validation</strong><p>对被评 checkpoint 隐藏；与训练数据严格分开。</p></div>
+    <div><strong>Independent evidence</strong><p>执行器、环境反馈、可追溯资料、独立 verifier 与人工抽查。</p></div>
+  </div>
+  <figcaption>图 1. 01–05 构成一轮迭代；验证结果回到下一轮边界搜索，validation boundary 则阻止系统“自己出题、自己训练、再自己宣布胜利”。</figcaption>
+</figure>
+
+一轮 eval 最后应该留下的不是 score，而是一份能驱动下一步的 **failure record**：失败发生在哪个任务切片，终局错误是什么，轨迹里最早的因果偏差在哪里，可能对应哪种机制，以及下一批数据准备干预什么。相同的 timeout 可能来自错误规划、工具调用失败或上下文管理失效；只按终局标签聚类，会把不同问题混在一起。
 
 对这类评估，我会看五层证据：
 
-1. **Outcome**：任务最终是否完成，判断能否由执行器或明确 verifier 给出。
+1. **Outcome**：任务最终是否完成，能否由执行器或明确 verifier 判断。
 2. **Process**：失败最早从哪里开始，后面的错误是否只是连锁反应。
 3. **Slice**：问题是否在一类新任务上重复出现，而不是单个 bad case。
 4. **Prescription**：它能否导出下一批任务、反馈形式或 Harness 变化。
-5. **Transfer**：干预以后，提升是否出现在没有参与数据生产的 held-out 任务上。
-
-<figure class="rsi-diagram rsi-diagram--flow">
-  <div><span>01</span><strong>先说想变强什么</strong></div>
-  <div><span>02</span><strong>出一批没见过的题</strong></div>
-  <div><span>03</span><strong>看失败发生在哪</strong></div>
-  <div><span>04</span><strong>决定下一批数据</strong></div>
-  <div><span>05</span><strong>换新题再试一次</strong></div>
-  <figcaption>图 1. 编号表示一轮工作的先后，而不是五个独立分数。Eval 在这里不是终点；第 03 步看到的失败，会直接决定第 04 步生产什么数据。</figcaption>
-</figure>
-
-这件事大概只能 in-house 做。因为评估要跟着自己的模型、工具和数据一起变，题也不能永远固定。旧的失败修掉以后，系统应该继续往边界外出题，而不是继续庆祝一个已经会做的分数。
-
-评估和数据生产之间还需要保持一点距离。如果同一个模型负责出题、解题、筛选和打分，这个闭环很快会变成自我确认。留一批没见过的任务，用执行器或独立 verifier，再加少量人工抽查，麻烦一点，但值得。
+5. **Transfer**：干预以后，提升是否出现在未参与数据生产的 private validation 上。
 
 <span class="anchor" id="ladder"></span>
 
-# 2. Ladder：先看趋势，再谈规模
+# 2. Ladder：用小实验决定要不要爬下一阶
 
 假设一个 coding Harness 一周能跑出一百万条轨迹，要不要全做？这个问题不能拍脑袋决定。合成数据最麻烦的地方就在这里：样本可以写得很漂亮，答案也可以是对的，训练到目标模型上却没有任何变化。
 
-Ladder 这个词借自 model architecture 的研究。一种新的 architecture 不会一上来就拿最大的算力做到底。通常会先跑几个从小到大的模型，看 loss 和下游能力怎么随参数、token 和 compute 变化；还会看它相对 baseline 的优势是在放大、保持，还是逐渐消失。小模型上的一个好点子，不一定能活到更大的 scale。Architecture ladder 想回答的是：**这个设计值不值得继续 scale。**
+Ladder 不是某一条公式，也不是默认存在的 scaling law。它把一次昂贵的大规模投入拆成若干个成本递增的台阶：每一级只放大一个对象，其他条件尽量固定；相对 control 的信号足够稳定，才继续爬下一阶。它首先是一套控制实验与投入节奏的方法。
 
-Data ladder 问的是另一件事。固定目标模型和训练方法，只改变某类数据的数量、比例或覆盖范围，然后观察每增加一段数据，独立 eval 还能得到多少收益。它关心的不是新 architecture 能不能放大，而是：**这批数据还提供多少新的学习信号，以及应该做到哪里停。**
+这个词常用于 architecture scaling。更严谨的做法是在一组递增的 compute budget 上，分别训练 candidate 与 matched baseline；数据分布、objective、评估协议，以及模型规模与 token 的分配规则都预先固定。Architecture ladder 问的是：**相对 baseline 的优势能否跨规模保持，是否值得进入下一档 compute？**
 
-到了 synthetic data，这条 ladder 又多了一层麻烦。自然数据通常先在那里，再决定取多少；synthetic data 则是生产出来的。生产模型、Harness、verifier、采样温度和筛选规则只要换一个，数据分布就会跟着换。量做大以后，通过率可能下降，重复会增加，长尾任务也可能被简单样本淹没。更重要的是，同一批轨迹对不同目标模型的作用并不一样：有的模型能吸收其中的规划习惯，有的模型只学到措辞，还有的模型几乎没有变化。
+Data ladder 换了放大对象。固定目标模型、训练配置与 eval，只增加某个固定来源的数据量或覆盖，观察每一批新增数据还能带来多少 held-out gain。它问的是：**这批数据还有多少新的学习信号，边际回报在哪里开始消失？**
 
-已有工作已经开始直接测 synthetic data 的 scaling curve。例如 SynthLLM 在数学预训练实验中观察到可拟合的增长曲线与明显的饱和区，而且不同大小的目标模型达到最优点所需的 token 数并不相同（[Qin et al., 2025](https://arxiv.org/abs/2503.19551)）。这正好说明“能生成多少”和“应该生成多少”是两件事。不过，单条 pipeline 上拟合出的曲线还不能自动外推到另一种生产模型、Harness 或目标模型。
+Synthetic-data ladder 更麻烦，因为数据不是先在那里等着被取用，而是 production recipe 的输出。Producer、Harness、verifier、采样策略和 filter 共同决定数据分布；目标模型又决定这些轨迹能否被吸收。因此，一条可比较的 synthetic-data ladder 必须固定 **production recipe 与 target model**，只逐阶增加通过验证且去重后的轨迹量。只要 production recipe 的任一环节（producer、Harness、verifier、sampling policy 或 filter）或 target model 发生变化，就不能把新点直接接到旧曲线上，而应回到低成本台阶重新校准。
 
-所以三种 Ladder 看起来相似，真正押注的对象并不一样：
+扩量本身还可能改变产线的输出：通过率下降、重复增加、简单样本淹没长尾。同一批轨迹放到两个目标模型上，也可能一个学到规划习惯，另一个只学到措辞。SynthLLM 的实验同样观察到 synthetic data 的饱和区会随目标模型规模变化（[Qin et al., 2025](https://arxiv.org/abs/2503.19551)）。所以“能生成多少”和“针对这个模型应该生成多少”是两个问题。
 
-<figure class="ladder-figure">
-  <div class="ladder-comparison">
-    <div>
-      <strong>Architecture ladder</strong>
-      <p class="ladder-axis">放大对象：模型与 compute</p>
-      <div class="ladder-scale" aria-label="从小模型逐级放大到大模型"><span>小模型</span><i></i><span>中模型</span><i></i><span>大模型</span></div>
-      <p>看结构优势会扩大、保持，还是逐渐消失。</p>
-      <small>问题是：这个 model design 值不值得继续做大？</small>
-    </div>
-    <div>
-      <strong>Data ladder</strong>
-      <p class="ladder-axis">放大对象：固定来源的数据量</p>
-      <div class="ladder-scale" aria-label="从小批数据逐级增加到大批数据"><span>小批</span><i></i><span>中批</span><i></i><span>大批</span></div>
-      <p>固定训练对象，观察增益、迁移和边际回报。</p>
-      <small>问题是：这批数据还值不值得继续加？</small>
-    </div>
-    <div>
-      <strong>Synthetic-data ladder</strong>
-      <p class="ladder-axis">放大对象：产线 × 数据 × 目标模型</p>
-      <div class="ladder-scale" aria-label="从验证数据开始，经过小规模训练，再决定是否扩量"><span>验证</span><i></i><span>小训</span><i></i><span class="ladder-scale__stop">扩量？</span></div>
-      <p>每一级都要重新确认轨迹有没有被目标模型吸收。</p>
-      <small>问题是：这条产线，针对这个模型，还值不值得继续跑？</small>
-    </div>
-  </div>
-  <div class="diagram-legend" aria-label="图例">
-    <strong>图例</strong>
-    <span><i class="legend-key legend-key--node"></i>一个经过训练与 eval 的台阶</span>
-    <span><i class="legend-key legend-key--line"></i>前一级有信号，才继续投入</span>
-    <span><i class="legend-key legend-key--stop"></i>优势消失或收益饱和时停</span>
-  </div>
-  <figcaption>图 2. 三种 Ladder 的形式相似，但横轴并不相同。前两种主要放大一个变量；synthetic-data ladder 还把生产管线和目标模型带进了实验。</figcaption>
+三种 Ladder 都是在做“小实验先行”，但它们的实验单位和曲线失效条件并不一样：
+
+<figure class="ladder-map" aria-labelledby="ladder-map-title">
+  <header class="ladder-map__head"><strong id="ladder-map-title">Ladder：用一串成本递增的受控实验，决定要不要爬下一阶</strong><p>每一阶只放大一个对象；控制条件一旦改变，就开启一条新的 ladder。</p></header>
+  <section class="ladder-lane">
+    <div class="ladder-lane__meta"><span>01</span><h3>Architecture ladder</h3><p><b>放大</b> training compute（模型与 token 按同一规则分配）<br><b>固定</b> candidate/baseline 对照、数据分布、objective、eval</p></div>
+    <ol class="ladder-track" aria-label="从小规模模型逐级测试到更大规模模型"><li><span>小规模</span></li><li><span>中规模</span></li><li><span>大规模</span></li><li><span>下一尺度？</span></li></ol>
+    <p class="ladder-readout"><b>看什么</b><br>相对 baseline 的优势能否跨 scale 保持，而不是只在一个小点成立。</p>
+  </section>
+  <section class="ladder-lane">
+    <div class="ladder-lane__meta"><span>02</span><h3>Data ladder</h3><p><b>放大</b> 固定来源的数据量或覆盖<br><b>固定</b> target model、训练配置、eval</p></div>
+    <ol class="ladder-track" aria-label="从对照组逐级增加固定来源的数据"><li><span>Control</span></li><li><span>小批</span></li><li><span>更大批</span></li><li><span>下一批？</span></li></ol>
+    <p class="ladder-readout"><b>看什么</b><br>新增数据是否仍带来 held-out 增益，以及边际回报何时消失。</p>
+  </section>
+  <section class="ladder-lane ladder-lane--synthetic">
+    <div class="ladder-lane__meta"><span>03</span><h3>Synthetic-data ladder</h3><p><b>放大</b> 已验证、去重的轨迹量<br><b>固定</b> producer、Harness、verifier、filter、target model</p></div>
+    <ol class="ladder-track" aria-label="从对照组到小规模训练，再决定是否继续扩量"><li><span>Control</span></li><li><span>Pilot</span></li><li><span>扩一阶</span></li><li class="is-decision"><span>再扩？</span></li></ol>
+    <p class="ladder-readout"><b>为什么不同</b><br>数据是产线的输出，扩量时质量与分布也会漂移；换产线或目标模型，曲线即失效。</p>
+  </section>
+  <figcaption>图 2. Synthetic-data ladder 不是一条通用曲线，而是某条 production recipe 对某个 target model 的条件曲线。</figcaption>
 </figure>
 
-因此，synthetic-data ladder 是一串越来越贵的小赌注。先花最少的钱确认任务和 verifier 没问题，再做一次小训练看有没有信号；有信号才扩量，然后看迁移和饱和。上一层没回答清楚，就不急着爬下一层。
-
-<div class="ladder-stack">
-  <div><span>01</span><section><strong>数据本身成立吗</strong><p>任务可解吗？答案和 verifier 靠谱吗？它真的碰到了目标能力吗？</p><small>这一层不过，就先别训练。</small></section></div>
-  <div><span>02</span><section><strong>小模型能学到吗</strong><p>拿一小批数据做一次便宜的训练，目标行为有没有稳定变化？</p><small>看不到可重复的变化，就先别扩量。</small></section></div>
-  <div><span>03</span><section><strong>多做还有用吗</strong><p>数据量扩大几倍以后，收益还在不在？新轨迹有没有带来新信息？</p><small>这里看趋势，不迷信某一个点的分数。</small></section></div>
-  <div><span>04</span><section><strong>能迁移吗</strong><p>在没有参与数据生产的新任务上，它也变好了吗？原来的能力掉没掉？</p><small>只会做同一种题，不算真的学会。</small></section></div>
-  <div><span>05</span><section><strong>什么时候停</strong><p>继续生成、筛选和训练的成本，是否已经超过新带来的能力增益？</p><small>找到饱和区，才知道该做多少。</small></section></div>
-</div>
+因此，synthetic-data ladder 是一串越来越贵的小赌注：先 audit 一小批任务与 verifier，再从同一 base checkpoint 做 pilot training；有可重复的 held-out signal 才扩量；增益接近噪声、成本或 regression risk 的阈值时先重复，跌破以后就停，或者修改产线并重开 ladder。
 
 ## 一个最小可用的实验设计
 
-为了让 Ladder 真正可比较，每次只放开少数变量。最小版本可以固定目标模型起点、训练 token budget、优化器和 held-out eval，只改变被接受且去重后的 trajectory 数量，例如做四个逐级扩大的数据点，并保留一个不加这批数据的 control。每一级至少重复两次，以免把训练噪声当成趋势。
+为了让 Ladder 真正可比较，每次只放开少数变量。最小版本固定 base checkpoint、优化器、训练轮数（或预先约定的数据曝光规则）和 held-out eval，只改变被接受且去重后的 trajectory 数量；总训练 token 随数据量增加。若必须固定 training-token budget，则实验测的是等算力下的 coverage 或 mixture，而不是纯粹的数据量 scaling，两种实验应分开报告。每一级至少重复两次，以免把训练噪声当成趋势。
 
 每个点同时记录三类量：生产侧的生成成本、通过率和去重率；训练侧的有效 token、训练稳定性与行为变化；评估侧的目标切片提升、跨切片迁移和回归。只有当相邻台阶的增益在重复实验中方向一致，才进入更贵的一层。
 
 严格地说，在足够多的规模点、目标模型和生产管线上验证以前，它只是 **ladder experiment**，还不是一条可外推的 scaling law。Ladder 的价值首先是控制投资节奏与暴露饱和点，而不是提前承诺一条漂亮的幂律。
+
+<figure class="ladder-curve" aria-labelledby="ladder-curve-title">
+  <header class="ladder-map__head"><strong id="ladder-curve-title">每爬一阶，都重新问：新增这批轨迹还带来多少新能力？</strong><p>阈值综合重复实验的不确定性、production cost 与 regression risk，不是一个固定公开分数。</p></header>
+  <div class="ladder-curve__scroll" tabindex="0" aria-label="可横向滚动查看完整图">
+    <svg viewBox="0 0 720 330" role="img" aria-labelledby="curve-title curve-desc">
+      <title id="curve-title">Synthetic-data ladder 的扩量决策示意</title>
+      <desc id="curve-desc">下一阶在独立任务上的边际增益逐渐接近决策阈值。信号清楚时继续，接近阈值时重复，低于阈值时停止或重做产线。</desc>
+      <rect class="curve-zone curve-zone--scale" x="90" y="32" width="570" height="148" rx="3" />
+      <rect class="curve-zone curve-zone--stop" x="90" y="180" width="570" height="76" rx="3" />
+      <text class="curve-zone-label" x="105" y="54">信号清楚：继续扩一阶</text>
+      <text class="curve-zone-label" x="105" y="244">信号不足：停止，或改产线后重开 ladder</text>
+      <line class="curve-axis" x1="90" y1="256" x2="670" y2="256" />
+      <line class="curve-axis" x1="90" y1="256" x2="90" y2="25" />
+      <line class="curve-threshold" x1="90" y1="180" x2="660" y2="180" />
+      <text class="curve-threshold-label" x="654" y="172" text-anchor="end">可信信号 / 成本阈值</text>
+      <path class="curve-line" d="M150 67 C225 72 255 101 300 110 S390 145 440 163 S525 196 585 212" />
+      <g class="curve-error"><line x1="150" y1="56" x2="150" y2="79"/><line x1="144" y1="56" x2="156" y2="56"/><line x1="144" y1="79" x2="156" y2="79"/></g>
+      <g class="curve-error"><line x1="300" y1="96" x2="300" y2="124"/><line x1="294" y1="96" x2="306" y2="96"/><line x1="294" y1="124" x2="306" y2="124"/></g>
+      <g class="curve-error"><line x1="440" y1="142" x2="440" y2="190"/><line x1="434" y1="142" x2="446" y2="142"/><line x1="434" y1="190" x2="446" y2="190"/></g>
+      <g class="curve-error"><line x1="585" y1="197" x2="585" y2="226"/><line x1="579" y1="197" x2="591" y2="197"/><line x1="579" y1="226" x2="591" y2="226"/></g>
+      <circle class="curve-point" cx="150" cy="67" r="5"/><circle class="curve-point" cx="300" cy="110" r="5"/><circle class="curve-point curve-point--warn" cx="440" cy="163" r="5"/><circle class="curve-point curve-point--stop" cx="585" cy="212" r="5"/>
+      <text class="curve-callout" x="150" y="43" text-anchor="middle">有清楚信号</text><text class="curve-callout" x="300" y="86" text-anchor="middle">增益仍在</text><text class="curve-callout" x="440" y="132" text-anchor="middle">先重复确认</text><text class="curve-callout" x="585" y="235" text-anchor="middle">停，或改产线</text>
+      <text class="curve-tick" x="150" y="278" text-anchor="middle">Pilot</text><text class="curve-tick" x="300" y="278" text-anchor="middle">扩量 1</text><text class="curve-tick" x="440" y="278" text-anchor="middle">扩量 2</text><text class="curve-tick" x="585" y="278" text-anchor="middle">扩量 3</text>
+      <text class="curve-axis-label" x="380" y="310" text-anchor="middle">累计通过验证且去重的轨迹</text>
+      <text class="curve-axis-label" x="24" y="142" text-anchor="middle" transform="rotate(-90 24 142)">下一阶带来的 held-out 增益</text>
+    </svg>
+  </div>
+  <figcaption>图 3. 这是决策规则示意，不是实验结果。每个点都应从同一 base checkpoint 训练，并在未参与数据生产的 held-out 任务上重复测量；曲线不能外推到新的 production recipe 或 target model。</figcaption>
+</figure>
 
 ## 先看哪几个数
 
@@ -197,11 +220,11 @@ Data ladder 问的是另一件事。固定目标模型和训练方法，只改�
 
 合理产量不是预算能买到的最大数量，而是饱和以前那一段。这听起来很朴素，但没有 Ladder，很容易先把昂贵的数据做完，再回来解释它为什么没用。
 
-## Ladder 要跟着模型走
+## Ladder 属于产线与目标模型
 
 同一批 synthetic data 放到两个模型上，结果可能差很多。因为每条数据都带着生产模型和 Harness 的习惯：怎么拆题、爱用什么工具、什么时候回退、会犯什么错。目标模型能不能吸收这些习惯，并没有通用答案。
 
-所以目标模型、生产模型或 Harness 只要换了一个，都应该先回到小台阶重跑。上一条曲线可以当参考，不能当保证。这也是 synthetic data 的 scaling law 比自然数据更难做的地方。
+所以无论换目标模型，还是改 producer、Harness、verifier、sampling policy 或 filter，都应该先回到低成本台阶重跑。上一条曲线可以当参考，不能当保证。这也是 synthetic data 的 scaling law 比自然数据更难做的地方。
 
 <span class="anchor" id="trajectory"></span>
 
@@ -240,7 +263,7 @@ Harness–Evolve 可以这样理解：先让模型在一个有工具、有反馈
   <div><strong>Evolve</strong><p>多次尝试、变体、回退、修改、选择</p></div>
   <div><strong>Trajectory data</strong><p>留下完整、可靠而且有差异的过程</p></div>
   <div><strong>SFT</strong><p>把这些过程训练回目标模型</p></div>
-  <figcaption>图 3. 四个方框是同一条数据产线的四个阶段。Evolve 改善的是候选轨迹，不是直接更新模型；真正把这些过程写回目标模型的是最后的 SFT。</figcaption>
+  <figcaption>图 4. 四个方框是同一条数据产线的四个阶段。Evolve 改善的是候选轨迹，不是直接更新模型；真正把这些过程写回目标模型的是最后的 SFT。</figcaption>
 </figure>
 
 ## 为什么需要很多种 Harness
@@ -289,6 +312,7 @@ RSI-oriented harness 至少还需要几种今天并不总是默认具备的能�
 
 - **Reasoning self-training** 优化模型内化的推理路径。STaR 是最直接的例子。
 - **Synthetic-data scaling** 研究某条生成方法随数据量和模型规模的收益与饱和，SynthLLM 属于这一类。
+- **Dynamic evaluation** 把 benchmark creation 变成持续搜索与刷新，而不是维护一份永久题库；AutoBencher 是其中一个例子。
 - **Harness optimization** 修改 prompt、工具、上下文或工作流，让冻结模型在部署时做得更好。Self-Harness 把失败挖掘、修改与回归测试连成闭环。
 - **Open-ended agent evolution** 保留多个候选 agent，在可执行反馈下继续分支和选择。DGM 与 AlphaEvolve 展示了 archive 和 evaluator 如何支撑这种搜索（[Novikov et al., 2025](https://arxiv.org/abs/2506.13131)）。
 - **本文的 Harness–Evolve** 位于这些方向的交叉处：借 harness 扩大轨迹搜索空间，借 verifier 和多样性规则选择轨迹，再把结果蒸馏回目标模型。它目前是一个研究假设，而不是已有实验结论。
@@ -316,9 +340,12 @@ RSI-oriented harness 至少还需要几种今天并不总是默认具备的能�
 
 它当然还不是模型完全自己改进自己。目标、Harness、验证和停止条件，现在都还需要大量人的判断。也正因为它不完整，这个方向反而更可信：不需要先解决所有问题，就能把其中一段做成可以测、可以扩、也可以推翻的实验。
 
+<span class="anchor" id="open-questions"></span>
+
 # 仍未解决的问题
 
 - 怎么知道一个模糊目标已经覆盖得够好，而不是偷偷换成了另一套 Benchmark？
+- 模型生成的 benchmark 和 validation set，怎样保持新颖又不把 generator 的偏好当成能力边界？
 - 不同 Harness 的轨迹怎么去重、怎么配比，才不会互相抵消？
 - 什么时候该继续扩量，什么时候其实应该先换生产模型或 Harness？
 - 模型能不能逐渐参与 Harness 的设计，同时不让 eval 和数据一起塌掉？
@@ -339,6 +366,9 @@ RSI-oriented harness 至少还需要几种今天并不总是默认具备的能�
 9. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
 10. METR (2026), [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/).
 11. Wu et al. (2026), [*StructAgent: Harness Long-horizon Digital Agents with Unified Causal Structure*](https://arxiv.org/abs/2607.11388).
+12. Akhtar et al. (2026), [*When AI Benchmarks Plateau*](https://arxiv.org/abs/2602.16763).
+13. Center for AI Safety & Scale AI (2025), [*Humanity's Last Exam*](https://labs.scale.com/leaderboard/humanitys_last_exam).
+14. Li et al. (2025), [*AutoBencher: Creating Salient, Novel, Difficult Datasets for Language Models*](https://proceedings.iclr.cc/paper_files/paper/2025/hash/eb216114f3eaad22506fd1bc7bbff0ca-Abstract-Conference.html).
 
 <footer class="post-footer">
   <p>Thanks for reading. 如果你也在做 synthetic data、eval 或 agent harness，欢迎来聊。</p>

@@ -107,8 +107,8 @@ For a complete publication and citation record, see my [Google Scholar profile](
 # ✍️ Blog
 
 <div class="home-blog-column">
-  <p class="home-blog-column__meta">Research note · 31 Jul 2026</p>
-  <h2><a href="{{ '/blog/data-driven-rsi/' | relative_url }}">Data 可能是 RSI 最先能想清楚的一块</a></h2>
-  <p>如果模型还想继续 scaling，就绕不开 synthetic data。这里记下我最近对模糊评估、Synthetic Data Ladder，以及 Harness–Evolve 轨迹产线的一些想法。</p>
+  <p class="home-blog-column__meta">Research note · Updated 3 Aug 2026</p>
+  <h2><a href="{{ '/blog/data-driven-rsi/' | relative_url }}">Data-driven RSI：Eval、Synthetic Data Ladder 与轨迹产线</a></h2>
+  <p>RSI 真正想接过的是基础模型团队持续推动的研究循环。这里从 Data 出发，讨论会自我生长的 eval、Synthetic Data Ladder，以及 Harness–Evolve 轨迹产线。</p>
   <p class="home-blog-column__links"><a href="{{ '/blog/data-driven-rsi/' | relative_url }}">中文版 →</a><span>·</span><a href="{{ '/blog/data-driven-rsi/en/' | relative_url }}">English →</a><span>·</span><a href="{{ '/blog/' | relative_url }}">全部文章</a></p>
 </div>
