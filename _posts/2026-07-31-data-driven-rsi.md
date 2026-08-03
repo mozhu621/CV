@@ -17,14 +17,14 @@ translation_url: /blog/data-driven-rsi/en/
   </div>
   <p class="post-kicker">Research note · 31 Jul 2026 · Updated 3 Aug 2026</p>
   <h1>Data-driven RSI：Eval、<br>Synthetic Data Ladder 与轨迹产线</h1>
-  <p class="post-dek">RSI 想接过的，首先是今天由基础模型团队推动的改进循环：发现问题、设计评估、生产数据、训练，再决定下一步。本文从其中最容易开始实验的一段——Data——往下推。</p>
+  <p class="post-dek">RSI 描述一种能够持续递归的自我改进：当前模型参与创造更强的后继模型，后继模型再推进下一轮。本文从其中最容易开始实验的一段——Data——往下推。</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
 <nav class="post-toc" aria-label="文章目录">
   <strong>这篇会聊</strong>
   <ol>
-    <li><a href="#start-with-data">RSI 想接过什么</a></li>
+    <li><a href="#start-with-data">RSI 想做到什么</a></li>
     <li><a href="#synthetic-data">为什么一定会走到 synthetic data</a></li>
     <li><a href="#eval">Eval 要持续生长</a></li>
     <li><a href="#ladder">三种 Ladder 有什么不同</a></li>
@@ -38,11 +38,15 @@ translation_url: /blog/data-driven-rsi/en/
 
 <span class="anchor" id="start-with-data"></span>
 
-# RSI 想接过什么
+# RSI 想做到什么
 
-许多关于 RSI 的设想，落到工程上都在问同一件事：今天由基础模型团队手工维持的改进循环，能不能逐渐交给模型？OpenAI、Moonshot AI（Kimi）、智谱 AI（GLM）等团队仍需要研究者不断发现失败、搭 eval、做数据、跑训练，再决定下一版往哪里走。
+RSI 是 Recursive Self-Improvement，递归自我改进。当前模型参与创造更强的后继模型；后继模型继承这套能力，继续发现问题、提出改进并训练下一代。每一轮都改进模型，也改进产生模型的方法。循环可以持续下去，才有“递归”的含义。
 
-RSI 想接替我们这批基础模型研究者目前维持的工作。即使没有人持续守在循环里，LLM 也能找到能力边界、提出值得解决的问题、为下一轮训练制造经验，并检验后继模型是否真的更强。这样的研究循环能够长期运转，才算迈出了 RSI 的第一步。
+今天，这套循环主要由基础模型团队维持。OpenAI、Moonshot AI（Kimi）、智谱 AI（GLM）等团队的研究者不断寻找能力边界、搭建 eval、生产数据、运行训练，再决定下一版往哪里走。模型负责完成一次次任务，人负责改进制造模型的过程。
+
+RSI 想把后一部分也逐步交给模型。即使没有人持续守在循环里，LLM 也能找到值得解决的能力缺口，提出可以验证的改进，生产下一轮训练经验，并判断后继模型是否真的更强。后继模型还要能够重复这套过程。
+
+这要求系统具备几种相连的能力：找到有价值的问题；把问题转成训练干预；用独立证据确认效果；根据结果决定下一轮。只会生成更多样本，循环走不远。只会在固定 benchmark 上涨分，方向也会很快耗尽。RSI 的核心，是让整个改进过程逐轮积累。
 
 ## 为什么先从 Data 开始
 
@@ -60,7 +64,7 @@ Data 提供了一个更容易落地的起点。下一次关键的算法变化会
 
 ## 先给几个工作定义
 
-本文采用一个较弱、也更容易实验的 **RSI** 定义：当前模型参与发现能力缺口、生产下一轮训练经验；训练得到的后继模型在未参与生产的新任务上取得可复现的提升。这个定义暂不要求模型在一次推理中直接重写参数。
+本文只研究这条长循环中的一段：当前模型参与发现能力缺口、生产下一轮训练经验；训练得到的后继模型在未参与生产的新任务上取得可复现的提升。模型暂时不需要在一次推理中直接重写参数。
 
 **开放目标评估**（open-ended evaluation）允许目标保持宽泛，例如数学研究能力。每轮留下的证据仍要具体：任务、轨迹、失败原因、验证结果和下一步的数据处方都要能复查。
 

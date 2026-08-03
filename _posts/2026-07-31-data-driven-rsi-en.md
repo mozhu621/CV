@@ -18,14 +18,14 @@ translation_url: /blog/data-driven-rsi/
   </div>
   <p class="post-kicker">Research note · 31 Jul 2026 · Updated 3 Aug 2026</p>
   <h1>Data-Driven RSI:<br>Evaluation, Ladders, and Trajectories</h1>
-  <p class="post-dek">What RSI must first take over is the improvement loop now driven by foundation-model teams: find problems, design evaluations, produce data, train, and choose the next move. This note starts with the part of that loop that seems easiest to test—data.</p>
+  <p class="post-dek">RSI describes a recursive process of improvement: the current model helps create a stronger successor, and the successor carries the process into the next round. This note starts with the part that seems easiest to test—data.</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
 <nav class="post-toc" aria-label="Table of contents">
   <strong>In this note</strong>
   <ol>
-    <li><a href="#start-with-data">What RSI is meant to take over</a></li>
+    <li><a href="#start-with-data">What RSI is meant to achieve</a></li>
     <li><a href="#synthetic-data">Why this leads to synthetic data</a></li>
     <li><a href="#eval">Evaluation has to keep moving</a></li>
     <li><a href="#ladder">How the three ladders differ</a></li>
@@ -39,11 +39,15 @@ translation_url: /blog/data-driven-rsi/
 
 <span class="anchor" id="start-with-data"></span>
 
-# What RSI is meant to take over
+# What RSI is meant to achieve
 
-Many visions of RSI become the same engineering question: can models gradually take over the improvement loop that foundation-model teams still maintain by hand? Teams at OpenAI, Moonshot AI—the company behind Kimi—and Zhipu AI—the developer of GLM—still rely on researchers to find failures, build evaluations, produce data, run training, and choose the next direction.
+RSI stands for Recursive Self-Improvement. A current model helps create a stronger successor. That successor inherits the ability to find problems, propose improvements, and train the next generation. Each round improves the model and the method used to produce it. Continued repetition gives the process its recursive character.
 
-RSI is meant to take over work that foundation-model researchers like us still perform. An LLM should be able to locate its capability boundary, propose worthwhile problems, create experience for the next training round, and test whether its successor is genuinely stronger, even when nobody is continuously tending the loop. A research loop that can keep running in this way would be a first step toward RSI.
+Foundation-model teams currently maintain this loop. Researchers at organizations such as OpenAI, Moonshot AI—the company behind Kimi—and Zhipu AI—the developer of GLM—locate capability boundaries, build evaluations, produce data, run training, and choose the next direction. Models complete individual tasks; people improve the process that produces the models.
+
+RSI aims to move the second responsibility into the system as well. An LLM should be able to identify a worthwhile capability gap, propose a testable intervention, create experience for the next training round, and determine whether its successor is genuinely stronger. The successor must then be able to repeat the process.
+
+Several abilities have to work together: find valuable problems, turn them into training interventions, confirm the effect with independent evidence, and use the result to choose the next round. Generating more samples alone will not sustain the loop. Gains on a fixed benchmark will also run out of direction. RSI depends on cumulative improvement of the whole process.
 
 ## Why start with data
 
@@ -61,7 +65,7 @@ Those are the three questions considered here.
 
 ## Working definitions
 
-This note uses a weaker, testable definition of **RSI**: the current model helps identify capability gaps and produce experience for the next training round; the resulting successor then improves reproducibly on fresh tasks outside production. Parameter rewriting during a single inference run sits outside this definition.
+This note studies one segment of that longer loop: the current model helps identify capability gaps and produce experience for the next training round; the resulting successor then improves reproducibly on fresh tasks outside production. The model does not yet need to rewrite its parameters during a single inference run.
 
 **Open-ended evaluation** allows a broad goal, such as mathematical research ability. Each iteration still needs auditable evidence: tasks, trajectories, failure causes, verifier outcomes, and a data prescription for the next round.
 
