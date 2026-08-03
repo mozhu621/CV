@@ -21,6 +21,8 @@ translation_url: /blog/data-driven-rsi/en/
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
+> **编辑说明**：本文由作者与 Codex（GPT‑5.6‑sol）共同完成。文中的想法仍在整理，个别地方可能表述得不够清楚，也可能存在理解偏差，欢迎指出。
+
 <nav class="post-toc" aria-label="文章目录">
   <strong>这篇会聊</strong>
   <ol>
