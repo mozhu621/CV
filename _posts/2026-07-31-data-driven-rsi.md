@@ -17,7 +17,7 @@ translation_url: /blog/data-driven-rsi/en/
   </div>
   <p class="post-kicker">Research note · 31 Jul 2026 · Updated 3 Aug 2026</p>
   <h1>Data-driven RSI：Eval、<br>Synthetic Data Ladder 与轨迹产线</h1>
-  <p class="post-dek">RSI 描述一种能够持续递归的自我改进：当前模型参与创造更强的后继模型，后继模型再推进下一轮。本文从其中最容易开始实验的一段——Data——往下推。</p>
+  <p class="post-dek">RSI 描述一种能够持续递归的自我改进：当前模型参与创造更强的后继模型，后继模型再推进下一轮。本文从最基础的一段——Data——往下推。</p>
   <div class="post-tags"><span>Eval</span><span>Synthetic data</span><span>Harness–Evolve</span></div>
 </header>
 
@@ -26,12 +26,10 @@ translation_url: /blog/data-driven-rsi/en/
   <ol>
     <li><a href="#start-with-data">RSI 想做到什么</a></li>
     <li><a href="#synthetic-data">为什么一定会走到 synthetic data</a></li>
-    <li><a href="#eval">Eval 要持续生长</a></li>
+    <li><a href="#eval">模糊目标下的 Eval</a></li>
     <li><a href="#ladder">三种 Ladder 有什么不同</a></li>
     <li><a href="#trajectory">轨迹需要一条靠谱的产线</a></li>
-    <li><a href="#related-work">它与现有工作的关系</a></li>
     <li><a href="#loop">这条 loop 怎么转起来</a></li>
-    <li><a href="#open-questions">仍未解决的问题</a></li>
     <li><a href="#references">References</a></li>
   </ol>
 </nav>
@@ -44,9 +42,7 @@ RSI 是 Recursive Self-Improvement，递归自我改进。当前模型参与创�
 
 今天，这套循环主要由基础模型团队维持。OpenAI、Moonshot AI（Kimi）、智谱 AI（GLM）等团队的研究者不断寻找能力边界、搭建 eval、生产数据、运行训练，再决定下一版往哪里走。模型负责完成一次次任务，人负责改进制造模型的过程。
 
-RSI 希望模型也能做后一部分工作。没有研究者一直守着，LLM 仍能找到能力缺口，想出可验证的改进，准备下一轮训练材料，再检查新模型是否真的变强。新模型接着做同样的事。
-
-要跑起这条循环，模型得先找到有价值的问题，再把问题变成训练方案。训练完成以后，它还要拿出独立证据，说明新模型学到了什么，并据此安排下一轮。多生成一些样本远远不够；固定 benchmark 上的分数也迟早会用完。真正需要积累的是这套改进能力。
+RSI 希望模型也能做后一部分工作。没有研究者一直守着，LLM 仍能找到能力缺口，想出可验证的改进，准备下一轮训练材料，甚至参与 architecture 的迭代，再检查新模型是否真的变强。新模型接着做同样的事。
 
 ## 为什么先从 Data 开始
 
@@ -96,7 +92,7 @@ Will DePue 把互联网称为 deep learning 的“一次性补贴”（[DePue, 2
 
 <span class="anchor" id="eval"></span>
 
-# 1. Eval 要持续生长
+# 1. Eval：在模糊目标下驱动自我迭代
 
 Benchmark 都有保质期。模型逐渐接近满分，题型被反复研究，样本也可能混进训练集，它就越来越难区分最强的系统。不同题库老化的速度不一样，但趋势已经很清楚：一项覆盖 60 个常用文本 benchmark 的研究发现，近一半已经高度饱和（[Akhtar et al., 2026](https://arxiv.org/abs/2602.16763)）。Contamination 又让分数多了一层疑问（[Singh et al., 2024](https://arxiv.org/abs/2411.03923)）。
 
@@ -107,6 +103,8 @@ Benchmark 都有保质期。模型逐渐接近满分，题型被反复研究，�
 模型可以参与出题，却不能独自认定自己进步。平时找错用的 active benchmark 可以不断变化；确认提升的 private validation 要与训练产线隔开，也不能让被评 checkpoint 提前看到。题目和答案是否可靠、有没有泄漏，还得靠独立生成器、环境证据或人工抽查。
 
 > 模型可以自己出下一套题，进步则由独立证据确认。
+
+一套设计良好的 eval，本来就是基础模型团队迭代时最重要的基础设施之一。到了 RSI 阶段，它还要承担新的工作：从“数学更强”“coding 更强”这类模糊目标出发，把模型当前的边界变成下一轮能够执行的任务和验证集。
 
 Self-evaluation 的用处，是不断移动能力边界。Self-validation 则让模型参与设计检验，最后把裁决交给它无法提前迎合的证据。
 
@@ -228,6 +226,12 @@ Synthetic-data ladder 又多了一层麻烦：数据是现场生产出来的。P
 
 换目标模型，或者改 producer、Harness、verifier、sampling policy、filter，都要先回到低成本档位。上一条曲线提供经验，不提供保证。Synthetic data 的 scaling law 难做，难就难在这里。
 
+## 从 pilot 推到目标规模
+
+Ladder 最终希望得到一组可以预测的曲线。先在小批数据和较小模型上跑低成本实验，再用少量更大规模的点做校准，估计同一条 production recipe 在目标模型上的收益、饱和位置和所需数据量。这样，大规模生产开始以前，团队已经知道大概要做多少数据，也能判断这条产线是否值得继续投。
+
+跨模型预测需要一组经过校准的 ladder，不能拿一个小模型上的单点直接外推。模型规模变化以后，吸收效率和饱和位置都可能移动；较大模型上的校准点仍然要保留。
+
 <span class="anchor" id="trajectory"></span>
 
 # 3. 轨迹需要一条靠谱的产线
@@ -290,36 +294,23 @@ METR 用“人类专家完成同一任务所需的时间”来描述 agent 的 t
 
 最近的长程 agent 工作开始重视 compact state、checkpoint、verifier-backed state transition 和 targeted recovery，不再把完整交互历史反复塞回 prompt（[Wu et al., 2026](https://arxiv.org/abs/2607.11388)）。Harness–Evolve 也会碰到同一件事：轨迹在变长，承载轨迹的 Harness 也得升级。否则，产线永远只能生产当前 horizon 以内的数据。
 
-## 数据合成还是需要先验
+## 人已经积累了哪些合成经验
 
 <dl class="prior-list">
-  <div><dt>目标先验</dt><dd>知道“数学更强”大致由哪些能力组成，但不把它锁死在一套题上。</dd></div>
-  <div><dt>任务先验</dt><dd>知道什么任务值得出、难度怎么往上走、哪种失败最有信息。</dd></div>
-  <div><dt>验证先验</dt><dd>能执行就执行，能检查就检查，尽量别让生产数据的模型给自己打分。</dd></div>
-  <div><dt>探索先验</dt><dd>允许模型试错和回退，也要拦住没有意义的长轨迹与固定套路。</dd></div>
-  <div><dt>多样性先验</dt><dd>控制题型、工具、解法和生产模型的来源，不让一种 pattern 填满数据集。</dd></div>
+  <div><dt>改写与变换</dt><dd>从已有材料出发，做重写、翻译、格式转换、难度调整和任务化。</dd></div>
+  <div><dt>教师生成</dt><dd>从少量 seed 出发，由更强模型生成题目、答案、反馈或偏好数据，再蒸馏给目标模型。</dd></div>
+  <div><dt>搜索与验证</dt><dd>一次生成多条候选，用代码执行、证明检查、规则或 verifier 留下可靠样本。</dd></div>
+  <div><dt>环境交互</dt><dd>让模型在工具和环境中行动，记录状态、反馈、失败、回退与恢复，得到完整 trajectory。</dd></div>
+  <div><dt>课程与配比</dt><dd>控制难度、题型、工具、解法和生产模型的比例，让数据跟着目标模型的能力边界移动。</dd></div>
 </dl>
 
-这些先验来自人做数据时积累的经验：哪里值得探索，什么反馈可信，看到什么结果要多留个心眼。模型要学的也包括这些判断。换到新 topic 或新的模糊目标时，它应该能借用旧经验，重新设计任务和环境，找出下一批有用的数据。
+过去的 synthetic data 大多落在这几类里。Harness 轨迹属于“环境交互”：数据里保存的不只是题目和答案，还有模型看到的状态、调用过的工具、得到的反馈以及中途如何改路。Harness–Evolve 又在此基础上加入多次尝试和筛选，把一条交互过程做成可训练的轨迹。
+
+真正有用的先验，是面对一个新目标时知道该选哪种生产方法。知识覆盖不足，可以先改写和扩展真实材料；答案容易验证，可以多采样再筛选；能力藏在工作过程里，就要搭 Harness 记录轨迹。模型以后也要学会做这种选择：先读目标和 failure map，再设计任务、环境、verifier 与数据配比。
 
 生产模型很容易复制自己。行动、判断和筛选都交给同一个模型，Evolve 可能只会把原来的 pattern 越放越大。执行工具、独立 verifier、不同来源的生产模型、真实数据锚点和少量人工抽查，可以让产线少一点回音。
 
 筛选本身也会制造 shortcut。Verifier 只看最终答案，可能留下碰巧答对的短路径；一味偏好长轨迹，又会奖励空转。筛选时最好同时看 outcome、过程是否完整、轨迹是否新鲜以及成本。被拒绝的轨迹和原因也要留下，它们正好能告诉下一轮该怎么改 Harness、怎么出题。
-
-<span class="anchor" id="related-work"></span>
-
-# 它与现有工作的关系
-
-相邻工作大致在优化不同的东西：
-
-- **Reasoning self-training** 优化模型内化的推理路径。STaR 是最直接的例子。
-- **Synthetic-data scaling** 研究某条生成方法随数据量和模型规模的收益与饱和，SynthLLM 属于这一类。
-- **Dynamic evaluation** 持续搜索和刷新 benchmark；AutoBencher 是其中一个例子。
-- **Harness optimization** 修改 prompt、工具、上下文或工作流，让冻结模型在部署时做得更好。Self-Harness 把失败挖掘、修改与回归测试连成闭环。
-- **Open-ended agent evolution** 保留多个候选 agent，在可执行反馈下继续分支和选择。DGM 与 AlphaEvolve 展示了 archive 和 evaluator 如何支撑这种搜索（[Novikov et al., 2025](https://arxiv.org/abs/2506.13131)）。
-- **Harness–Evolve** 把几条线接在一起：Harness 扩大轨迹搜索空间，verifier 和多样性规则负责挑选，最后把结果蒸馏回目标模型。这一做法还需要实验验证。
-
-真正要测的有三件事：多 Harness 产出的数据是否更容易迁移；Ladder 能不能提前看出大规模生产的收益；SFT 学到了多少可复用的过程，又抄走了多少生成器和 verifier 的表面习惯。
 
 <span class="anchor" id="loop"></span>
 
@@ -342,19 +333,6 @@ METR 用“人类专家完成同一任务所需的时间”来描述 agent 的 t
 
 目标怎么定、Harness 怎么写、证据是否可信、什么时候停，现在仍离不开人的判断。先把其中一段做成能测、能复现的实验，已经足够开始。
 
-<span class="anchor" id="open-questions"></span>
-
-# 仍未解决的问题
-
-- 怎么知道一个模糊目标已经覆盖得够好？如何防止它悄悄换成另一套 Benchmark？
-- 模型生成的 benchmark 和 validation set，怎样保持新颖又不把 generator 的偏好当成能力边界？
-- 不同 Harness 的轨迹怎么去重、怎么配比，才不会互相抵消？
-- 什么时候该继续扩量，什么时候其实应该先换生产模型或 Harness？
-- 模型能不能逐渐参与 Harness 的设计，同时不让 eval 和数据一起塌掉？
-- SFT 学到的到底是更好的解题过程，还是生产模型更隐蔽的表达习惯？
-
-这些问题还没有答案。最直接的下一步，是挑一个窄领域，把整条 loop 真跑几轮，看看它先坏在哪里。
-
 # References
 
 1. Villalobos et al. (2024), [*Will we run out of data? Limits of LLM scaling based on human-generated data*](https://arxiv.org/abs/2211.04325).
@@ -362,15 +340,14 @@ METR 用“人类专家完成同一任务所需的时间”来描述 agent 的 t
 3. Zelikman et al. (2022), [*STaR: Bootstrapping Reasoning With Reasoning*](https://arxiv.org/abs/2203.14465).
 4. Qin et al. (2025), [*Scaling Laws of Synthetic Data for Language Models*](https://arxiv.org/abs/2503.19551).
 5. Zhang et al. (2025), [*Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents*](https://arxiv.org/abs/2505.22954).
-6. Novikov et al. (2025), [*AlphaEvolve: A coding agent for scientific and algorithmic discovery*](https://arxiv.org/abs/2506.13131).
-7. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
-8. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
-9. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
-10. METR (2026), [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/).
-11. Wu et al. (2026), [*StructAgent: Harness Long-horizon Digital Agents with Unified Causal Structure*](https://arxiv.org/abs/2607.11388).
-12. Akhtar et al. (2026), [*When AI Benchmarks Plateau*](https://arxiv.org/abs/2602.16763).
-13. Center for AI Safety & Scale AI (2025), [*Humanity's Last Exam*](https://labs.scale.com/leaderboard/humanitys_last_exam).
-14. Li et al. (2025), [*AutoBencher: Creating Salient, Novel, Difficult Datasets for Language Models*](https://proceedings.iclr.cc/paper_files/paper/2025/hash/eb216114f3eaad22506fd1bc7bbff0ca-Abstract-Conference.html).
+6. Zhang et al. (2026), [*Self-Harness: Harnesses That Improve Themselves*](https://arxiv.org/abs/2606.09498).
+7. Weng (2026), [*Harness Engineering for Self-Improvement*](https://lilianweng.github.io/posts/2026-07-04-harness/).
+8. DePue (2026), [*A Stargate for Data*](https://willdepue.net/writings/a-stargate-for-data/).
+9. METR (2026), [*Task-Completion Time Horizons of Frontier AI Models*](https://metr.org/time-horizons/).
+10. Wu et al. (2026), [*StructAgent: Harness Long-horizon Digital Agents with Unified Causal Structure*](https://arxiv.org/abs/2607.11388).
+11. Akhtar et al. (2026), [*When AI Benchmarks Plateau*](https://arxiv.org/abs/2602.16763).
+12. Center for AI Safety & Scale AI (2025), [*Humanity's Last Exam*](https://labs.scale.com/leaderboard/humanitys_last_exam).
+13. Li et al. (2025), [*AutoBencher: Creating Salient, Novel, Difficult Datasets for Language Models*](https://proceedings.iclr.cc/paper_files/paper/2025/hash/eb216114f3eaad22506fd1bc7bbff0ca-Abstract-Conference.html).
 
 <footer class="post-footer">
   <p>Thanks for reading. 如果你也在做 synthetic data、eval 或 agent harness，欢迎来聊。</p>
